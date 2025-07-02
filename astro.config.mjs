@@ -2,6 +2,7 @@
 import starlight from '@astrojs/starlight';
 import {defineConfig} from 'astro/config';
 import starlightLinksValidator from 'starlight-links-validator';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,6 +11,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Jetski',
+      customCss: ['./src/styles/global.css'],
       editLink: {
         baseUrl: 'https://github.com/jetski-sh/website/tree/main',
       },
@@ -46,4 +48,7 @@ export default defineConfig({
       plugins: [starlightLinksValidator()],
     }),
   ],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
