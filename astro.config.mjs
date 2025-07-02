@@ -1,8 +1,8 @@
 // @ts-check
 import starlight from '@astrojs/starlight';
+import tailwindcss from '@tailwindcss/vite';
 import {defineConfig} from 'astro/config';
 import starlightLinksValidator from 'starlight-links-validator';
-import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
