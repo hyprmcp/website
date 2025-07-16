@@ -1,10 +1,9 @@
 // @ts-check
 import starlight from '@astrojs/starlight';
+import starlightUtils from '@lorenzo_lewis/starlight-utils';
 import tailwindcss from '@tailwindcss/vite';
 import {defineConfig} from 'astro/config';
 import starlightLinksValidator from 'starlight-links-validator';
-import starlightUtils from "@lorenzo_lewis/starlight-utils";
-
 
 // https://astro.build/config
 export default defineConfig({
@@ -48,13 +47,13 @@ export default defineConfig({
           autogenerate: {directory: 'docs/reference'},
         },
         {
-          label: "Navbar",
+          label: 'Navbar',
           items: [
-            {label: "Home", link: "/"},
-            {label: "Docs", link: "/docs/guides/example/"},
-            {label: "Pricing", link: "/pricing"}
+            {label: 'Home', link: '/'},
+            {label: 'Docs', link: '/docs/guides/example/'},
+            {label: 'Pricing', link: '/pricing'},
           ],
-        }
+        },
       ],
       tableOfContents: {
         minHeadingLevel: 2,
@@ -65,8 +64,8 @@ export default defineConfig({
         starlightLinksValidator(),
         starlightUtils({
           navLinks: {
-            leading: {useSidebarLabelled: "Navbar"}
-          }
+            leading: {useSidebarLabelled: 'Navbar'},
+          },
         }),
       ],
     }),

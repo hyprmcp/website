@@ -61,12 +61,14 @@ This is a Jetski documentation website built with:
 ### Component Overrides
 
 To override Starlight theme components:
+
 1. Find the original component in `node_modules/@astrojs/starlight/components/`
 2. Copy the component to `src/components/`
 3. Add the component reference to the `components` object in `astro.config.mjs`
 4. Example: `PageTitle: './src/components/PageTitle.astro'`
 
 Available Starlight components can be found in:
+
 - `node_modules/@astrojs/starlight/components/` - All base components
 - Key components: `Page.astro`, `PageTitle.astro`, `ContentPanel.astro`, `Header.astro`, `Footer.astro`, `Hero.astro`, `Sidebar.astro`, etc.
 
