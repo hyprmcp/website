@@ -3,8 +3,8 @@ import starlight from '@astrojs/starlight';
 import starlightUtils from '@lorenzo_lewis/starlight-utils';
 import tailwindcss from '@tailwindcss/vite';
 import {defineConfig} from 'astro/config';
+import rehypeMermaid from 'rehype-mermaid';
 import starlightLinksValidator from 'starlight-links-validator';
-import rehypeMermaid from "rehype-mermaid";
 
 // https://astro.build/config
 export default defineConfig({
