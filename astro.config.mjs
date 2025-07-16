@@ -3,6 +3,8 @@ import starlight from '@astrojs/starlight';
 import tailwindcss from '@tailwindcss/vite';
 import {defineConfig} from 'astro/config';
 import starlightLinksValidator from 'starlight-links-validator';
+import starlightUtils from "@lorenzo_lewis/starlight-utils";
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,6 +16,12 @@ export default defineConfig({
       customCss: ['./src/styles/global.css'],
       editLink: {
         baseUrl: 'https://github.com/jetski-sh/website/tree/main',
+      },
+      components: {
+        // Components can be overwritten here
+        PageTitle: './src/components/PageTitle.astro',
+        ContentPanel: './src/components/ContentPanel.astro',
+        Footer: './src/components/Footer.astro',
       },
       social: [
         {
@@ -39,13 +47,28 @@ export default defineConfig({
           label: 'Reference',
           autogenerate: {directory: 'docs/reference'},
         },
+        {
+          label: "Navbar",
+          items: [
+            {label: "Home", link: "/"},
+            {label: "Docs", link: "/docs/guides/example/"},
+            {label: "Pricing", link: "/pricing"}
+          ],
+        }
       ],
       tableOfContents: {
         minHeadingLevel: 2,
         maxHeadingLevel: 6,
       },
       prerender: true,
-      plugins: [starlightLinksValidator()],
+      plugins: [
+        starlightLinksValidator(),
+        starlightUtils({
+          navLinks: {
+            leading: {useSidebarLabelled: "Navbar"}
+          }
+        }),
+      ],
     }),
   ],
   vite: {
