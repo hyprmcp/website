@@ -1,0 +1,63 @@
+---
+title: What is Jetski?
+description: Jetski is an open-source, serverless hosting, authentication and analytics provider to deploy MCP servers with a single command. Engineers use Jetski to let their users easily use their MCP servers by browser-based MCP clients, like Claude, ChatGPT and improve the authorization experience.
+slug: docs/getting-started
+sidebar:
+  order: 1
+---
+
+import {Aside} from '@astrojs/starlight/components';
+
+Jetski is an open-source, serverless hosting, authentication and analytics provider to deploy MCP servers with a single command. Engineers use Jetski to let their users easily use their MCP servers by browser-based MCP clients, like Claude, ChatGPT and improve the authorization experience by using the latest OAuth2 login standard for MCP servers out of the box.
+
+Jetski provides insights into the usage of your MCP server, like the number of clients, tool calls, and serverless hosting with a generous free tier - think of it as a Vercel for MCP servers.
+
+## Architecture
+
+```mermaid
+graph TD
+    A[Start] --> B{Is it working?}
+    B -->|Yes| C[Great!]
+    B -->|No| D[Debug]
+    D --> B
+```
+
+## Jetski in Short
+
+| Feature                              | Description                                                                                                                                                           |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🚀 **One-command deployment**        | Deploy MCP servers with a single command - no complex configuration required.                                                                                        |
+| 🔗 **Browser-based MCP clients**     | Seamlessly connect MCP servers to browser-based clients like Claude, ChatGPT, and other AI assistants.                                                             |
+| 🔒 **Built-in OAuth2 authentication** | Latest OAuth2 login standard for MCP servers out of the box, improving user authorization experience.                                                               |
+| 📊 **Rich analytics & insights**     | Track usage metrics including client connections, tool calls, and server performance with detailed analytics.                                                       |
+| ⚡ **Serverless hosting**            | Serverless architecture with generous free tier - think Vercel for MCP servers.                                                                                     |
+| 🎯 **Developer-focused**             | Built by engineers, for engineers - simple API and intuitive developer experience.                                                                                  |
+| 📱 **Easy integration**              | Simple integration with existing MCP servers and development workflows.                                                                                             |
+
+## Who is Jetski for?
+
+Jetski helps:
+
+- **MCP server developers** who want to easily deploy and share their MCP servers with users
+- **AI engineers** building MCP tools and integrations for AI assistants
+- **Development teams** who need analytics and insights into their MCP server usage
+- **Organizations** looking to provide seamless MCP server access to their users
+
+## What can I do with Jetski?
+
+Jetski enables you to:
+
+- **Deploy MCP servers** with a single command to serverless infrastructure
+- **Connect to AI clients** seamlessly through browser-based MCP clients like Claude and ChatGPT
+- **Secure access** with built-in OAuth2 authentication and authorization
+- **Monitor usage** with detailed analytics on client connections, tool calls, and server performance
+- **Scale automatically** with serverless hosting that grows with your needs
+
+## Where do I start?
+
+Get started with Jetski in minutes. Follow the [quickstart guide](/docs/quickstart/) to deploy your first MCP server and learn how to use the platform effectively.
+
+<Aside type="note">
+  Ready to begin? Create your Jetski account [here](https://jetski.sh/) and
+  follow the onboarding steps.
+</Aside>

@@ -4,6 +4,7 @@ import starlightUtils from '@lorenzo_lewis/starlight-utils';
 import tailwindcss from '@tailwindcss/vite';
 import {defineConfig} from 'astro/config';
 import starlightLinksValidator from 'starlight-links-validator';
+import rehypeMermaid from "rehype-mermaid";
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,9 +19,10 @@ export default defineConfig({
       },
       components: {
         // Components can be overwritten here
-        PageTitle: './src/components/PageTitle.astro',
-        ContentPanel: './src/components/ContentPanel.astro',
-        Footer: './src/components/Footer.astro',
+        PageTitle: './src/components/overwrites/PageTitle.astro',
+        ContentPanel: './src/components/overwrites/ContentPanel.astro',
+        Footer: './src/components/overwrites/Footer.astro',
+        SocialIcons: './src/components/overwrites/SocialIcons.astro',
       },
       social: [
         {
@@ -36,21 +38,14 @@ export default defineConfig({
       ],
       sidebar: [
         {
-          label: 'Guides',
-          items: [
-            // Each item here is one entry in the navigation menu.
-            {label: 'Example Guide', slug: 'docs/guides/example'},
-          ],
-        },
-        {
-          label: 'Reference',
-          autogenerate: {directory: 'docs/reference'},
+          label: 'Getting started',
+          autogenerate: {directory: 'docs/getting-started'},
         },
         {
           label: 'Navbar',
           items: [
             {label: 'Home', link: '/'},
-            {label: 'Docs', link: '/docs/guides/example/'},
+            {label: 'Docs', link: '/docs/getting-started/'},
             {label: 'Pricing', link: '/pricing'},
           ],
         },
@@ -70,6 +65,13 @@ export default defineConfig({
       ],
     }),
   ],
+  markdown: {
+    syntaxHighlight: {
+      type: 'shiki',
+      excludeLangs: ['mermaid', 'math'],
+    },
+    rehypePlugins: [rehypeMermaid],
+  },
   vite: {
     plugins: [tailwindcss()],
   },
