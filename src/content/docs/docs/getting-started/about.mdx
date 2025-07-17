@@ -8,18 +8,53 @@ sidebar:
 
 import {Aside} from '@astrojs/starlight/components';
 
-Jetski is an open-source, serverless hosting, authentication and analytics provider to deploy MCP servers with a single command. Engineers use Jetski to let their users easily use their MCP servers by browser-based MCP clients, like Claude, ChatGPT and improve the authorization experience by using the latest OAuth2 login standard for MCP servers out of the box.
+Jetski is an open-source, serverless hosting, authentication and analytics provider to deploy MCP servers with a single command.
+Engineers use Jetski to let their users easily use their MCP servers by browser-based MCP clients, like Claude, ChatGPT and improve the authorization experience by using the latest OAuth2 login standard for MCP servers out of the box.
 
 Jetski provides insights into the usage of your MCP server, like the number of clients, tool calls, and serverless hosting with a generous free tier - think of it as a Vercel for MCP servers.
 
 ## Architecture
 
 ```mermaid
-graph TD
-    A[Start] --> B{Is it working?}
-    B -->|Yes| C[Great!]
-    B -->|No| D[Debug]
-    D --> B
+graph TB
+    %% User and Clients
+    User[👤 User] --> UserBrowser[🌐 Browser]
+    User --> MCPClient[🤖 MCP Client<br/>Claude, ChatGPT, etc.]
+
+    %% Developer Tools
+    Developer[👨‍💻 Developer] --> CLI[⚡ Jetski CLI]
+    Developer --> DeveloperBrowser[🌐 Browser]
+
+    CLI --> |Deploy MCP server| Platform[🏗️ Jetski Platform & 📊 Analytics Engine]
+    DeveloperBrowser --> |Manage MCP server| Platform
+
+
+    %% Core Platform Components
+    UserBrowser <--> |OAuth2 Flow| AuthServer[🔐 Authentication Server]
+    Proxy[🔄 Jetski Proxy] --> |Collects merics| Platform
+
+    %% MCP Server Infrastructure
+    Proxy <--> |Streamable HTTP| MCPServer[🚀 Deployed Remote MCP Server]
+
+    %% Authentication Flow
+    MCPClient --> |Request access| AuthServer
+
+    %% Request Flow
+    MCPClient <--> |Streamable HTTP| Proxy
+
+    %% MCP Deployment flow
+    Platform <--> |Orchestrates| MCPServer
+
+    %% Styling
+    classDef user fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef platform fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef server fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    classDef auth fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+
+    class User,UserBrowser,MCPClient user
+    class Platform,CLI,Proxy,Developer platform
+    class MCPServer server
+    class AuthServer auth
 ```
 
 ## Jetski in Short
