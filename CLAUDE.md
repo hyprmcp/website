@@ -47,6 +47,11 @@ This is a Jetski documentation website built with:
 - `astro.config.mjs` - Main configuration with Starlight setup
 - `src/content.config.ts` - Content collections configuration
 
+### Writing Documentation
+
+Documentation is written in MDX format, allowing you to use React components alongside Markdown content.
+After every sentence a new line is added to ensure proper formatting and readability.
+
 ### Configuration Details
 
 - Site URL: https://jetski.sh

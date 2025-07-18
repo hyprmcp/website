@@ -4,3 +4,62 @@ slug: docs/quickstart
 sidebar:
   order: 2
 ---
+
+import {Aside, Code, Steps, TabItem, Tabs} from '@astrojs/starlight/components';
+
+Jetski only supports MCP servers that use the [streamable HTTP standard](https://modelcontextprotocol.io/specification/draft/basic/transports#streamable-http).
+This ensures optimal performance and compatibility with browser-based MCP clients and support for the latest OAuth2 authorization standard.
+
+<Aside type="tip">
+  Most MCP server frameworks already support streamable HTTP. The migration is
+  usually straightforward and only requires a different initialization method.
+</Aside>
+
+## Install the Jetski CLI
+
+You can either install the Jetski CLI via Homebrew or download the binary directly from the [releases page](https://github.com/jetski-sh)
+
+```shell
+brew install jetski-sh/tap/jetski
+```
+
+Alternatively, you can run the CLI directly using `npx` or `uvx` to directly run the latest version of the binary.
+
+<Tabs>
+  <TabItem label="npm">
+    <Code lang="shell" code="npx @jetski-sh/jetski@latest --help" />
+  </TabItem>
+  <TabItem label="pnpm">
+    <Code lang="shell" code="pnpm dlx @jetski-sh/jetski@latest --help" />
+  </TabItem>
+  <TabItem label="uvx" code="uvx @jetski-sh/jetski@latest --help"></TabItem>
+</Tabs>
+
+## Deploy your first remote MCP server
+
+You can also just run the single command `jetski deploy` to deploy your MCP server to Jetski Cloud,
+which will automatically guide you through the setup process.
+If you want to set up your project step-by-step, follow these steps:
+
+<Steps>
+1.  <Code code="jetski login" lang="shell"></Code>
+    Authenticate and connect your project with Jetski Cloud
+    Make sure to have already registered an account at [jetski.sh](https://jetski.sh/).
+    Then run the following command to connect with the Jetski Cloud:
+
+2.  <Code code="jetski connect" lang="shell"></Code>
+    Create your MCP server project on Jetski Cloud Connecting your MCP server to
+    Jetski will create a `jetski.json` file in your project directory containing
+    the project ID and other configuration details.
+
+3.  <Code code="jetski deploy" lang="shell"></Code>
+    This step will deploy your MCP server to Jetski Cloud.
+    After this step succeeded you will be able to work with your MCP server under
+    <Code code="https://<org>.jetski.cloud/<project>/mcp"></Code>
+</Steps>
+
+## Test your remote MCP server
+
+Using the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) you can test your remote MCP server.
+
+<Code code="npx @modelcontextprotocol/inspector" lang="shell"></Code>
