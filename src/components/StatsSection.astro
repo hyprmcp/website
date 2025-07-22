@@ -2,24 +2,39 @@
 // Stats/Metrics Section Component
 ---
 
-<div class="bg-gray-50 dark:bg-gray-900 py-24 sm:py-32">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<style>
+  .hero-bg {
+    background-image: linear-gradient(0deg, transparent 49%, rgba(34, 197, 94, 0.15) 49.5%, rgba(249, 115, 22, 0.15) 50.5%, transparent 51%),
+                      linear-gradient(90deg, transparent 49%, rgba(34, 197, 94, 0.15) 49.5%, rgba(249, 115, 22, 0.15) 50.5%, transparent 51%);
+    background-size: 200px 200px;
+  }
+
+  .dark .hero-bg {
+    background-image: linear-gradient(0deg, transparent 49%, rgba(37, 99, 235, 0.2) 49.5%, rgba(168, 85, 247, 0.2) 50.5%, transparent 51%),
+                      linear-gradient(90deg, transparent 49%, rgba(37, 99, 235, 0.2) 49.5%, rgba(168, 85, 247, 0.2) 50.5%, transparent 51%);
+    background-size: 200px 200px;
+  }
+</style>
+
+<div class="relative overflow-hidden bg-gray-50 dark:bg-slate-900 hero-bg py-24 sm:py-32">
+  <div class="absolute inset-0 bg-gray-50/80 dark:bg-slate-900/80"></div>
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
       <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
         Trusted by developers worldwide
       </h2>
       <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
-        Join thousands of developers building the future of AI
+        We hosted our first MCP servers before we even released Jetski Cloud
       </p>
     </div>
 
     <div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
       <div class="text-center">
-        <div class="text-4xl font-bold text-blue-600 dark:text-blue-400">10k+</div>
+        <div class="text-4xl font-bold text-blue-600 dark:text-blue-400">5+</div>
         <div class="mt-2 text-sm text-gray-600 dark:text-gray-400">MCP Servers Deployed</div>
       </div>
       <div class="text-center">
-        <div class="text-4xl font-bold text-purple-600 dark:text-purple-400">50M+</div>
+        <div class="text-4xl font-bold text-purple-600 dark:text-purple-400">1k+</div>
         <div class="mt-2 text-sm text-gray-600 dark:text-gray-400">API Calls Processed</div>
       </div>
       <div class="text-center">
