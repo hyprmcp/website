@@ -18,10 +18,7 @@ export default defineConfig({
       logo: {
         src: './src/assets/jetski.svg',
       },
-      customCss: [
-        './src/styles/global.css',
-        './node_modules/css-device-frames/dist/device-frames.css',
-      ],
+      customCss: ['./src/styles/global.css'],
       editLink: {
         baseUrl: 'https://github.com/jetski-sh/website/tree/main',
       },
