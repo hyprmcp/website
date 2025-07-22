@@ -18,7 +18,7 @@ export default defineConfig({
       logo: {
         light: './src/assets/jetski-black.svg',
         dark: './src/assets/jetski-white.svg',
-        replacesTitle: true
+        replacesTitle: true,
       },
       customCss: ['./src/styles/global.css'],
       editLink: {
@@ -86,5 +86,8 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+  },
+  redirects: {
+    '/docs/': '/docs/getting-started/',
   },
 });
