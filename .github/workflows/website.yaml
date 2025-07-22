@@ -26,9 +26,16 @@ jobs:
           node-version: '24.1'
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
+      - uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('pnpm-lock.yaml') }}
       - name: Install dependencies
         run: pnpm i
       - name: Lint with prettier
         run: pnpm run lint
+      - name: Install playwright browser
+        run: pnpm exec playwright install --with-deps chromium
       - name: Build website
         run: pnpm run build
