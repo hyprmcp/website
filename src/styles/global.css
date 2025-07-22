@@ -42,3 +42,8 @@
     animation: tilt 3s infinite linear;
   }
 }
+
+/* https://jhildenbiddle.github.io/css-device-frames/#/?id=customization */
+.app-frame {
+  --bar-height: 33px;
+}
