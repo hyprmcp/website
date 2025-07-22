@@ -16,7 +16,9 @@ export default defineConfig({
       description:
         'Serverless hosting and analytics provider for remote, authenticated streamable HTTP MCP server',
       logo: {
-        src: './src/assets/jetski.svg',
+        light: './src/assets/jetski-black.svg',
+        dark: './src/assets/jetski-white.svg',
+        replacesTitle: true
       },
       customCss: ['./src/styles/global.css'],
       editLink: {
