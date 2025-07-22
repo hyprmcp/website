@@ -16,12 +16,11 @@ export default defineConfig({
       description:
         'Serverless hosting and analytics provider for remote, authenticated streamable HTTP MCP server',
       logo: {
-        src: './src/assets/jetski.svg',
+        light: './src/assets/jetski-black.svg',
+        dark: './src/assets/jetski-white.svg',
+        replacesTitle: true,
       },
-      customCss: [
-        './src/styles/global.css',
-        './node_modules/css-device-frames/dist/device-frames.css',
-      ],
+      customCss: ['./src/styles/global.css'],
       editLink: {
         baseUrl: 'https://github.com/jetski-sh/website/tree/main',
       },
@@ -87,5 +86,8 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+  },
+  redirects: {
+    '/docs/': '/docs/getting-started/',
   },
 });
