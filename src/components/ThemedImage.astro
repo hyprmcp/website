@@ -2,12 +2,12 @@
 import {Image} from 'astro:assets';
 
 export interface Props {
-  lightSrc: string;
-  darkSrc: string;
+  lightSrc: ImageMetadata;
+  darkSrc: ImageMetadata;
   alt: string;
 }
 const {lightSrc, darkSrc, alt} = Astro.props;
 ---
 
-<Image src={lightSrc} alt={alt} class="dark:sl-hidden" />
-<Image src={darkSrc} alt={alt} class="light:sl-hidden" />
+<Image src={lightSrc} alt={alt} class="dark:sl-hidden max-w-full h-auto" />
+<Image src={darkSrc} alt={alt} class="light:sl-hidden max-w-full h-auto" />

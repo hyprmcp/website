@@ -1,0 +1,42 @@
+---
+import EmblaCarousel from './EmblaCarousel.astro';
+import JetskiButton from './JetskiButton.astro';
+---
+
+<style>
+  .hero-bg {
+    background-image: linear-gradient(0deg, transparent 49%, rgba(34, 197, 94, 0.15) 49.5%, rgba(249, 115, 22, 0.15) 50.5%, transparent 51%),
+                      linear-gradient(90deg, transparent 49%, rgba(34, 197, 94, 0.15) 49.5%, rgba(249, 115, 22, 0.15) 50.5%, transparent 51%);
+    background-size: 200px 200px;
+  }
+
+  .dark .hero-bg {
+    background-image: linear-gradient(0deg, transparent 49%, rgba(37, 99, 235, 0.2) 49.5%, rgba(168, 85, 247, 0.2) 50.5%, transparent 51%),
+                      linear-gradient(90deg, transparent 49%, rgba(37, 99, 235, 0.2) 49.5%, rgba(168, 85, 247, 0.2) 50.5%, transparent 51%);
+    background-size: 200px 200px;
+  }
+</style>
+
+<div class="relative overflow-hidden bg-gray-50 dark:bg-slate-900 hero-bg">
+  <div class="absolute inset-0 bg-gray-50/80 dark:bg-slate-900/80"></div>
+  <div class="relative w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h1 class="text-3xl font-bold tracking-tight mb-8 sm:text-5xl lg:text-6xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        Deploy MCP servers with ease
+      </h1>
+      <EmblaCarousel />
+      <p class="mt-6 text-lg leading-8 text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
+        The serverless hosting platform for Model Context Protocol servers.
+        Deploy in seconds, scale automatically, and focus on building amazing AI experiences.
+      </p>
+      <div class="mt-10 flex items-center justify-center gap-x-6">
+        <JetskiButton href="/" variant="primary">
+          Start Deploying
+        </JetskiButton>
+        <JetskiButton href="/docs/getting-started" variant="secondary">
+          View documentation <span aria-hidden="true">→</span>
+        </JetskiButton>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'href'> {
+	href: string | URL;
+	variant?: 'primary' | 'secondary' | 'link';
+	target?: string;
+}
+
+const {
+	class: className,
+	variant = 'primary',
+	...attrs
+} = Astro.props;
+
+const variantClasses = {
+	primary: 'relative no-underline text-sm inline-flex items-center justify-center p-0.5 overflow-hidden text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 hover:to-purple-600 hover:from-blue-500 dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800',
+	secondary: 'relative no-underline text-sm inline-flex items-center justify-center p-0.5 overflow-hidden text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 hover:to-purple-600 hover:from-blue-500 dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800',
+	link: 'text-sm accent-current hover:underline'
+};
+---
+
+{variant === 'primary' ? (
+	<a class:list={[variantClasses[variant], className]} {...attrs}>
+		<span class="relative px-6 py-3 transition-all ease-in duration-75 bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-md group-hover:bg-opacity-0  w-full text-center">
+			<slot />
+		</span>
+	</a>
+) : variant === 'secondary' ? (
+	<a class:list={[variantClasses[variant], className]} {...attrs}>
+		<span class="relative px-6 py-3 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md w-full text-center">
+			<slot />
+		</span>
+	</a>
+) : (
+	<a class:list={[variantClasses[variant], className]} {...attrs}>
+		<slot />
+	</a>
+)}

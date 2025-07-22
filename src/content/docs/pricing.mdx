@@ -1,17 +1,20 @@
 ---
 title: Pricing
-description: Start for free
+description: Start Deploying
 template: splash
 ---
 
+import CTASection from '../../components/CTASection.astro';
+import JetskiButton from '../../components/JetskiButton.astro';
+
 <div class="not-content">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-16">
     <div class="text-center">
       <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
         Simple, transparent pricing
       </h1>
       <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
-        Deploy and scale your MCP servers with confidence. Start for free, upgrade when you need more.
+        Deploy and scale your MCP servers with confidence. Start Deploying, upgrade when you need more.
       </p>
     </div>
 
@@ -65,9 +68,11 @@ template: splash
             OAuth2 authentication
           </li>
         </ul>
-        <a href="/docs/getting-started" class="mt-8 block w-full rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
-          Get started for free
-        </a>
+        <div class="mt-8">
+          <JetskiButton href="/docs/getting-started" variant="secondary" class="w-full">
+            Start Deploying
+          </JetskiButton>
+        </div>
       </div>
 
       {/* Pro Plan */}
@@ -106,7 +111,7 @@ template: splash
             <svg class="h-6 w-5 flex-none text-blue-600" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
             </svg>
-            $0.01 per additional tool call
+            $0.0001 per additional tool call
           </li>
           <li class="flex gap-x-3">
             <svg class="h-6 w-5 flex-none text-blue-600" viewBox="0 0 20 20" fill="currentColor">
@@ -133,9 +138,11 @@ template: splash
             99.9% uptime SLA
           </li>
         </ul>
-        <a href="/docs/getting-started" class="mt-8 block w-full rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
-          Start Pro trial
-        </a>
+        <div class="mt-8">
+          <JetskiButton href="/docs/getting-started" variant="primary" class="w-full">
+            Start Pro trial
+          </JetskiButton>
+        </div>
       </div>
 
       {/* Enterprise Plan */}
@@ -195,9 +202,11 @@ template: splash
             24/7 phone support
           </li>
         </ul>
-        <a href="/" class="mt-8 block w-full rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
-          Contact sales
-        </a>
+        <div class="mt-8">
+          <JetskiButton href="/" variant="secondary" class="w-full">
+            Contact sales
+          </JetskiButton>
+        </div>
       </div>
     </div>
 
@@ -254,22 +263,7 @@ template: splash
       </div>
     </div>
 
-    <div class="mt-16 text-center">
-      <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        Ready to get started?
-      </h2>
-      <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
-        Deploy your first MCP server in under 5 minutes
-      </p>
-      <div class="mt-8 flex justify-center gap-x-6">
-        <a href="/docs/getting-started" class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
-          Start for free
-        </a>
-        <a href="/docs/getting-started" class="text-sm font-semibold leading-6 text-gray-900 dark:text-white">
-          View documentation <span aria-hidden="true">→</span>
-        </a>
-      </div>
-    </div>
-
   </div>
 </div>
+
+<CTASection />

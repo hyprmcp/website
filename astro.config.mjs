@@ -12,8 +12,16 @@ export default defineConfig({
 
   integrations: [
     starlight({
-      title: 'Jetski',
-      customCss: ['./src/styles/global.css'],
+      title: 'jetski',
+      description:
+        'Serverless hosting and analytics provider for remote, authenticated streamable HTTP MCP server',
+      logo: {
+        src: './src/assets/jetski.svg',
+      },
+      customCss: [
+        './src/styles/global.css',
+        './node_modules/css-device-frames/dist/device-frames.css',
+      ],
       editLink: {
         baseUrl: 'https://github.com/jetski-sh/website/tree/main',
       },
