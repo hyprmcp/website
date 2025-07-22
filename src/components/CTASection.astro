@@ -1,16 +1,17 @@
 ---
 // CTA (Call to Action) Section Component
+import JetskiButton from './JetskiButton.astro';
 ---
 
 <style>
   .hero-bg {
-    background-image: linear-gradient(0deg, transparent 49%, rgba(34, 197, 94, 0.15) 49.5%, rgba(249, 115, 22, 0.15) 50.5%, transparent 51%), 
+    background-image: linear-gradient(0deg, transparent 49%, rgba(34, 197, 94, 0.15) 49.5%, rgba(249, 115, 22, 0.15) 50.5%, transparent 51%),
                       linear-gradient(90deg, transparent 49%, rgba(34, 197, 94, 0.15) 49.5%, rgba(249, 115, 22, 0.15) 50.5%, transparent 51%);
     background-size: 200px 200px;
   }
-  
+
   .dark .hero-bg {
-    background-image: linear-gradient(0deg, transparent 49%, rgba(37, 99, 235, 0.2) 49.5%, rgba(168, 85, 247, 0.2) 50.5%, transparent 51%), 
+    background-image: linear-gradient(0deg, transparent 49%, rgba(37, 99, 235, 0.2) 49.5%, rgba(168, 85, 247, 0.2) 50.5%, transparent 51%),
                       linear-gradient(90deg, transparent 49%, rgba(37, 99, 235, 0.2) 49.5%, rgba(168, 85, 247, 0.2) 50.5%, transparent 51%);
     background-size: 200px 200px;
   }
@@ -27,12 +28,12 @@
         Join thousands of developers using Jetski to build the future of AI. Start free, scale as you grow.
       </p>
       <div class="mt-10 flex items-center justify-center gap-x-6">
-        <a href="/" class="rounded-md bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:from-blue-500 hover:to-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all duration-200">
-          Get started for free
-        </a>
-        <a href="/pricing" class="text-sm font-semibold leading-6 text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 transition-colors">
+        <JetskiButton href="/" variant="primary">
+          Start Deploying
+        </JetskiButton>
+        <JetskiButton href="/pricing" variant="secondary">
           View pricing <span aria-hidden="true">→</span>
-        </a>
+        </JetskiButton>
       </div>
     </div>
   </div>

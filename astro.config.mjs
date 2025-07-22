@@ -12,7 +12,7 @@ export default defineConfig({
 
   integrations: [
     starlight({
-      title: 'Jetski',
+      title: 'jetski',
       description:
         'Serverless hosting and analytics provider for remote, authenticated streamable HTTP MCP server',
       logo: {
