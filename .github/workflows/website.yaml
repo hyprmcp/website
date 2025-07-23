@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   build:
@@ -39,3 +40,26 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
       - name: Build website
         run: pnpm run build
+      - uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4
+        if: github.ref == 'refs/heads/main'
+        with:
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::855808870739:role/github-actions-jetski.sh
+      - name: Deploy short lived content
+        if: github.ref == 'refs/heads/main'
+        run: >-
+          aws s3 sync dist s3://jetski.sh/
+          --cache-control "max-age=60, public"
+          --acl=public-read
+      - name: Deploy long lived content
+        if: github.ref == 'refs/heads/main'
+        run: >-
+          aws s3 sync dist/_astro s3://jetski.sh/_astro
+          --cache-control "max-age=604800, public"
+          --acl=public-read
+      - name: Invalidate cache
+        if: github.ref == 'refs/heads/main'
+        run: >-
+          aws cloudfront create-invalidation
+          --distribution-id E1OJSRCMNHM1NE
+          --invalidation-batch "Paths={Quantity='1' ,Items=['/*']},CallerReference=WEBSITE_$GITHUB_RUN_ID"
