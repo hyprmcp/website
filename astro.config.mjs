@@ -48,11 +48,15 @@ export default defineConfig({
           label: 'Getting started',
           autogenerate: {directory: 'docs/getting-started'},
         },
-        {label: 'Platform', autogenerate: {directory: 'docs/platform'}},
-        {
-          label: 'MCP Authentication',
-          autogenerate: {directory: 'docs/authentication'},
-        },
+        // Not yet documented
+        // {
+        //   label: 'Platform',
+        //   autogenerate: {directory: 'docs/platform'},
+        // },
+        // {
+        //   label: 'MCP Authentication',
+        //   autogenerate: {directory: 'docs/authentication'},
+        // },
         {
           label: 'Navbar',
           items: [

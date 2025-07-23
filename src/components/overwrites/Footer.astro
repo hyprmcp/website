@@ -2,8 +2,6 @@
 import EditLink from 'virtual:starlight/components/EditLink';
 import LastUpdated from 'virtual:starlight/components/LastUpdated';
 import Pagination from 'virtual:starlight/components/Pagination';
-import config from 'virtual:starlight/user-config';
-import {Icon} from '@astrojs/starlight/components';
 import JetskiFooter from '../JetskiFooter.astro';
 
 const {entry} = Astro.locals.starlightRoute;
@@ -18,7 +16,7 @@ const isSplashTemplate = entry.data.template === 'splash';
     </div>
     <Pagination />
     <div class="kudos sl-flex">
-      Glasskube, Inc.
+      © 2025 Glasskube, Inc.
     </div>
   )}
   {isSplashTemplate && (
