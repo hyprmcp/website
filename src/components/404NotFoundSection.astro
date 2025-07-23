@@ -1,0 +1,291 @@
+---
+import JetskiButton from './util/JetskiButton.astro';
+import {Icon} from '@astrojs/starlight/components';
+---
+
+<style>
+  .hero-bg {
+    background-image: linear-gradient(0deg, transparent 49%, rgba(34, 197, 94, 0.15) 49.5%, rgba(249, 115, 22, 0.15) 50.5%, transparent 51%),
+                      linear-gradient(90deg, transparent 49%, rgba(34, 197, 94, 0.15) 49.5%, rgba(249, 115, 22, 0.15) 50.5%, transparent 51%);
+    background-size: 200px 200px;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .dark .hero-bg {
+    background-image: linear-gradient(0deg, transparent 49%, rgba(37, 99, 235, 0.2) 49.5%, rgba(168, 85, 247, 0.2) 50.5%, transparent 51%),
+                      linear-gradient(90deg, transparent 49%, rgba(37, 99, 235, 0.2) 49.5%, rgba(168, 85, 247, 0.2) 50.5%, transparent 51%);
+    background-size: 200px 200px;
+  }
+
+  .neon-text {
+    text-shadow:
+      0 0 5px rgba(0, 255, 255, 0.5),
+      0 0 10px rgba(0, 255, 255, 0.4),
+      0 0 15px rgba(0, 255, 255, 0.3),
+      0 0 20px rgba(0, 255, 255, 0.2);
+    animation: neon-flicker 2s infinite alternate;
+  }
+
+  .dark .neon-text {
+    text-shadow:
+      0 0 5px rgba(0, 255, 255, 0.5),
+      0 0 10px rgba(0, 255, 255, 0.4),
+      0 0 15px rgba(0, 255, 255, 0.3),
+      0 0 20px rgba(0, 255, 255, 0.2);
+  }
+
+  .neon-text:not(.dark *) {
+    text-shadow:
+      0 0 8px rgba(59, 130, 246, 0.4),
+      0 0 16px rgba(59, 130, 246, 0.3),
+      0 0 24px rgba(59, 130, 246, 0.2);
+  }
+
+  .neon-pink {
+    text-shadow:
+      0 0 5px rgba(255, 0, 255, 0.5),
+      0 0 10px rgba(255, 0, 255, 0.4),
+      0 0 15px rgba(255, 0, 255, 0.3);
+  }
+
+  .dark .neon-pink {
+    text-shadow:
+      0 0 5px rgba(255, 0, 255, 0.5),
+      0 0 10px rgba(255, 0, 255, 0.4),
+      0 0 15px rgba(255, 0, 255, 0.3);
+  }
+
+  .neon-pink:not(.dark *) {
+    text-shadow:
+      0 0 8px rgba(147, 51, 234, 0.4),
+      0 0 16px rgba(147, 51, 234, 0.3);
+  }
+
+  .glitch-box {
+    position: relative;
+    border: 2px solid transparent;
+    backdrop-filter: blur(10px);
+    border-image: linear-gradient(45deg, #00ffff, #ff00ff, #00ff00, #ffff00) 1;
+    animation: border-glow 3s ease-in-out infinite alternate;
+  }
+
+  .dark .glitch-box {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(20, 20, 40, 0.9));
+  }
+
+  .light .glitch-box {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(248, 250, 252, 0.9));
+    border-image: linear-gradient(45deg, #3b82f6, #8b5cf6, #10b981, #f59e0b) 1;
+  }
+
+  .glitch-box::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    z-index: -1;
+    filter: blur(8px);
+    opacity: 0.7;
+    animation: pulse-scale 4s ease-in-out infinite;
+  }
+
+  .dark .glitch-box::before {
+    background: linear-gradient(45deg, #00ffff, #ff00ff, #00ff00, #ffff00);
+  }
+
+  .glitch-box:not(.dark *)::before {
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #10b981, #f59e0b);
+    opacity: 0.4;
+  }
+
+  .matrix-rain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: matrix-scroll 20s linear infinite;
+  }
+
+  .dark .matrix-rain {
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 98px,
+        rgba(0, 255, 0, 0.03) 100px
+      );
+  }
+
+  .matrix-rain:not(.dark *) {
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 98px,
+        rgba(34, 197, 94, 0.02) 100px
+      );
+  }
+
+  .floating-icon {
+    animation: float-icon 3s ease-in-out infinite;
+  }
+
+  @keyframes neon-flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      filter: brightness(1);
+    }
+    20%, 24%, 55% {
+      filter: brightness(0.8);
+    }
+  }
+
+  @keyframes border-glow {
+    0% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(255, 0, 255, 0.4); }
+    100% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.3); }
+  }
+
+  @keyframes pulse-scale {
+    0%, 100% { transform: scale(0.9); }
+    50% { transform: scale(1.1); }
+  }
+
+  @keyframes matrix-scroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 1000px; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes float-icon {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-8px) rotate(5deg); }
+    66% { transform: translateY(4px) rotate(-3deg); }
+  }
+
+  .cyberpunk-button {
+    background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
+    border: 1px solid rgba(0, 255, 255, 0.5);
+    transition: all 0.3s ease;
+  }
+
+  .cyberpunk-button:hover {
+    background: linear-gradient(45deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3));
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    transform: translateY(-2px);
+  }
+</style>
+
+<div class="relative min-h-screen overflow-hidden bg-gray-50 dark:bg-slate-900 hero-bg">
+  <div class="absolute inset-0 bg-gray-50/80 dark:bg-slate-900/80"></div>
+  <div class="matrix-rain"></div>
+
+  <div class="relative z-10 mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <!-- Floating icons -->
+      <div class="absolute top-20 left-1/4 floating-icon">
+        <Icon name="warning" class="w-8 h-8 text-yellow-400 opacity-60" />
+      </div>
+      <div class="absolute top-32 right-1/4 floating-icon" style="animation-delay: -1s;">
+        <Icon name="rocket" class="w-6 h-6 text-cyan-400 opacity-60" />
+      </div>
+      <div class="absolute top-16 right-1/3 floating-icon" style="animation-delay: -2s;">
+        <Icon name="open-book" class="w-7 h-7 text-green-400 opacity-60" />
+      </div>
+
+      <!-- Main 404 Display -->
+      <div class="mb-12">
+        <h1 class="text-9xl sm:text-[12rem] font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-green-400 neon-text leading-none">
+          404
+        </h1>
+        <div class="mt-4">
+          <span class="text-2xl sm:text-3xl font-bold text-white neon-pink">
+            SIGNAL LOST
+          </span>
+        </div>
+      </div>
+
+      <!-- Message Section -->
+      <div class="mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+          <span class="text-blue-600 dark:text-cyan-400">SYSTEM ERROR:</span> Page Not Found
+        </h2>
+        <p class="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          Looks like this MCP server endpoint doesn't exist in our neural network.
+          <br />
+          Don't worry, even the best AI systems have glitches sometimes! 🤖
+        </p>
+      </div>
+
+      <!-- Action Card -->
+      <div class="max-w-2xl mx-auto mb-16">
+        <!-- Navigation Card -->
+        <div class="glitch-box rounded-2xl p-8 text-center">
+          <div class="flex items-center justify-center mb-4">
+            <div class="p-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 mr-4 flex items-center justify-center">
+              <Icon name="rocket" class="w-6 h-6 text-white" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-0">Mission Control</h3>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 mb-6">
+            Return to base and explore our serverless MCP deployment platform from the beginning.
+          </p>
+          <JetskiButton href="/" variant="primary" class="w-full cyberpunk-button">
+            Return to Homepage
+          </JetskiButton>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+        <a
+          href="/docs/getting-started/"
+          class="block p-4 rounded-lg bg-white/50 dark:bg-gray-900/50 border border-gray-300/50 dark:border-gray-700/50 hover:border-blue-400/50 dark:hover:border-cyan-400/50 transition-all duration-300 group"
+        >
+          <Icon name="open-book" class="w-6 h-6 text-blue-600 dark:text-cyan-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+          <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">Docs</span>
+        </a>
+
+        <a
+          href="/pricing"
+          class="block p-4 rounded-lg bg-white/50 dark:bg-gray-900/50 border border-gray-300/50 dark:border-gray-700/50 hover:border-purple-400/50 dark:hover:border-purple-400/50 transition-all duration-300 group"
+        >
+          <Icon name="information" class="w-6 h-6 text-purple-600 dark:text-purple-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+          <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">Pricing</span>
+        </a>
+
+        <a
+          href="/waitlist"
+          class="block p-4 rounded-lg bg-white/50 dark:bg-gray-900/50 border border-gray-300/50 dark:border-gray-700/50 hover:border-green-400/50 dark:hover:border-green-400/50 transition-all duration-300 group"
+        >
+          <Icon name="rocket" class="w-6 h-6 text-green-600 dark:text-green-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+          <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">Waitlist</span>
+        </a>
+
+        <a
+          href="https://github.com/jetski-sh"
+          target="_blank"
+          class="block p-4 rounded-lg bg-white/50 dark:bg-gray-900/50 border border-gray-300/50 dark:border-gray-700/50 hover:border-orange-400/50 dark:hover:border-yellow-400/50 transition-all duration-300 group"
+        >
+          <Icon name="github" class="w-6 h-6 text-orange-600 dark:text-yellow-400 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+          <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">GitHub</span>
+        </a>
+      </div>
+
+      <!-- Fun Footer Message -->
+      <div class="mt-16 text-center">
+        <p class="text-gray-600 dark:text-gray-500 text-sm">
+          <span class="text-blue-600 dark:text-cyan-400 font-mono">[SYSTEM]</span>
+          Don't worry, our MCP servers are still running smoothly!
+          <span class="text-green-600 dark:text-green-400">●</span> Online
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
