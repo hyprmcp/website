@@ -52,6 +52,17 @@ This is a Jetski documentation website built with:
 Documentation is written in MDX format, allowing you to use React components alongside Markdown content.
 After every sentence a new line is added to ensure proper formatting and readability.
 
+### SEO Guidelines
+
+When writing page titles and descriptions, follow these SEO best practices:
+
+- **Page titles**: Maximum 60 characters to avoid truncation in search results
+- **Meta descriptions**: Maximum 160 characters to avoid truncation in search results
+- Include relevant keywords like "MCP", "Model Context Protocol", "serverless", "Jetski"
+- Make titles and descriptions unique for each page
+- Focus on user intent and value proposition
+- Include action words like "Deploy", "Learn", "Get Started"
+
 ### Configuration Details
 
 - Site URL: https://jetski.sh
