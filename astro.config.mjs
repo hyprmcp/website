@@ -61,7 +61,7 @@ export default defineConfig({
           label: 'Navbar',
           items: [
             {label: 'Home', link: '/'},
-            {label: 'Pricing', link: '/pricing'},
+            {label: 'Pricing', link: '/pricing/'},
             {label: 'Docs', link: '/docs/getting-started/'},
           ],
         },
