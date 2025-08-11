@@ -1,4 +1,5 @@
 // @ts-check
+import sitemap from '@astrojs/sitemap';
 import starlight from '@astrojs/starlight';
 import starlightUtils from '@lorenzo_lewis/starlight-utils';
 import tailwindcss from '@tailwindcss/vite';
@@ -79,6 +80,9 @@ export default defineConfig({
           },
         }),
       ],
+    }),
+    sitemap({
+      filter: page => !page.startsWith('https://jetski.sh/lp/'),
     }),
   ],
   markdown: {

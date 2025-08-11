@@ -12,6 +12,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.4.2",
     "@astrojs/starlight": "^0.35.2",
     "@astrojs/starlight-tailwind": "^4.0.1",
     "@lorenzo_lewis/starlight-utils": "^0.3.2",
