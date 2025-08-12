@@ -1,0 +1,39 @@
+---
+import ThemeProvider from 'virtual:starlight/components/ThemeProvider';
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+---
+
+<footer class="bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-gray-800">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="flex items-center mb-4 md:mb-0">
+        <span class="text-2xl font-bold text-gray-900 dark:text-white">Jetski</span>
+        <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">Analytics Gateway</span>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
+        <a href="/docs/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+          Documentation
+        </a>
+        <a href="/pricing/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+          Pricing
+        </a>
+        <a href="/docs/analytics/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+          Analytics Guide
+        </a>
+        <a href="https://github.com/jetski-sh" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+          GitHub
+        </a>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <ThemeProvider />
+        <ThemeSelect />
+      </div>
+    </div>
+
+    <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800 text-center text-sm text-gray-600 dark:text-gray-400">
+      <p>&copy; 2025 Jetski. All rights reserved. Built for MCP developers and product managers.</p>
+    </div>
+  </div>
+</footer>
