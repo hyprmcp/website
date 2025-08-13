@@ -1,27 +1,17 @@
 ---
 import JetskiButton from '../util/JetskiButton.astro';
 
-export interface Props {
-  title: string;
-  description: string;
-  primaryCTA: {
-    text: string;
-    href: string;
-  };
-  secondaryCTA: {
-    text: string;
-    href: string;
-  };
-  benefits: string[];
-}
-
-const {
-  title,
-  description,
-  primaryCTA,
-  secondaryCTA,
-  benefits
-} = Astro.props;
+const title = 'Ready to illuminate your MCP server?';
+const description = 'Start understanding your users today. Get instant access to powerful analytics that help you build better MCP experiences.';
+const primaryCTA = {
+  text: 'Get Started Free',
+  href: '/waitlist/'
+};
+const secondaryCTA = {
+  text: 'Read Documentation',
+  href: '/docs/analytics/'
+};
+const benefits = ['No credit card required', '5-minute setup', 'GDPR compliant'];
 ---
 
 <style>
@@ -43,8 +33,14 @@ const {
     <div class="relative isolate overflow-hidden bg-white dark:bg-gray-800 rounded-3xl shadow-2xl cta-gradient">
       <div class="px-6 py-16 sm:px-16 sm:py-24 lg:px-24">
         <div class="mx-auto max-w-2xl text-center">
+          <a href="#get-started" class="inline-flex items-center rounded-full bg-yellow-100 dark:bg-yellow-900/30 px-4 py-1.5 text-sm font-medium text-yellow-800 dark:text-yellow-200 mb-6 hover:bg-yellow-200 dark:hover:bg-yellow-900/50 transition-colors cursor-pointer">
+            <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            Get Started
+          </a>
           <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-            {title}
+            Ready to <span class="text-yellow-600 dark:text-yellow-400">illuminate</span> your MCP server?
           </h2>
           <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600 dark:text-gray-300">
             {description}

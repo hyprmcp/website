@@ -1,14 +1,27 @@
 ---
 import ThemeProvider from 'virtual:starlight/components/ThemeProvider';
 import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+import ThemedImage from '../util/ThemedImage.astro';
+import jetskiBlack from '../../assets/jetski-black.svg';
+import jetskiWhite from '../../assets/jetski-white.svg';
 ---
 
 <footer class="bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-gray-800">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
     <div class="flex flex-col md:flex-row justify-between items-center">
       <div class="flex items-center mb-4 md:mb-0">
-        <span class="text-2xl font-bold text-gray-900 dark:text-white">Jetski</span>
-        <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">Analytics Gateway</span>
+        <ThemedImage
+          lightSrc={jetskiBlack}
+          darkSrc={jetskiWhite}
+          alt="Jetski Logo"
+          class="w-8 h-8 mr-2"
+          width={32}
+          height={32}
+        />
+        <div class="flex flex-col">
+          <span class="text-2xl font-bold text-gray-900 dark:text-white">Jetski</span>
+          <span class="text-sm text-gray-600 dark:text-gray-400">Analytics Gateway</span>
+        </div>
       </div>
 
       <div class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">

@@ -1,0 +1,82 @@
+---
+---
+
+<section id="simple-integration" class="py-24 bg-gradient-to-b from-white to-gray-50 dark:from-slate-900 dark:to-slate-800">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <a href="#simple-integration" class="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900/30 px-4 py-1.5 text-sm font-medium text-blue-800 dark:text-blue-200 mb-4 hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors cursor-pointer">
+        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+        </svg>
+        Simple Integration
+      </a>
+      <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Drop-in analytics in <span class="text-blue-600 dark:text-blue-400">60 seconds</span>
+      </h2>
+      <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+        Just place Jetski Gateway between in front of your MCP server. Zero code changes required.
+      </p>
+    </div>
+
+    <!-- Installation Command -->
+    <div class="max-w-2xl mx-auto mb-12">
+      <div class="bg-gray-900 dark:bg-black rounded-xl p-4 shadow-xl relative">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs text-gray-400 uppercase tracking-wider">Quick Install</span>
+          <button class="copy-btn p-2 rounded-lg bg-gray-800 dark:bg-gray-900 text-gray-400 hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-white transition-all duration-200 group" data-copy="jetski gateway configure">
+            <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+            </svg>
+          </button>
+        </div>
+        <code class="text-green-400 font-mono text-sm select-all">$ jetski gateway configure</code>
+      </div>
+    </div>
+
+    <!-- Key Benefits -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      <div class="text-center">
+        <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Zero Code Changes</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">Works with any MCP server out of the box</p>
+      </div>
+
+      <div class="text-center">
+        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Real-time Analytics</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">See metrics instantly as they happen</p>
+      </div>
+
+      <div class="text-center">
+        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Privacy First</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">End-to-end encryption for sensitive data</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const textToCopy = btn.dataset.copy;
+      navigator.clipboard.writeText(textToCopy);
+      btn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+      setTimeout(() => {
+        btn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>';
+      }, 2000);
+    });
+  });
+</script>

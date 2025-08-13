@@ -1,141 +1,25 @@
 ---
 import StandaloneLayout from '../../../layouts/StandaloneLayout.astro';
 import AnalyticsHero from '../../../components/lp/AnalyticsHero.astro';
+import AnalyticsGatewayInstallation from '../../../components/lp/AnalyticsGatewayInstallation.astro';
+import AnalyticsGatewayFlowChart from '../../../components/lp/AnalyticsGatewayFlowChart.astro';
 import AnalyticsFeatures from '../../../components/lp/AnalyticsFeatures.astro';
-import MetricsShowcase from '../../../components/lp/MetricsShowcase.astro';
+import AnalyticsMetricsShowcase from '../../../components/lp/AnalyticsMetricsShowcase.astro';
 import AnalyticsCTA from '../../../components/lp/AnalyticsCTA.astro';
 
 const pageTitle = 'Jetski Analytics - Turn the lights on for your MCP server';
 const pageDescription = 'Understand how users interact with your Model Context Protocol servers. Get deep insights into prompts, tool usage, and user behavior patterns with Jetski Analytics Gateway.';
-
-const heroProps = {
-  badge: 'Analytics Gateway for MCP',
-  headline: 'Turn the lights on for your',
-  highlightText: 'MCP server',
-  description: 'Understand how users interact with your Model Context Protocol servers. Get deep insights into prompts, tool usage, and user behavior patterns.',
-  primaryCTA: {
-    text: 'Start Analyzing Prompts',
-    href: '#get-started'
-  },
-  secondaryCTA: {
-    text: 'See how it works',
-    href: '#features'
-  },
-  stats: [
-    { value: '100K+', label: 'Prompts Analyzed' },
-    { value: '500ms', label: 'Avg Response Time' },
-    { value: '99.9%', label: 'Uptime SLA' }
-  ]
-};
-
-const featuresProps = {
-  sectionTitle: 'Comprehensive Analytics',
-  sectionSubtitle: 'Everything you need to understand your MCP users',
-  sectionDescription: 'From prompt analysis to performance monitoring, get complete visibility into how your MCP server is being used.',
-  features: [
-    {
-      title: 'Real-time Prompt Analysis',
-      description: 'Monitor every prompt sent to your MCP server in real-time. Understand user intent and optimize your tools accordingly.',
-      icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
-      color: 'blue'
-    },
-    {
-      title: 'Tool Usage Metrics',
-      description: 'Track which tools are used most frequently. Identify patterns and optimize tool performance based on actual usage.',
-      icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
-      color: 'purple'
-    },
-    {
-      title: 'User Behavior Insights',
-      description: 'Understand how different user segments interact with your MCP server. Segment by role, department, or custom attributes.',
-      icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
-      color: 'green'
-    },
-    {
-      title: 'Performance Monitoring',
-      description: 'Track response times, error rates, and throughput. Get alerts when performance degrades.',
-      icon: 'M13 10V3L4 14h7v7l9-11h-7z',
-      color: 'yellow'
-    },
-    {
-      title: 'Custom Dashboards',
-      description: 'Build custom dashboards tailored to your needs. Export data to your favorite analytics tools.',
-      icon: 'M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z',
-      color: 'indigo'
-    },
-    {
-      title: 'Compliance & Security',
-      description: 'GDPR compliant data handling. End-to-end encryption for sensitive prompts. Role-based access control.',
-      icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z',
-      color: 'red'
-    }
-  ]
-};
-
-const metricsProps = {
-  title: 'See the full picture of your MCP usage',
-  subtitle: 'Get actionable insights from every interaction. Track prompt patterns, measure tool effectiveness, and optimize your MCP server based on real data.',
-  features: [
-    {
-      icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
-      title: 'Prompt Intelligence',
-      description: 'Automatically categorize and analyze prompts to understand user intent',
-      color: 'blue'
-    },
-    {
-      icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
-      title: 'Usage Trends',
-      description: 'Identify peak usage times and plan capacity accordingly',
-      color: 'purple'
-    },
-    {
-      icon: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4',
-      title: 'Tool Optimization',
-      description: 'Discover which tools deliver the most value to your users',
-      color: 'green'
-    }
-  ],
-  chartTitle: 'Weekly Prompt Volume',
-  chartTotal: '12,847',
-  chartGrowth: '↑ 23%',
-  chartData: [
-    { day: 'Mon', value: 65, count: '1,834' },
-    { day: 'Tue', value: 80, count: '2,256' },
-    { day: 'Wed', value: 90, count: '2,538' },
-    { day: 'Thu', value: 95, count: '2,679', isHighlight: true },
-    { day: 'Fri', value: 70, count: '1,976' },
-    { day: 'Sat', value: 35, count: '988' },
-    { day: 'Sun', value: 20, count: '576' }
-  ],
-  bottomStats: [
-    { value: '156ms', label: 'Avg Response' },
-    { value: '98.7%', label: 'Success Rate' },
-    { value: '4.2', label: 'Tools/Prompt' }
-  ]
-};
-
-const ctaProps = {
-  title: 'Ready to illuminate your MCP server?',
-  description: 'Start understanding your users today. Get instant access to powerful analytics that help you build better MCP experiences.',
-  primaryCTA: {
-    text: 'Get Started Free',
-    href: '/waitlist/'
-  },
-  secondaryCTA: {
-    text: 'Read Documentation',
-    href: '/docs/analytics/'
-  },
-  benefits: ['No credit card required', '5-minute setup', 'GDPR compliant']
-};
 ---
 
-<StandaloneLayout 
-  title={pageTitle} 
+<StandaloneLayout
+  title={pageTitle}
   description={pageDescription}
   ogUrl="https://jetski.sh/lp/mcp-prompt-analytics/"
 >
-  <AnalyticsHero {...heroProps} />
-  <AnalyticsFeatures {...featuresProps} />
-  <MetricsShowcase {...metricsProps} />
-  <AnalyticsCTA {...ctaProps} />
+  <AnalyticsHero />
+  <AnalyticsGatewayInstallation />
+  <AnalyticsGatewayFlowChart />
+  <AnalyticsFeatures />
+  <AnalyticsMetricsShowcase />
+  <AnalyticsCTA />
 </StandaloneLayout>
