@@ -1,0 +1,85 @@
+---
+import JetskiButton from '../util/JetskiButton.astro';
+import AnalyticsDashboard from './AnalyticsDashboard.astro';
+
+const badge = 'Analytics Gateway for MCP';
+const headline = 'Turn the lights on for your';
+const highlightText = 'MCP server';
+const description = 'Understand how users interact with your Model Context Protocol servers. Get deep insights into prompts, tool usage, and user behavior patterns.';
+const primaryCTA = {
+  text: 'Start Analyzing Prompts',
+  href: '#get-started'
+};
+const secondaryCTA = {
+  text: 'See how it works',
+  href: '#how-it-works'
+};
+const stats = [
+  { value: '100K+', label: 'Prompts Analyzed' },
+  { value: '500ms', label: 'Avg Response Time' },
+  { value: '99.9%', label: 'Uptime SLA' }
+];
+---
+
+<style>
+  .hero-bg {
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+  }
+
+  .dark .hero-bg {
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.25) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.25) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(59, 130, 246, 0.2) 0%, transparent 50%);
+  }
+
+</style>
+
+<div id="analytics-gateway" class="relative overflow-hidden bg-white dark:bg-slate-900 hero-bg">
+  <div class="absolute inset-0 bg-white/50 dark:bg-slate-900/50"></div>
+  <div class="relative w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center">
+        <a href="#analytics-gateway" class="inline-flex items-center px-4 py-1.5 mb-6 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors cursor-pointer">
+          <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+          </svg>
+          {badge}
+        </a>
+
+        <h1 class="text-4xl font-bold tracking-tight mb-6 sm:text-5xl lg:text-6xl text-gray-900 dark:text-white">
+          {headline}
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400"> {highlightText}</span>
+        </h1>
+
+        <p class="mt-6 text-xl leading-8 text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          {description}
+        </p>
+
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <JetskiButton href={primaryCTA.href} variant="primary">
+            {primaryCTA.text}
+          </JetskiButton>
+          <JetskiButton href={secondaryCTA.href} variant="secondary">
+            {secondaryCTA.text} <span aria-hidden="true">→</span>
+          </JetskiButton>
+        </div>
+
+        <div class="mt-16 grid grid-cols-3 gap-8 max-w-3xl mx-auto">
+          {stats.map((stat) => (
+            <div class="text-center">
+              <div class="text-3xl font-bold text-gray-900 dark:text-white">{stat.value}</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <AnalyticsDashboard />
+    </div>
+  </div>
+</div>
