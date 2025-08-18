@@ -72,6 +72,10 @@
         <circle r="4" fill="#3B82F6">
           <animateMotion dur="2s" repeatCount="indefinite" path="M 330 200 L 550 200"/>
         </circle>
+        <!-- Reverse flow dot -->
+        <circle r="4" fill="#10B981" opacity="0.6">
+          <animateMotion dur="2.5s" repeatCount="indefinite" path="M 550 200 L 330 200" begin="0.8s"/>
+        </circle>
 
         <!-- Jetski Gateway -->
         <g transform="translate(550, 150)">
@@ -94,6 +98,14 @@
         <circle r="4" fill="#3B82F6">
           <animateMotion dur="2s" repeatCount="indefinite" path="M 750 200 L 970 200" begin="0.5s"/>
         </circle>
+        <!-- Reverse flow dot -->
+        <circle r="4" fill="#10B981" opacity="0.6">
+          <animateMotion dur="2.5s" repeatCount="indefinite" path="M 970 200 L 750 200" begin="1.3s"/>
+        </circle>
+        <!-- Another reverse dot -->
+        <circle r="3" fill="#EC4899" opacity="0.7">
+          <animateMotion dur="3s" repeatCount="indefinite" path="M 970 200 L 750 200" begin="2.5s"/>
+        </circle>
 
         <!-- MCP Server -->
         <g transform="translate(970, 150)">
@@ -106,6 +118,21 @@
         <!-- Response flow back -->
         <path d="M 970 220 L 750 220" stroke="#E5E7EB" stroke-width="2" fill="none" stroke-dasharray="4 4" class="dark:stroke-slate-600"/>
         <path d="M 750 220 L 330 220" stroke="#E5E7EB" stroke-width="2" fill="none" stroke-dasharray="4 4" class="dark:stroke-slate-600"/>
+        
+        <!-- More animated circles on response paths -->
+        <circle r="3" fill="#06B6D4" opacity="0.7">
+          <animateMotion dur="2.2s" repeatCount="indefinite" path="M 970 220 L 750 220" begin="0.3s"/>
+        </circle>
+        <circle r="3" fill="#06B6D4" opacity="0.7">
+          <animateMotion dur="2.2s" repeatCount="indefinite" path="M 750 220 L 330 220" begin="0.8s"/>
+        </circle>
+        
+        <!-- Zigzag crazy circle -->
+        <circle r="4" fill="#A855F7" opacity="0.8">
+          <animateMotion dur="3s" repeatCount="indefinite" 
+            path="M 330 200 Q 440 180, 550 200 T 750 200 Q 860 220, 970 200" begin="1s"/>
+          <animate attributeName="r" values="4;6;4" dur="3s" repeatCount="indefinite"/>
+        </circle>
 
         <!-- Flow from Gateway to Analytics Platform -->
         <path d="M 650 250 L 650 320" stroke="#8B5CF6" stroke-width="2" fill="none" class="dark:stroke-purple-500"/>
@@ -120,6 +147,25 @@
         </circle>
         <circle r="3" fill="#8B5CF6">
           <animateMotion dur="3s" repeatCount="indefinite" path="M 650 250 L 650 320" begin="2s"/>
+        </circle>
+        
+        <!-- Crazy upward circle -->
+        <circle r="5" fill="#FCD34D" opacity="0.8">
+          <animateMotion dur="1.5s" repeatCount="indefinite" path="M 650 400 L 650 50" begin="0s"/>
+          <animate attributeName="r" values="5;8;5" dur="1.5s" repeatCount="indefinite"/>
+          <animate attributeName="fill" values="#FCD34D;#F59E0B;#FCD34D" dur="1.5s" repeatCount="indefinite"/>
+        </circle>
+        
+        <!-- Another crazy circle with erratic path -->
+        <circle r="4" fill="#EF4444" opacity="0.7">
+          <animateMotion dur="2s" repeatCount="indefinite" 
+            path="M 650 380 Q 680 300, 650 250 T 620 150 Q 650 100, 650 50" begin="0.5s"/>
+          <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        
+        <!-- Reverse flow from Analytics back up -->
+        <circle r="3" fill="#22C55E" opacity="0.6">
+          <animateMotion dur="2.5s" repeatCount="indefinite" path="M 650 320 L 650 250" begin="1.5s"/>
         </circle>
 
         <!-- Jetski Analytics Platform -->

@@ -1,5 +1,5 @@
 ---
-import JetskiButton from '../util/JetskiButton.astro';
+import JetskiButton from '../../util/JetskiButton.astro';
 
 const title = 'Ready to illuminate your MCP server?';
 const description = 'Start understanding your users today. Get instant access to powerful analytics that help you build better MCP experiences.';
@@ -16,14 +16,14 @@ const benefits = ['No credit card required', '5-minute setup', 'GDPR compliant']
 
 <style>
   .cta-gradient {
-    background: linear-gradient(135deg, 
-      rgba(99, 102, 241, 0.1) 0%, 
+    background: linear-gradient(135deg,
+      rgba(99, 102, 241, 0.1) 0%,
       rgba(168, 85, 247, 0.1) 100%);
   }
-  
+
   .dark .cta-gradient {
-    background: linear-gradient(135deg, 
-      rgba(99, 102, 241, 0.2) 0%, 
+    background: linear-gradient(135deg,
+      rgba(99, 102, 241, 0.2) 0%,
       rgba(168, 85, 247, 0.2) 100%);
   }
 </style>
@@ -45,7 +45,7 @@ const benefits = ['No credit card required', '5-minute setup', 'GDPR compliant']
           <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600 dark:text-gray-300">
             {description}
           </p>
-          
+
           <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <JetskiButton href={primaryCTA.href} variant="primary">
               {primaryCTA.text}
@@ -54,7 +54,7 @@ const benefits = ['No credit card required', '5-minute setup', 'GDPR compliant']
               {secondaryCTA.text}
             </JetskiButton>
           </div>
-          
+
           <div class="mt-8 flex items-center justify-center space-x-6 text-sm text-gray-600 dark:text-gray-400">
             {benefits.map((benefit) => (
               <div class="flex items-center">
@@ -67,7 +67,7 @@ const benefits = ['No credit card required', '5-minute setup', 'GDPR compliant']
           </div>
         </div>
       </div>
-      
+
       <div class="absolute -top-24 -right-24 opacity-20">
         <svg width="400" height="400" viewBox="0 0 400 400" class="text-purple-600 dark:text-purple-400">
           <defs>
