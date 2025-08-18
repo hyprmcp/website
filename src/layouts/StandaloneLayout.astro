@@ -11,16 +11,17 @@ import '../../node_modules/@astrojs/starlight/style/asides.css';
 import '../../node_modules/@astrojs/starlight/style/util.css';
 import 'virtual:starlight/optional-css';
 
-import LandingFooter from '../components/lp/LandingFooter.astro';
+import LandingFooter, { type FooterLink } from '../components/lp/LandingFooter.astro';
 
 export interface Props {
   title: string;
   description: string;
   ogUrl?: string;
   footerTagline?: string;
+  footerLinks?: FooterLink[];
 }
 
-const { title, description, ogUrl = Astro.url.href, footerTagline } = Astro.props;
+const { title, description, ogUrl = Astro.url.href, footerTagline, footerLinks } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -45,6 +46,6 @@ const { title, description, ogUrl = Astro.url.href, footerTagline } = Astro.prop
     <main>
       <slot />
     </main>
-    <LandingFooter tagline={footerTagline} />
+    <LandingFooter tagline={footerTagline} links={footerLinks} />
   </body>
 </html>

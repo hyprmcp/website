@@ -5,11 +5,24 @@ import ThemedImage from '../util/ThemedImage.astro';
 import jetskiBlack from '../../assets/jetski-black.svg';
 import jetskiWhite from '../../assets/jetski-white.svg';
 
-export interface Props {
-  tagline?: string;
+export interface FooterLink {
+  href: string;
+  text: string;
 }
 
-const { tagline = 'Built for MCP developers and product managers.' } = Astro.props;
+export interface Props {
+  tagline?: string;
+  links?: FooterLink[];
+}
+
+const { 
+  tagline = 'Built for MCP developers and product managers.',
+  links = [
+    { href: '/docs/', text: 'Documentation' },
+    { href: '/pricing/', text: 'Pricing' },
+    { href: 'https://github.com/jetski-sh', text: 'GitHub' }
+  ]
+} = Astro.props;
 ---
 
 <footer class="bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-gray-800">
@@ -29,15 +42,11 @@ const { tagline = 'Built for MCP developers and product managers.' } = Astro.pro
       </div>
 
       <div class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
-        <a href="/docs/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
-          Documentation
-        </a>
-        <a href="/pricing/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
-          Pricing
-        </a>
-        <a href="https://github.com/jetski-sh" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
-          GitHub
-        </a>
+        {links.map((link) => (
+          <a href={link.href} class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+            {link.text}
+          </a>
+        ))}
       </div>
 
       <div class="flex items-center space-x-4">
