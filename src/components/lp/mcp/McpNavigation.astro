@@ -1,0 +1,42 @@
+---
+import ThemedImage from '../../util/ThemedImage.astro';
+import jetskiBlack from '../../../assets/jetski-black.svg';
+import jetskiWhite from '../../../assets/jetski-white.svg';
+---
+
+<nav class="fixed top-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center">
+        <ThemedImage
+          lightSrc={jetskiBlack}
+          darkSrc={jetskiWhite}
+          alt="Jetski Logo"
+          class="w-14 h-14"
+        />
+      </div>
+
+      <div class="hidden md:flex space-x-8">
+        <a href="#features" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors no-underline">
+          Features
+        </a>
+        <a href="#demo" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors no-underline">
+          Demo
+        </a>
+        <a href="#pricing" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors no-underline">
+          Pricing
+        </a>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <a
+          href="https://tally.so/r/woj4kX"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-gray-900 text-white dark:bg-white dark:text-gray-900 px-4 py-2 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors no-underline">
+          Get Started
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>

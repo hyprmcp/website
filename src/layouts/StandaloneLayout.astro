@@ -17,9 +17,10 @@ export interface Props {
   title: string;
   description: string;
   ogUrl?: string;
+  footerTagline?: string;
 }
 
-const { title, description, ogUrl = Astro.url.href } = Astro.props;
+const { title, description, ogUrl = Astro.url.href, footerTagline } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -44,6 +45,6 @@ const { title, description, ogUrl = Astro.url.href } = Astro.props;
     <main>
       <slot />
     </main>
-    <LandingFooter />
+    <LandingFooter tagline={footerTagline} />
   </body>
 </html>
