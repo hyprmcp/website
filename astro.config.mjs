@@ -83,7 +83,6 @@ export default defineConfig({
     }),
     sitemap({
       filter: page => {
-
         // Exclude specific pages by slug
         const excludedSlugs = ['ai-integration', 'mcp-analytics', 'remote-mcp'];
         const url = new URL(page);
