@@ -151,6 +151,49 @@
                 </iframe>
               </div>
             </div>
+            
+            <!-- Cloned slides for infinite scroll -->
+            <!-- Clone of Tweet 1 -->
+            <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4 tweet-slide clone" data-index="0">
+              <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm h-80 overflow-hidden">
+                <iframe
+                  src="https://platform.twitter.com/embed/Tweet.html?id=1925210339836391875&theme=light"
+                  width="100%"
+                  height="320"
+                  frameborder="0"
+                  scrolling="no"
+                  allowtransparency="true">
+                </iframe>
+              </div>
+            </div>
+
+            <!-- Clone of Tweet 2 -->
+            <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4 tweet-slide clone" data-index="1">
+              <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm h-80 overflow-hidden">
+                <iframe
+                  src="https://platform.twitter.com/embed/Tweet.html?id=1942630432178331877&theme=light"
+                  width="100%"
+                  height="320"
+                  frameborder="0"
+                  scrolling="no"
+                  allowtransparency="true">
+                </iframe>
+              </div>
+            </div>
+
+            <!-- Clone of Tweet 3 -->
+            <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4 tweet-slide clone" data-index="2">
+              <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm h-80 overflow-hidden">
+                <iframe
+                  src="https://platform.twitter.com/embed/Tweet.html?id=1914426165109940667&theme=light"
+                  width="100%"
+                  height="320"
+                  frameborder="0"
+                  scrolling="no"
+                  allowtransparency="true">
+                </iframe>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -171,3 +214,160 @@
 <style>
   /* Carousel styles - handled by JavaScript */
 </style>
+
+<script>
+  // Carousel functionality with infinite scroll
+  let currentIndex = 0;
+  const totalSlides = 6;
+  let carousel: HTMLElement | null = null;
+  let slides: NodeListOf<Element> | null = null;
+  let dots: NodeListOf<Element> | null = null;
+  let intervalId: number | null = null;
+  let isTransitioning = false;
+
+  function getVisibleSlides() {
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth >= 1024) return 3; // Desktop: 3 slides
+      if (window.innerWidth >= 768) return 2; // Tablet: 2 slides
+      return 1; // Mobile: 1 slide
+    }
+    return 1;
+  }
+
+  function updateCarousel(instant = false) {
+    if (!carousel || !slides || !dots) return;
+    
+    // Calculate transform based on screen size
+    let slideWidth = 100; // Default for mobile (full width)
+    if (window.innerWidth >= 1024) {
+      slideWidth = 33.333; // Desktop: 1/3 width
+    } else if (window.innerWidth >= 768) {
+      slideWidth = 50; // Tablet: 1/2 width
+    }
+    
+    const transform = -(currentIndex * slideWidth);
+    
+    if (instant) {
+      carousel.style.transition = 'none';
+    } else {
+      carousel.style.transition = 'transform 500ms ease-in-out';
+    }
+    
+    carousel.style.transform = `translateX(${transform}%)`;
+    
+    // Update dots - show active dot based on actual slide position (modulo for infinite scroll)
+    const actualIndex = currentIndex % totalSlides;
+    dots.forEach((dot, i) => {
+      const dotElement = dot as HTMLElement;
+      if (i === actualIndex) {
+        dotElement.classList.add('bg-blue-600');
+        dotElement.classList.remove('bg-gray-300');
+      } else {
+        dotElement.classList.remove('bg-blue-600');
+        dotElement.classList.add('bg-gray-300');
+      }
+    });
+  }
+
+  function nextSlide() {
+    if (isTransitioning) return;
+    
+    isTransitioning = true;
+    currentIndex++;
+    updateCarousel();
+    
+    // Check if we've reached the cloned slides
+    const visibleSlides = getVisibleSlides();
+    if (currentIndex >= totalSlides) {
+      // Wait for transition to complete, then jump back to start
+      setTimeout(() => {
+        currentIndex = currentIndex % totalSlides;
+        updateCarousel(true); // Instant transition
+        isTransitioning = false;
+      }, 500);
+    } else {
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 500);
+    }
+  }
+
+  function prevSlide() {
+    if (isTransitioning) return;
+    
+    isTransitioning = true;
+    currentIndex--;
+    
+    if (currentIndex < 0) {
+      // Jump to end instantly, then animate to previous
+      currentIndex = totalSlides - 1;
+      updateCarousel(true);
+      setTimeout(() => {
+        updateCarousel();
+        isTransitioning = false;
+      }, 20);
+    } else {
+      updateCarousel();
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 500);
+    }
+  }
+
+  function goToSlide(slideIndex: number) {
+    if (isTransitioning) return;
+    
+    isTransitioning = true;
+    currentIndex = slideIndex;
+    updateCarousel();
+    
+    setTimeout(() => {
+      isTransitioning = false;
+    }, 500);
+  }
+
+  function startAutoSlide() {
+    stopAutoSlide();
+    intervalId = window.setInterval(nextSlide, 5000);
+  }
+
+  function stopAutoSlide() {
+    if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
+  }
+
+  // Initialize carousel when DOM is ready
+  if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+      carousel = document.getElementById('tweet-carousel');
+      slides = document.querySelectorAll('.tweet-slide:not(.clone)');
+      dots = document.querySelectorAll('.carousel-dot');
+      
+      if (carousel && slides && dots) {
+        // Initialize carousel
+        updateCarousel();
+        
+        // Start auto-slide
+        startAutoSlide();
+        
+        // Add dot navigation - each dot represents one tweet
+        dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => {
+            goToSlide(index);
+            // Reset auto-slide timer
+            startAutoSlide();
+          });
+        });
+        
+        // Pause on hover
+        carousel.addEventListener('mouseenter', stopAutoSlide);
+        carousel.addEventListener('mouseleave', startAutoSlide);
+        
+        // Handle window resize
+        window.addEventListener('resize', () => updateCarousel());
+      }
+    });
+  }
+</script>

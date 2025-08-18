@@ -82,7 +82,16 @@ export default defineConfig({
       ],
     }),
     sitemap({
-      filter: page => !page.startsWith('https://jetski.sh/lp/'),
+      filter: page => {
+
+        // Exclude specific pages by slug
+        const excludedSlugs = ['ai-integration', 'mcp-analytics', 'remote-mcp'];
+        const url = new URL(page);
+        const pathname = url.pathname;
+
+        // Check if the pathname contains any of the excluded slugs
+        return !excludedSlugs.some(slug => pathname.includes(slug));
+      },
     }),
   ],
   markdown: {
