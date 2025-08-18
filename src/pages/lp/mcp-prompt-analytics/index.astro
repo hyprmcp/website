@@ -1,0 +1,25 @@
+---
+import StandaloneLayout from '../../../layouts/StandaloneLayout.astro';
+import AnalyticsHero from '../../../components/lp/AnalyticsHero.astro';
+import AnalyticsGatewayInstallation from '../../../components/lp/AnalyticsGatewayInstallation.astro';
+import AnalyticsGatewayFlowChart from '../../../components/lp/AnalyticsGatewayFlowChart.astro';
+import AnalyticsFeatures from '../../../components/lp/AnalyticsFeatures.astro';
+import AnalyticsMetricsShowcase from '../../../components/lp/AnalyticsMetricsShowcase.astro';
+import AnalyticsCTA from '../../../components/lp/AnalyticsCTA.astro';
+
+const pageTitle = 'Jetski Analytics - Turn the lights on for your MCP server';
+const pageDescription = 'Understand how users interact with your Model Context Protocol servers. Get deep insights into prompts, tool usage, and user behavior patterns with Jetski Analytics Gateway.';
+---
+
+<StandaloneLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogUrl="https://jetski.sh/lp/mcp-prompt-analytics/"
+>
+  <AnalyticsHero />
+  <AnalyticsGatewayInstallation />
+  <AnalyticsGatewayFlowChart />
+  <AnalyticsFeatures />
+  <AnalyticsMetricsShowcase />
+  <AnalyticsCTA />
+</StandaloneLayout>
