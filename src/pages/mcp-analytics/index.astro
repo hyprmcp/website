@@ -8,7 +8,8 @@ import AnalyticsMetricsShowcase from '../../components/lp/analytics/AnalyticsMet
 import AnalyticsCTA from '../../components/lp/analytics/AnalyticsCTA.astro';
 
 const pageTitle = 'Jetski Analytics - Turn the lights on for your MCP server';
-const pageDescription = 'Understand how users interact with your Model Context Protocol servers. Get deep insights into prompts, tool usage, and user behavior patterns with Jetski Analytics Gateway.';
+const pageDescription =
+  'Understand how users interact with your Model Context Protocol servers. Get deep insights into prompts, tool usage, and user behavior patterns with Jetski Analytics Gateway.';
 ---
 
 <StandaloneLayout
@@ -17,11 +18,10 @@ const pageDescription = 'Understand how users interact with your Model Context P
   ogUrl="https://jetski.sh/lp/mcp-prompt-analytics/"
   footerTagline="Analytics Gateway - Built for MCP developers and product managers."
   footerLinks={[
-    { href: '#analytics-gateway', text: 'Analytics Gateway' },
-    { href: '#simple-integration', text: 'Simple Integration' },
-    { href: '#how-it-works', text: 'How It Works' }
-  ]}
->
+    {href: '#analytics-gateway', text: 'Analytics Gateway'},
+    {href: '#simple-integration', text: 'Simple Integration'},
+    {href: '#how-it-works', text: 'How It Works'},
+  ]}>
   <AnalyticsHero />
   <AnalyticsGatewayInstallation />
   <AnalyticsGatewayFlowChart />

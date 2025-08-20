@@ -15,17 +15,18 @@ export interface Props {
   links?: FooterLink[];
 }
 
-const { 
+const {
   tagline = 'Built for MCP developers and product managers.',
   links = [
-    { href: '/docs/', text: 'Documentation' },
-    { href: '/pricing/', text: 'Pricing' },
-    { href: 'https://github.com/jetski-sh', text: 'GitHub' }
-  ]
+    {href: '/docs/', text: 'Documentation'},
+    {href: '/pricing/', text: 'Pricing'},
+    {href: 'https://github.com/jetski-sh', text: 'GitHub'},
+  ],
 } = Astro.props;
 ---
 
-<footer class="bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-gray-800">
+<footer
+  class="bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-gray-800">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
     <div class="flex flex-col md:flex-row justify-between items-center">
       <div class="flex items-center mb-4 md:mb-0">
@@ -36,17 +37,25 @@ const {
           class="w-12 h-12 mr-2"
         />
         <div class="flex flex-col">
-          <span class="text-2xl font-bold text-gray-900 dark:text-white">Jetski</span>
-          <span class="text-sm text-gray-600 dark:text-gray-400 max-w-64">{tagline}</span>
+          <span class="text-2xl font-bold text-gray-900 dark:text-white"
+            >Jetski</span
+          >
+          <span class="text-sm text-gray-600 dark:text-gray-400 max-w-64"
+            >{tagline}</span
+          >
         </div>
       </div>
 
       <div class="flex flex-wrap justify-center gap-6 mb-4 md:mb-0">
-        {links.map((link) => (
-          <a href={link.href} class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
-            {link.text}
-          </a>
-        ))}
+        {
+          links.map(link => (
+            <a
+              href={link.href}
+              class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+              {link.text}
+            </a>
+          ))
+        }
       </div>
 
       <div class="flex items-center space-x-4">
@@ -55,7 +64,8 @@ const {
       </div>
     </div>
 
-    <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800 text-center text-sm text-gray-600 dark:text-gray-400">
+    <div
+      class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800 text-center text-sm text-gray-600 dark:text-gray-400">
       <p>&copy; 2025 Jetski. All rights reserved.</p>
     </div>
   </div>

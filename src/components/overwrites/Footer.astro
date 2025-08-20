@@ -9,19 +9,19 @@ const isSplashTemplate = entry.data.template === 'splash';
 ---
 
 <footer class="sl-flex">
-  {!isSplashTemplate && (
-    <div class="meta sl-flex">
-      <EditLink />
-      <LastUpdated />
-    </div>
-    <Pagination />
-    <div class="kudos sl-flex">
-      © 2025 Glasskube, Inc.
-    </div>
-  )}
-  {isSplashTemplate && (
-    <JetskiFooter />
-  )}
+  {
+    !isSplashTemplate && (
+      <>
+        <div class="meta sl-flex">
+          <EditLink />
+          <LastUpdated />
+        </div>
+        <Pagination />
+        <div class="kudos sl-flex">© 2025 Glasskube, Inc.</div>
+      </>
+    )
+  }
+  {isSplashTemplate && <JetskiFooter />}
 </footer>
 
 <style>

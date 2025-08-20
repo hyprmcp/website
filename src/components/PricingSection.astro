@@ -5,182 +5,288 @@ import {Icon} from '@astrojs/starlight/components';
 
 <style>
   .hero-bg {
-    background-image: linear-gradient(0deg, transparent 49%, rgba(34, 197, 94, 0.15) 49.5%, rgba(249, 115, 22, 0.15) 50.5%, transparent 51%),
-                      linear-gradient(90deg, transparent 49%, rgba(34, 197, 94, 0.15) 49.5%, rgba(249, 115, 22, 0.15) 50.5%, transparent 51%);
+    background-image:
+      linear-gradient(
+        0deg,
+        transparent 49%,
+        rgba(34, 197, 94, 0.15) 49.5%,
+        rgba(249, 115, 22, 0.15) 50.5%,
+        transparent 51%
+      ),
+      linear-gradient(
+        90deg,
+        transparent 49%,
+        rgba(34, 197, 94, 0.15) 49.5%,
+        rgba(249, 115, 22, 0.15) 50.5%,
+        transparent 51%
+      );
     background-size: 200px 200px;
   }
 
   .dark .hero-bg {
-    background-image: linear-gradient(0deg, transparent 49%, rgba(37, 99, 235, 0.2) 49.5%, rgba(168, 85, 247, 0.2) 50.5%, transparent 51%),
-                      linear-gradient(90deg, transparent 49%, rgba(37, 99, 235, 0.2) 49.5%, rgba(168, 85, 247, 0.2) 50.5%, transparent 51%);
+    background-image:
+      linear-gradient(
+        0deg,
+        transparent 49%,
+        rgba(37, 99, 235, 0.2) 49.5%,
+        rgba(168, 85, 247, 0.2) 50.5%,
+        transparent 51%
+      ),
+      linear-gradient(
+        90deg,
+        transparent 49%,
+        rgba(37, 99, 235, 0.2) 49.5%,
+        rgba(168, 85, 247, 0.2) 50.5%,
+        transparent 51%
+      );
     background-size: 200px 200px;
   }
 </style>
 
-<div class="relative overflow-hidden bg-gray-50 dark:bg-slate-900 hero-bg py-24 sm:py-32 border-b border-gray-200 dark:border-gray-800">
+<div
+  class="relative overflow-hidden bg-gray-50 dark:bg-slate-900 hero-bg py-24 sm:py-32 border-b border-gray-200 dark:border-gray-800">
   <div class="absolute inset-0 bg-gray-50/80 dark:bg-slate-900/80"></div>
   <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-  <div class="text-center">
-    <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
-      Simple, transparent pricing
-    </h1>
-    <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
-      Deploy and scale your MCP servers with confidence. Start Deploying, upgrade when you need more.
-    </p>
-  </div>
-
-  <div class="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-3">
-
-    {/* Hobby Plan */}
-    <div class="relative rounded-2xl bg-white dark:bg-gray-900 p-8 shadow-lg ring-1 ring-gray-200 dark:ring-gray-800">
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-semibold leading-8 text-gray-900 dark:text-white">
-          Hobby
-        </h3>
-      </div>
-      <div class="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
-        $0
-        <span class="ml-1 text-xl font-semibold leading-6 tracking-normal text-gray-600 dark:text-gray-400">
-          /month
-        </span>
-      </div>
-      <p class="mt-6 text-base leading-7 text-gray-600 dark:text-gray-400">
-        Perfect for developers getting started with MCP servers
+    <div class="text-center">
+      <h1
+        class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
+        Simple, transparent pricing
+      </h1>
+      <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
+        Deploy and scale your MCP servers with confidence. Start Deploying,
+        upgrade when you need more.
       </p>
-      <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-green-600" />
-          Up to 3 MCP servers
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-green-600" />
-          1,000 tool calls per month
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-green-600" />
-          Basic analytics
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-green-600" />
-          Community support
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-green-600" />
-          OAuth2 authentication
-        </li>
-      </ul>
-      <div class="mt-8">
-        <JetskiButton href="/waitlist/" variant="secondary" class="w-full">
-          Start Deploying
-        </JetskiButton>
-      </div>
     </div>
 
-    {/* Pro Plan */}
-    <div class="relative rounded-2xl bg-white dark:bg-gray-900 p-8 shadow-lg ring-2 ring-blue-600">
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-semibold leading-8 text-gray-900 dark:text-white">
-          Pro
-        </h3>
-        <p class="rounded-full bg-blue-600/10 px-2.5 py-1 text-xs font-semibold leading-5 text-blue-600">
-          Most popular
+    <div class="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-3">
+      {/* Hobby Plan */}
+      <div
+        class="relative rounded-2xl bg-white dark:bg-gray-900 p-8 shadow-lg ring-1 ring-gray-200 dark:ring-gray-800">
+        <div class="flex items-center justify-between">
+          <h3
+            class="text-lg font-semibold leading-8 text-gray-900 dark:text-white">
+            Hobby
+          </h3>
+        </div>
+        <div
+          class="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
+          $0
+          <span
+            class="ml-1 text-xl font-semibold leading-6 tracking-normal text-gray-600 dark:text-gray-400">
+            /month
+          </span>
+        </div>
+        <p class="mt-6 text-base leading-7 text-gray-600 dark:text-gray-400">
+          Perfect for developers getting started with MCP servers
         </p>
+        <ul
+          role="list"
+          class="mt-8 space-y-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-green-600"
+            />
+            Up to 3 MCP servers
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-green-600"
+            />
+            1,000 tool calls per month
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-green-600"
+            />
+            Basic analytics
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-green-600"
+            />
+            Community support
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-green-600"
+            />
+            OAuth2 authentication
+          </li>
+        </ul>
+        <div class="mt-8">
+          <JetskiButton href="/waitlist/" variant="secondary" class="w-full">
+            Start Deploying
+          </JetskiButton>
+        </div>
       </div>
-      <div class="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
-        $10
-        <span class="ml-1 text-xl font-semibold leading-6 tracking-normal text-gray-600 dark:text-gray-400">
-          /month
-        </span>
-      </div>
-      <p class="mt-6 text-base leading-7 text-gray-600 dark:text-gray-400">
-        For growing teams and production MCP servers
-      </p>
-      <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-blue-600" />
-          Unlimited MCP servers
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-blue-600" />
-          100,000 tool calls included
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-blue-600" />
-          $0.0001 per additional tool call
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-blue-600" />
-          Advanced analytics & insights
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-blue-600" />
-          Priority support
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-blue-600" />
-          Custom domains
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-blue-600" />
-          99.9% uptime SLA
-        </li>
-      </ul>
-      <div class="mt-8">
-        <JetskiButton href="/docs/getting-started/" variant="primary" class="w-full">
-          Start Pro trial
-        </JetskiButton>
-      </div>
-    </div>
 
-    {/* Enterprise Plan */}
-    <div class="relative rounded-2xl bg-white dark:bg-gray-900 p-8 shadow-lg ring-1 ring-gray-200 dark:ring-gray-800">
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-semibold leading-8 text-gray-900 dark:text-white">
-          Enterprise
-        </h3>
+      {/* Pro Plan */}
+      <div
+        class="relative rounded-2xl bg-white dark:bg-gray-900 p-8 shadow-lg ring-2 ring-blue-600">
+        <div class="flex items-center justify-between">
+          <h3
+            class="text-lg font-semibold leading-8 text-gray-900 dark:text-white">
+            Pro
+          </h3>
+          <p
+            class="rounded-full bg-blue-600/10 px-2.5 py-1 text-xs font-semibold leading-5 text-blue-600">
+            Most popular
+          </p>
+        </div>
+        <div
+          class="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
+          $10
+          <span
+            class="ml-1 text-xl font-semibold leading-6 tracking-normal text-gray-600 dark:text-gray-400">
+            /month
+          </span>
+        </div>
+        <p class="mt-6 text-base leading-7 text-gray-600 dark:text-gray-400">
+          For growing teams and production MCP servers
+        </p>
+        <ul
+          role="list"
+          class="mt-8 space-y-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-blue-600"
+            />
+            Unlimited MCP servers
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-blue-600"
+            />
+            100,000 tool calls included
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-blue-600"
+            />
+            $0.0001 per additional tool call
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-blue-600"
+            />
+            Advanced analytics & insights
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-blue-600"
+            />
+            Priority support
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-blue-600"
+            />
+            Custom domains
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-blue-600"
+            />
+            99.9% uptime SLA
+          </li>
+        </ul>
+        <div class="mt-8">
+          <JetskiButton
+            href="/docs/getting-started/"
+            variant="primary"
+            class="w-full">
+            Start Pro trial
+          </JetskiButton>
+        </div>
       </div>
-      <div class="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
-        Custom
-      </div>
-      <p class="mt-6 text-base leading-7 text-gray-600 dark:text-gray-400">
-        For large organizations with custom requirements
-      </p>
-      <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-gray-500" />
-          Everything in Pro
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-gray-500" />
-          Dedicated infrastructure
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-gray-500" />
-          Volume discounts
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-gray-500" />
-          White-label options
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-gray-500" />
-          SOC 2 compliance
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-gray-500" />
-          Dedicated account manager
-        </li>
-        <li class="flex gap-x-3">
-          <Icon name="approve-check" class="h-6 w-5 flex-none text-gray-500" />
-          24/7 phone support
-        </li>
-      </ul>
-      <div class="mt-8">
-        <JetskiButton href="/" variant="secondary" class="w-full">
-          Contact sales
-        </JetskiButton>
+
+      {/* Enterprise Plan */}
+      <div
+        class="relative rounded-2xl bg-white dark:bg-gray-900 p-8 shadow-lg ring-1 ring-gray-200 dark:ring-gray-800">
+        <div class="flex items-center justify-between">
+          <h3
+            class="text-lg font-semibold leading-8 text-gray-900 dark:text-white">
+            Enterprise
+          </h3>
+        </div>
+        <div
+          class="mt-4 flex items-baseline text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
+          Custom
+        </div>
+        <p class="mt-6 text-base leading-7 text-gray-600 dark:text-gray-400">
+          For large organizations with custom requirements
+        </p>
+        <ul
+          role="list"
+          class="mt-8 space-y-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-gray-500"
+            />
+            Everything in Pro
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-gray-500"
+            />
+            Dedicated infrastructure
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-gray-500"
+            />
+            Volume discounts
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-gray-500"
+            />
+            White-label options
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-gray-500"
+            />
+            SOC 2 compliance
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-gray-500"
+            />
+            Dedicated account manager
+          </li>
+          <li class="flex gap-x-3">
+            <Icon
+              name="approve-check"
+              class="h-6 w-5 flex-none text-gray-500"
+            />
+            24/7 phone support
+          </li>
+        </ul>
+        <div class="mt-8">
+          <JetskiButton href="/" variant="secondary" class="w-full">
+            Contact sales
+          </JetskiButton>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </div>

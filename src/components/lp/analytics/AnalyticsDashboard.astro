@@ -3,7 +3,7 @@ export interface Props {
   className?: string;
 }
 
-const { className = '' } = Astro.props;
+const {className = ''} = Astro.props;
 ---
 
 <style>
@@ -12,11 +12,11 @@ const { className = '' } = Astro.props;
     height: 100px;
     border-radius: 50%;
     background: conic-gradient(
-      #60a5fa 0deg 144deg,      /* Claude - 40% */
-      #34d399 144deg 216deg,    /* ChatGPT - 20% */
-      #a78bfa 216deg 270deg,    /* Cursor - 15% */
-      #fbbf24 270deg 324deg,    /* Code - 15% */
-      #f87171 324deg 360deg     /* Other - 10% */
+      #60a5fa 0deg 144deg,
+      /* Claude - 40% */ #34d399 144deg 216deg,
+      /* ChatGPT - 20% */ #a78bfa 216deg 270deg,
+      /* Cursor - 15% */ #fbbf24 270deg 324deg,
+      /* Code - 15% */ #f87171 324deg 360deg /* Other - 10% */
     );
     position: relative;
   }
@@ -51,7 +51,9 @@ const { className = '' } = Astro.props;
       <div class="space-y-3">
         <div class="bg-gray-700/50 dark:bg-gray-800/50 rounded p-3">
           <div class="text-xs text-gray-400 mb-1">Latest Prompt</div>
-          <div class="text-sm text-gray-200">"Analyze sales data for Q4 and generate trend visualizations"</div>
+          <div class="text-sm text-gray-200">
+            "Analyze sales data for Q4 and generate trend visualizations"
+          </div>
           <div class="flex items-center mt-2 text-xs text-gray-400">
             <span class="mr-3">User: analyst_428</span>
             <span>Response: 187ms</span>
@@ -79,7 +81,9 @@ const { className = '' } = Astro.props;
             <div class="space-y-2">
               <div>
                 <div class="flex items-center gap-2">
-                  <span class="text-green-400 font-mono text-xs">readFile()</span>
+                  <span class="text-green-400 font-mono text-xs"
+                    >readFile()</span
+                  >
                   <span class="text-2xs text-gray-500">2,847</span>
                 </div>
                 <div class="text-2xs text-gray-400">
@@ -88,7 +92,9 @@ const { className = '' } = Astro.props;
               </div>
               <div>
                 <div class="flex items-center gap-2">
-                  <span class="text-blue-400 font-mono text-xs">queryDatabase()</span>
+                  <span class="text-blue-400 font-mono text-xs"
+                    >queryDatabase()</span
+                  >
                   <span class="text-2xs text-gray-500">1,932</span>
                 </div>
                 <div class="text-2xs text-gray-400">
@@ -97,7 +103,9 @@ const { className = '' } = Astro.props;
               </div>
               <div>
                 <div class="flex items-center gap-2">
-                  <span class="text-purple-400 font-mono text-xs">createChart()</span>
+                  <span class="text-purple-400 font-mono text-xs"
+                    >createChart()</span
+                  >
                   <span class="text-2xs text-gray-500">1,456</span>
                 </div>
                 <div class="text-2xs text-gray-400">

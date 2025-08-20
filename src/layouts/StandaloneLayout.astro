@@ -11,7 +11,12 @@ import '../../node_modules/@astrojs/starlight/style/asides.css';
 import '../../node_modules/@astrojs/starlight/style/util.css';
 import 'virtual:starlight/optional-css';
 
-import LandingFooter, { type FooterLink } from '../components/lp/LandingFooter.astro';
+import LandingFooter, {
+  type FooterLink,
+} from '../components/lp/LandingFooter.astro';
+import Posthog from '../components/telemetry/Posthog.astro';
+import GTMHead from '../components/telemetry/GTMHead.astro';
+import GTMNoScript from '../components/telemetry/GTMNoScript.astro';
 
 export interface Props {
   title: string;
@@ -21,10 +26,16 @@ export interface Props {
   footerLinks?: FooterLink[];
 }
 
-const { title, description, ogUrl = Astro.url.href, footerTagline, footerLinks } = Astro.props;
+const {
+  title,
+  description,
+  ogUrl = Astro.url.href,
+  footerTagline,
+  footerLinks,
+} = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
@@ -38,11 +49,14 @@ const { title, description, ogUrl = Astro.url.href, footerTagline, footerLinks }
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <Posthog />
+    <GTMHead />
   </head>
   <body>
+    <GTMNoScript />
     <main>
       <slot />
     </main>

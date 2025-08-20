@@ -1,186 +1,488 @@
 ---
+
 ---
 
-<section id="how-it-works" class="py-24 bg-white dark:bg-slate-900 overflow-hidden">
+<section
+  id="how-it-works"
+  class="py-24 bg-white dark:bg-slate-900 overflow-hidden">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <a href="#how-it-works" class="inline-flex items-center rounded-full bg-purple-100 dark:bg-purple-900/30 px-4 py-1.5 text-sm font-medium text-purple-800 dark:text-purple-200 mb-4 hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors cursor-pointer">
-        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+      <a
+        href="#how-it-works"
+        class="inline-flex items-center rounded-full bg-purple-100 dark:bg-purple-900/30 px-4 py-1.5 text-sm font-medium text-purple-800 dark:text-purple-200 mb-4 hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors cursor-pointer">
+        <svg
+          class="w-4 h-4 mr-1.5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
         </svg>
         How It Works
       </a>
       <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-        Seamless data flow with <span class="text-purple-600 dark:text-purple-400">zero friction</span>
+        Seamless data flow with <span
+          class="text-purple-600 dark:text-purple-400">zero friction</span
+        >
       </h2>
       <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-        Watch how prompts and responses flow through your gateway while analytics are captured in real-time.
+        Watch how prompts and responses flow through your gateway while
+        analytics are captured in real-time.
       </p>
     </div>
 
     <!-- Animated Flow Diagram -->
     <div class="relative">
-      <svg class="w-full h-auto" viewBox="0 0 1400 420" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        class="w-full h-auto"
+        viewBox="0 0 1400 420"
+        xmlns="http://www.w3.org/2000/svg">
         <!-- Background Grid -->
         <defs>
-          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="1" class="text-gray-200 dark:text-gray-700" opacity="0.3"/>
+          <pattern
+            id="grid"
+            width="40"
+            height="40"
+            patternUnits="userSpaceOnUse">
+            <path
+              d="M 40 0 L 0 0 0 40"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1"
+              class="text-gray-200 dark:text-gray-700"
+              opacity="0.3"></path>
           </pattern>
-          
+
           <!-- Gradient for animated paths -->
           <linearGradient id="flow-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="#3B82F6" stop-opacity="0">
-              <animate attributeName="stop-opacity" values="0;1;0" dur="3s" repeatCount="indefinite" />
+              <animate
+                attributeName="stop-opacity"
+                values="0;1;0"
+                dur="3s"
+                repeatCount="indefinite"></animate>
             </stop>
             <stop offset="50%" stop-color="#3B82F6" stop-opacity="1">
-              <animate attributeName="stop-opacity" values="0;1;0" dur="3s" repeatCount="indefinite" begin="0.5s" />
+              <animate
+                attributeName="stop-opacity"
+                values="0;1;0"
+                dur="3s"
+                repeatCount="indefinite"
+                begin="0.5s"></animate>
             </stop>
             <stop offset="100%" stop-color="#3B82F6" stop-opacity="0">
-              <animate attributeName="stop-opacity" values="0;1;0" dur="3s" repeatCount="indefinite" begin="1s" />
+              <animate
+                attributeName="stop-opacity"
+                values="0;1;0"
+                dur="3s"
+                repeatCount="indefinite"
+                begin="1s"></animate>
             </stop>
           </linearGradient>
 
           <!-- Purple gradient for analytics flow -->
-          <linearGradient id="analytics-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient
+            id="analytics-gradient"
+            x1="0%"
+            y1="0%"
+            x2="0%"
+            y2="100%">
             <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0">
-              <animate attributeName="stop-opacity" values="0;1;0" dur="3s" repeatCount="indefinite" />
+              <animate
+                attributeName="stop-opacity"
+                values="0;1;0"
+                dur="3s"
+                repeatCount="indefinite"></animate>
             </stop>
             <stop offset="50%" stop-color="#8B5CF6" stop-opacity="1">
-              <animate attributeName="stop-opacity" values="0;1;0" dur="3s" repeatCount="indefinite" begin="0.5s" />
+              <animate
+                attributeName="stop-opacity"
+                values="0;1;0"
+                dur="3s"
+                repeatCount="indefinite"
+                begin="0.5s"></animate>
             </stop>
             <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0">
-              <animate attributeName="stop-opacity" values="0;1;0" dur="3s" repeatCount="indefinite" begin="1s" />
+              <animate
+                attributeName="stop-opacity"
+                values="0;1;0"
+                dur="3s"
+                repeatCount="indefinite"
+                begin="1s"></animate>
             </stop>
           </linearGradient>
         </defs>
 
-        <rect width="1400" height="420" fill="url(#grid)" opacity="0.5"/>
+        <rect width="1400" height="420" fill="url(#grid)" opacity="0.5"></rect>
 
         <!-- MCP Client -->
         <g transform="translate(150, 150)">
-          <rect x="0" y="0" width="180" height="100" rx="8" fill="white" stroke="#E5E7EB" stroke-width="2" class="dark:fill-slate-800 dark:stroke-slate-600"/>
-          <text x="90" y="35" text-anchor="middle" class="fill-gray-900 dark:fill-white font-semibold text-lg">MCP Client</text>
-          <text x="90" y="60" text-anchor="middle" class="fill-gray-500 dark:fill-gray-400 text-sm">(Claude, ChatGPT)</text>
-          <circle cx="90" cy="80" r="4" fill="#3B82F6" class="animate-pulse"/>
+          <rect
+            x="0"
+            y="0"
+            width="180"
+            height="100"
+            rx="8"
+            fill="white"
+            stroke="#E5E7EB"
+            stroke-width="2"
+            class="dark:fill-slate-800 dark:stroke-slate-600"></rect>
+          <text
+            x="90"
+            y="35"
+            text-anchor="middle"
+            class="fill-gray-900 dark:fill-white font-semibold text-lg"
+            >MCP Client</text
+          >
+          <text
+            x="90"
+            y="60"
+            text-anchor="middle"
+            class="fill-gray-500 dark:fill-gray-400 text-sm"
+            >(Claude, ChatGPT)</text
+          >
+          <circle cx="90" cy="80" r="4" fill="#3B82F6" class="animate-pulse"
+          ></circle>
         </g>
 
         <!-- Flow from Client to Gateway -->
-        <path d="M 330 200 L 550 200" stroke="#E5E7EB" stroke-width="2" fill="none" class="dark:stroke-slate-600"/>
-        <path d="M 330 200 L 550 200" stroke="url(#flow-gradient)" stroke-width="3" fill="none" opacity="0.8"/>
-        
+        <path
+          d="M 330 200 L 550 200"
+          stroke="#E5E7EB"
+          stroke-width="2"
+          fill="none"
+          class="dark:stroke-slate-600"></path>
+        <path
+          d="M 330 200 L 550 200"
+          stroke="url(#flow-gradient)"
+          stroke-width="3"
+          fill="none"
+          opacity="0.8"></path>
+
         <!-- Animated dots from Client to Gateway -->
         <circle r="4" fill="#3B82F6">
-          <animateMotion dur="2s" repeatCount="indefinite" path="M 330 200 L 550 200"/>
+          <animateMotion
+            dur="2s"
+            repeatCount="indefinite"
+            path="M 330 200 L 550 200"></animateMotion>
         </circle>
         <!-- Reverse flow dot -->
         <circle r="4" fill="#10B981" opacity="0.6">
-          <animateMotion dur="2.5s" repeatCount="indefinite" path="M 550 200 L 330 200" begin="0.8s"/>
+          <animateMotion
+            dur="2.5s"
+            repeatCount="indefinite"
+            path="M 550 200 L 330 200"
+            begin="0.8s"></animateMotion>
         </circle>
 
         <!-- Jetski Gateway -->
         <g transform="translate(550, 150)">
-          <rect x="0" y="0" width="200" height="100" rx="8" fill="#3B82F6" fill-opacity="0.1" stroke="#3B82F6" stroke-width="2" class="dark:fill-blue-900/30"/>
-          <text x="100" y="35" text-anchor="middle" class="fill-blue-900 dark:fill-blue-300 font-bold text-lg">Jetski Gateway</text>
-          <text x="100" y="60" text-anchor="middle" class="fill-blue-700 dark:fill-blue-400 text-sm">Analytics Layer</text>
-          
+          <rect
+            x="0"
+            y="0"
+            width="200"
+            height="100"
+            rx="8"
+            fill="#3B82F6"
+            fill-opacity="0.1"
+            stroke="#3B82F6"
+            stroke-width="2"
+            class="dark:fill-blue-900/30"></rect>
+          <text
+            x="100"
+            y="35"
+            text-anchor="middle"
+            class="fill-blue-900 dark:fill-blue-300 font-bold text-lg"
+            >Jetski Gateway</text
+          >
+          <text
+            x="100"
+            y="60"
+            text-anchor="middle"
+            class="fill-blue-700 dark:fill-blue-400 text-sm"
+            >Analytics Layer</text
+          >
+
           <!-- Processing indicator -->
           <g transform="translate(100, 80)">
-            <circle r="8" fill="none" stroke="#3B82F6" stroke-width="2" opacity="0.3"/>
-            <circle r="8" fill="none" stroke="#3B82F6" stroke-width="2" stroke-dasharray="12 6" class="animate-spin" style="animation-duration: 3s; transform-origin: center;"/>
+            <circle
+              r="8"
+              fill="none"
+              stroke="#3B82F6"
+              stroke-width="2"
+              opacity="0.3"></circle>
+            <circle
+              r="8"
+              fill="none"
+              stroke="#3B82F6"
+              stroke-width="2"
+              stroke-dasharray="12 6"
+              class="animate-spin"
+              style="animation-duration: 3s; transform-origin: center;"
+            ></circle>
           </g>
         </g>
 
         <!-- Flow from Gateway to Server -->
-        <path d="M 750 200 L 970 200" stroke="#E5E7EB" stroke-width="2" fill="none" class="dark:stroke-slate-600"/>
-        <path d="M 750 200 L 970 200" stroke="url(#flow-gradient)" stroke-width="3" fill="none" opacity="0.8"/>
-        
+        <path
+          d="M 750 200 L 970 200"
+          stroke="#E5E7EB"
+          stroke-width="2"
+          fill="none"
+          class="dark:stroke-slate-600"></path>
+        <path
+          d="M 750 200 L 970 200"
+          stroke="url(#flow-gradient)"
+          stroke-width="3"
+          fill="none"
+          opacity="0.8"></path>
+
         <!-- Animated dots from Gateway to Server -->
         <circle r="4" fill="#3B82F6">
-          <animateMotion dur="2s" repeatCount="indefinite" path="M 750 200 L 970 200" begin="0.5s"/>
+          <animateMotion
+            dur="2s"
+            repeatCount="indefinite"
+            path="M 750 200 L 970 200"
+            begin="0.5s"></animateMotion>
         </circle>
         <!-- Reverse flow dot -->
         <circle r="4" fill="#10B981" opacity="0.6">
-          <animateMotion dur="2.5s" repeatCount="indefinite" path="M 970 200 L 750 200" begin="1.3s"/>
+          <animateMotion
+            dur="2.5s"
+            repeatCount="indefinite"
+            path="M 970 200 L 750 200"
+            begin="1.3s"></animateMotion>
         </circle>
         <!-- Another reverse dot -->
         <circle r="3" fill="#EC4899" opacity="0.7">
-          <animateMotion dur="3s" repeatCount="indefinite" path="M 970 200 L 750 200" begin="2.5s"/>
+          <animateMotion
+            dur="3s"
+            repeatCount="indefinite"
+            path="M 970 200 L 750 200"
+            begin="2.5s"></animateMotion>
         </circle>
 
         <!-- MCP Server -->
         <g transform="translate(970, 150)">
-          <rect x="0" y="0" width="180" height="100" rx="8" fill="white" stroke="#E5E7EB" stroke-width="2" class="dark:fill-slate-800 dark:stroke-slate-600"/>
-          <text x="90" y="35" text-anchor="middle" class="fill-gray-900 dark:fill-white font-semibold text-lg">MCP Server</text>
-          <text x="90" y="60" text-anchor="middle" class="fill-gray-500 dark:fill-gray-400 text-sm">(Your Tools)</text>
-          <rect x="70" y="75" width="40" height="6" rx="2" fill="#10B981"/>
+          <rect
+            x="0"
+            y="0"
+            width="180"
+            height="100"
+            rx="8"
+            fill="white"
+            stroke="#E5E7EB"
+            stroke-width="2"
+            class="dark:fill-slate-800 dark:stroke-slate-600"></rect>
+          <text
+            x="90"
+            y="35"
+            text-anchor="middle"
+            class="fill-gray-900 dark:fill-white font-semibold text-lg"
+            >MCP Server</text
+          >
+          <text
+            x="90"
+            y="60"
+            text-anchor="middle"
+            class="fill-gray-500 dark:fill-gray-400 text-sm">(Your Tools)</text
+          >
+          <rect x="70" y="75" width="40" height="6" rx="2" fill="#10B981"
+          ></rect>
         </g>
 
         <!-- Response flow back -->
-        <path d="M 970 220 L 750 220" stroke="#E5E7EB" stroke-width="2" fill="none" stroke-dasharray="4 4" class="dark:stroke-slate-600"/>
-        <path d="M 750 220 L 330 220" stroke="#E5E7EB" stroke-width="2" fill="none" stroke-dasharray="4 4" class="dark:stroke-slate-600"/>
-        
+        <path
+          d="M 970 220 L 750 220"
+          stroke="#E5E7EB"
+          stroke-width="2"
+          fill="none"
+          stroke-dasharray="4 4"
+          class="dark:stroke-slate-600"></path>
+        <path
+          d="M 750 220 L 330 220"
+          stroke="#E5E7EB"
+          stroke-width="2"
+          fill="none"
+          stroke-dasharray="4 4"
+          class="dark:stroke-slate-600"></path>
+
         <!-- More animated circles on response paths -->
         <circle r="3" fill="#06B6D4" opacity="0.7">
-          <animateMotion dur="2.2s" repeatCount="indefinite" path="M 970 220 L 750 220" begin="0.3s"/>
+          <animateMotion
+            dur="2.2s"
+            repeatCount="indefinite"
+            path="M 970 220 L 750 220"
+            begin="0.3s"></animateMotion>
         </circle>
         <circle r="3" fill="#06B6D4" opacity="0.7">
-          <animateMotion dur="2.2s" repeatCount="indefinite" path="M 750 220 L 330 220" begin="0.8s"/>
+          <animateMotion
+            dur="2.2s"
+            repeatCount="indefinite"
+            path="M 750 220 L 330 220"
+            begin="0.8s"></animateMotion>
         </circle>
-        
+
         <!-- Zigzag crazy circle -->
         <circle r="4" fill="#A855F7" opacity="0.8">
-          <animateMotion dur="3s" repeatCount="indefinite" 
-            path="M 330 200 Q 440 180, 550 200 T 750 200 Q 860 220, 970 200" begin="1s"/>
-          <animate attributeName="r" values="4;6;4" dur="3s" repeatCount="indefinite"/>
+          <animateMotion
+            dur="3s"
+            repeatCount="indefinite"
+            path="M 330 200 Q 440 180, 550 200 T 750 200 Q 860 220, 970 200"
+            begin="1s"></animateMotion>
+          <animate
+            attributeName="r"
+            values="4;6;4"
+            dur="3s"
+            repeatCount="indefinite"></animate>
         </circle>
 
         <!-- Flow from Gateway to Analytics Platform -->
-        <path d="M 650 250 L 650 320" stroke="#8B5CF6" stroke-width="2" fill="none" class="dark:stroke-purple-500"/>
-        <path d="M 650 250 L 650 320" stroke="url(#analytics-gradient)" stroke-width="3" fill="none" opacity="0.8"/>
-        
+        <path
+          d="M 650 250 L 650 320"
+          stroke="#8B5CF6"
+          stroke-width="2"
+          fill="none"
+          class="dark:stroke-purple-500"></path>
+        <path
+          d="M 650 250 L 650 320"
+          stroke="url(#analytics-gradient)"
+          stroke-width="3"
+          fill="none"
+          opacity="0.8"></path>
+
         <!-- Animated dots to Analytics -->
         <circle r="3" fill="#8B5CF6">
-          <animateMotion dur="3s" repeatCount="indefinite" path="M 650 250 L 650 320"/>
+          <animateMotion
+            dur="3s"
+            repeatCount="indefinite"
+            path="M 650 250 L 650 320"></animateMotion>
         </circle>
         <circle r="3" fill="#8B5CF6">
-          <animateMotion dur="3s" repeatCount="indefinite" path="M 650 250 L 650 320" begin="1s"/>
+          <animateMotion
+            dur="3s"
+            repeatCount="indefinite"
+            path="M 650 250 L 650 320"
+            begin="1s"></animateMotion>
         </circle>
         <circle r="3" fill="#8B5CF6">
-          <animateMotion dur="3s" repeatCount="indefinite" path="M 650 250 L 650 320" begin="2s"/>
+          <animateMotion
+            dur="3s"
+            repeatCount="indefinite"
+            path="M 650 250 L 650 320"
+            begin="2s"></animateMotion>
         </circle>
-        
+
         <!-- Crazy upward circle -->
         <circle r="5" fill="#FCD34D" opacity="0.8">
-          <animateMotion dur="1.5s" repeatCount="indefinite" path="M 650 400 L 650 50" begin="0s"/>
-          <animate attributeName="r" values="5;8;5" dur="1.5s" repeatCount="indefinite"/>
-          <animate attributeName="fill" values="#FCD34D;#F59E0B;#FCD34D" dur="1.5s" repeatCount="indefinite"/>
+          <animateMotion
+            dur="1.5s"
+            repeatCount="indefinite"
+            path="M 650 400 L 650 50"
+            begin="0s"></animateMotion>
+          <animate
+            attributeName="r"
+            values="5;8;5"
+            dur="1.5s"
+            repeatCount="indefinite"></animate>
+          <animate
+            attributeName="fill"
+            values="#FCD34D;#F59E0B;#FCD34D"
+            dur="1.5s"
+            repeatCount="indefinite"></animate>
         </circle>
-        
+
         <!-- Another crazy circle with erratic path -->
         <circle r="4" fill="#EF4444" opacity="0.7">
-          <animateMotion dur="2s" repeatCount="indefinite" 
-            path="M 650 380 Q 680 300, 650 250 T 620 150 Q 650 100, 650 50" begin="0.5s"/>
-          <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+          <animateMotion
+            dur="2s"
+            repeatCount="indefinite"
+            path="M 650 380 Q 680 300, 650 250 T 620 150 Q 650 100, 650 50"
+            begin="0.5s"></animateMotion>
+          <animate
+            attributeName="opacity"
+            values="0.7;1;0.7"
+            dur="2s"
+            repeatCount="indefinite"></animate>
         </circle>
-        
+
         <!-- Reverse flow from Analytics back up -->
         <circle r="3" fill="#22C55E" opacity="0.6">
-          <animateMotion dur="2.5s" repeatCount="indefinite" path="M 650 320 L 650 250" begin="1.5s"/>
+          <animateMotion
+            dur="2.5s"
+            repeatCount="indefinite"
+            path="M 650 320 L 650 250"
+            begin="1.5s"></animateMotion>
         </circle>
 
         <!-- Jetski Analytics Platform -->
         <g transform="translate(550, 320)">
-          <rect x="0" y="0" width="200" height="80" rx="8" fill="#8B5CF6" fill-opacity="0.1" stroke="#8B5CF6" stroke-width="2" class="dark:fill-purple-900/30"/>
-          <text x="100" y="30" text-anchor="middle" class="fill-purple-900 dark:fill-purple-300 font-bold text-lg">Jetski Analytics</text>
-          <text x="100" y="50" text-anchor="middle" class="fill-purple-700 dark:fill-purple-400 text-sm">Real-time Dashboard</text>
-          
+          <rect
+            x="0"
+            y="0"
+            width="200"
+            height="80"
+            rx="8"
+            fill="#8B5CF6"
+            fill-opacity="0.1"
+            stroke="#8B5CF6"
+            stroke-width="2"
+            class="dark:fill-purple-900/30"></rect>
+          <text
+            x="100"
+            y="30"
+            text-anchor="middle"
+            class="fill-purple-900 dark:fill-purple-300 font-bold text-lg"
+            >Jetski Analytics</text
+          >
+          <text
+            x="100"
+            y="50"
+            text-anchor="middle"
+            class="fill-purple-700 dark:fill-purple-400 text-sm"
+            >Real-time Dashboard</text
+          >
+
           <!-- Mini chart visualization -->
           <g transform="translate(40, 55)">
-            <rect x="0" y="15" width="8" height="10" fill="#8B5CF6" opacity="0.6"/>
-            <rect x="12" y="10" width="8" height="15" fill="#8B5CF6" opacity="0.7"/>
-            <rect x="24" y="5" width="8" height="20" fill="#8B5CF6" opacity="0.8"/>
-            <rect x="36" y="8" width="8" height="17" fill="#8B5CF6" opacity="0.7"/>
-            <rect x="48" y="12" width="8" height="13" fill="#8B5CF6" opacity="0.6"/>
+            <rect
+              x="0"
+              y="15"
+              width="8"
+              height="10"
+              fill="#8B5CF6"
+              opacity="0.6"></rect>
+            <rect
+              x="12"
+              y="10"
+              width="8"
+              height="15"
+              fill="#8B5CF6"
+              opacity="0.7"></rect>
+            <rect
+              x="24"
+              y="5"
+              width="8"
+              height="20"
+              fill="#8B5CF6"
+              opacity="0.8"></rect>
+            <rect
+              x="36"
+              y="8"
+              width="8"
+              height="17"
+              fill="#8B5CF6"
+              opacity="0.7"></rect>
+            <rect
+              x="48"
+              y="12"
+              width="8"
+              height="13"
+              fill="#8B5CF6"
+              opacity="0.6"></rect>
           </g>
         </g>
 
@@ -192,7 +494,9 @@
           <text class="fill-gray-500 dark:fill-gray-400 text-xs">Tools</text>
         </g>
         <g transform="translate(660, 285)">
-          <text class="fill-purple-600 dark:fill-purple-400 text-xs">Logs & Metrics</text>
+          <text class="fill-purple-600 dark:fill-purple-400 text-xs"
+            >Logs & Metrics</text
+          >
         </g>
       </svg>
     </div>
@@ -200,32 +504,47 @@
     <!-- Flow Explanation -->
     <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
       <div class="flex items-start">
-        <div class="flex-shrink-0 w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-4">
+        <div
+          class="flex-shrink-0 w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-4">
           <span class="text-blue-600 dark:text-blue-400 font-bold">1</span>
         </div>
         <div>
-          <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Client sends prompt</h3>
-          <p class="text-sm text-gray-600 dark:text-gray-400">User interacts with Claude or ChatGPT normally</p>
+          <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
+            Client sends prompt
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            User interacts with Claude or ChatGPT normally
+          </p>
         </div>
       </div>
 
       <div class="flex items-start">
-        <div class="flex-shrink-0 w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-4">
+        <div
+          class="flex-shrink-0 w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-4">
           <span class="text-blue-600 dark:text-blue-400 font-bold">2</span>
         </div>
         <div>
-          <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Gateway intercepts</h3>
-          <p class="text-sm text-gray-600 dark:text-gray-400">Captures prompts and tool calls transparently</p>
+          <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
+            Gateway intercepts
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Captures prompts and tool calls transparently
+          </p>
         </div>
       </div>
 
       <div class="flex items-start">
-        <div class="flex-shrink-0 w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mr-4">
+        <div
+          class="flex-shrink-0 w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mr-4">
           <span class="text-purple-600 dark:text-purple-400 font-bold">3</span>
         </div>
         <div>
-          <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Analytics in real-time</h3>
-          <p class="text-sm text-gray-600 dark:text-gray-400">View insights instantly in your dashboard</p>
+          <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
+            Analytics in real-time
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            View insights instantly in your dashboard
+          </p>
         </div>
       </div>
     </div>
@@ -234,10 +553,14 @@
 
 <style>
   @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-  
+
   .animate-spin {
     animation: spin 3s linear infinite;
   }
