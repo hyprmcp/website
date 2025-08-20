@@ -2,11 +2,17 @@
 export interface Props {
   title?: string;
   description?: string;
+  ctaHref?: string;
+  ctaText?: string;
+  demoHref?: string;
 }
 
 const {
-  title = 'From Zero to MCP — in Days, Not Weeks',
-  description = 'We build, host, and monitor your remote MCP so your application works instantly with ChatGPT, AI agents, and IDEs.',
+  title,
+  description,
+  ctaHref,
+  ctaText = 'Get Started',
+  demoHref,
 } = Astro.props;
 ---
 
@@ -633,14 +639,29 @@ const {
         </svg>
       </div>
 
-      <div class="mt-10 flex items-center justify-center gap-x-6">
-        <a
-          href="https://tally.so/r/woj4kX"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="px-6 py-3 bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-all no-underline">
-          Get Started
-        </a>
+      <div class="mt-10 flex items-center justify-center gap-x-4">
+        {
+          demoHref && (
+            <a
+              href={demoHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-6 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-full hover:bg-gray-50 dark:hover:bg-gray-800 transition-all no-underline">
+              Book Demo
+            </a>
+          )
+        }
+        {
+          ctaHref && (
+            <a
+              href={ctaHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-6 py-3 bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-all no-underline">
+              {ctaText}
+            </a>
+          )
+        }
       </div>
     </div>
   </div>

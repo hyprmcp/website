@@ -2,6 +2,15 @@
 import ThemedImage from '../../util/ThemedImage.astro';
 import jetskiBlack from '../../../assets/jetski-black.svg';
 import jetskiWhite from '../../../assets/jetski-white.svg';
+
+interface Props {
+  navLinks?: Array<{href: string; text: string}>;
+  ctaHref?: string;
+  ctaText?: string;
+  demoHref?: string;
+}
+
+const {navLinks, ctaHref, ctaText = 'Get Started', demoHref} = Astro.props;
 ---
 
 <nav
@@ -18,30 +27,40 @@ import jetskiWhite from '../../../assets/jetski-white.svg';
       </div>
 
       <div class="hidden md:flex space-x-8">
-        <a
-          href="#features"
-          class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors no-underline">
-          Features
-        </a>
-        <a
-          href="#demo"
-          class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors no-underline">
-          Demo
-        </a>
-        <a
-          href="#pricing"
-          class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors no-underline">
-          Pricing
-        </a>
+        {
+          navLinks.map(link => (
+            <a
+              href={link.href}
+              class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors no-underline">
+              {link.text}
+            </a>
+          ))
+        }
       </div>
 
-      <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-3">
+        {
+          demoHref && (
+            <a
+              href={demoHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center text-gray-900 rounded-full border border-gray-200 dark:border-gray-700 transition-all dark:text-white no-underline">
+              <span class="px-4 py-2 bg-white dark:bg-gray-900 rounded-full text-center hover:bg-gray-50 dark:hover:bg-gray-800 transition-all text-sm font-medium">
+                Book Demo
+              </span>
+            </a>
+          )
+        }
         <a
-          href="https://tally.so/r/woj4kX"
+          href={ctaHref}
           target="_blank"
           rel="noopener noreferrer"
-          class="bg-gray-900 text-white dark:bg-white dark:text-gray-900 px-4 py-2 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors no-underline">
-          Get Started
+          class="inline-flex items-center justify-center text-gray-900 rounded-full border border-gray-200 dark:border-gray-700 transition-all dark:text-white no-underline">
+          <span
+            class="px-4 py-2 bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-full text-center hover:bg-gray-800 dark:hover:bg-gray-200 transition-all text-sm font-medium">
+            {ctaText}
+          </span>
         </a>
       </div>
     </div>

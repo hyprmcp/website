@@ -12,6 +12,13 @@ import McpCTA from '../components/lp/mcp/McpCTA.astro';
 const pageTitle = 'Jetski - From Zero to MCP in Days, Not Weeks';
 const pageDescription =
   'We build, host, and monitor your remote MCP so your application works instantly with ChatGPT, AI agents, and IDEs.';
+const ctaHref = 'https://tally.so/r/woj4kX';
+const demoHref = 'https://cal.glasskube.com/team/hyprmcp/remote-mcp';
+const navLinks = [
+  {href: '#features', text: 'Features'},
+  {href: '#demo', text: 'Demo'},
+  {href: '#pricing', text: 'Pricing'},
+];
 ---
 
 <StandaloneLayout
@@ -19,17 +26,23 @@ const pageDescription =
   description={pageDescription}
   ogUrl="https://jetski.sh/remote-mcp/"
   footerTagline="From Zero to MCP — in Days, Not Weeks. We build, host, and monitor your remote MCP."
-  footerLinks={[
-    {href: '#features', text: 'Features'},
-    {href: '#demo', text: 'Demo'},
-    {href: '#pricing', text: 'Pricing'},
-  ]}>
-  <McpNavigation />
-  <McpHeroSection />
+  footerLinks={navLinks}>
+  <McpNavigation navLinks={navLinks} ctaHref={ctaHref} demoHref={demoHref} />
+  <McpHeroSection
+    title="From Zero to MCP — in Days, Not Weeks"
+    description="We build, host, and monitor your remote MCP so your application works instantly with ChatGPT, AI agents, and IDEs."
+    ctaHref={ctaHref}
+    demoHref={demoHref}
+  />
   <McpBenefits />
   <McpFeatures />
   <McpVideoDemo />
   <McpPricing />
   <McpSocialProof />
-  <McpCTA />
+  <McpCTA
+    title="Ready to get started?"
+    subtitle="Deploy your first MCP server in minutes"
+    ctaHref={ctaHref}
+    demoHref={demoHref}
+  />
 </StandaloneLayout>

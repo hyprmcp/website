@@ -1,17 +1,24 @@
 ---
 import StandaloneLayout from '../layouts/StandaloneLayout.astro';
-import McpStudioNavigation from '../components/lp/mcp/McpStudioNavigation.astro';
+import McpNavigation from '../components/lp/mcp/McpNavigation.astro';
 import McpHeroSection from '../components/lp/mcp/McpHeroSection.astro';
 import McpWhatIs from '../components/lp/mcp/McpWhatIs.astro';
 import McpHowWeHelp from '../components/lp/mcp/McpHowWeHelp.astro';
 import McpVideoDemo from '../components/lp/mcp/McpVideoDemo.astro';
 import McpPricing from '../components/lp/mcp/McpPricing.astro';
 import McpSocialProof from '../components/lp/mcp/McpSocialProof.astro';
-import McpStudioCTA from '../components/lp/mcp/McpStudioCTA.astro';
+import McpCTA from '../components/lp/mcp/McpCTA.astro';
 
 const pageTitle = 'Jetski - Connect Your Application to AI';
 const pageDescription =
   'Your app is invisible to AI agents and chatbots. MCP changes that - enabling direct AI integration for instant automation, enhanced user experiences, and competitive advantage.';
+const ctaHref = 'https://tally.so/r/3ql2o2';
+const demoHref = 'https://cal.glasskube.com/team/hyprmcp/ai-integration';
+const navLinks = [
+  {href: '#how-we-help', text: 'How We Help'},
+  {href: '#demo', text: 'Demo'},
+  {href: '#pricing', text: 'Pricing'},
+];
 ---
 
 <StandaloneLayout
@@ -19,16 +26,14 @@ const pageDescription =
   description={pageDescription}
   ogUrl="https://jetski.sh/ai-integration/"
   footerTagline="Connect your Application to AI. We build, host, and monitor your MCP servers."
-  footerLinks={[
-    {href: '#how-we-help', text: 'How We Help'},
-    {href: '#demo', text: 'Demo'},
-    {href: '#pricing', text: 'Pricing'},
-  ]}>
-  <McpStudioNavigation />
+  footerLinks={navLinks}>
+  <McpNavigation navLinks={navLinks} ctaHref={ctaHref} demoHref={demoHref} />
 
   <McpHeroSection
     title="Connect your Application to AI"
     description="Right now, your app is invisible to AI Chatbot & agents. MCP changes that."
+    ctaHref={ctaHref}
+    demoHref={demoHref}
   />
 
   <McpWhatIs />
@@ -44,5 +49,10 @@ const pageDescription =
 
   <McpSocialProof />
 
-  <McpStudioCTA />
+  <McpCTA
+    title="Ready to connect your app to AI?"
+    subtitle="Get started in minutes, not weeks"
+    ctaHref={ctaHref}
+    demoHref={demoHref}
+  />
 </StandaloneLayout>
