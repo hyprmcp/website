@@ -3,6 +3,8 @@ import {Icon} from '@astrojs/starlight/components';
 ---
 
 <style>
+  @reference 'tailwindcss';
+
   .hero-bg {
     background-image:
       linear-gradient(
@@ -40,10 +42,38 @@ import {Icon} from '@astrojs/starlight/components';
       );
     background-size: 200px 200px;
   }
+
+  .step-indicator {
+    @apply flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium transition-all duration-300;
+  }
+
+  .step-indicator.active {
+    @apply bg-blue-600 text-white;
+  }
+
+  .step-indicator.completed {
+    @apply bg-green-600 text-white;
+  }
+
+  .step-indicator.inactive {
+    @apply bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400;
+  }
+
+  .step-line {
+    @apply h-0.5 flex-1 transition-all duration-300;
+  }
+
+  .step-line.completed {
+    @apply bg-green-600;
+  }
+
+  .step-line.inactive {
+    @apply bg-gray-200 dark:bg-gray-700;
+  }
 </style>
 
 <div
-  class="relative overflow-hidden bg-gray-50 dark:bg-slate-900 hero-bg pt-8 sm:pt-16 pb-32 border-b border-gray-200 dark:border-gray-800">
+  class="relative overflow-hidden bg-gray-50 dark:bg-slate-900 hero-bg pt-8 sm:pt-16 pb-32 border-b border-gray-200 dark:border-slate-800">
   <div class="absolute inset-0 bg-gray-50/80 dark:bg-slate-900/80"></div>
   <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
     <div class="text-center">
@@ -66,199 +96,651 @@ import {Icon} from '@astrojs/starlight/components';
 
     <div class="mt-16">
       <div
-        class="rounded-2xl bg-white dark:bg-gray-900 p-8 shadow-lg ring-1 ring-gray-200 dark:ring-gray-800">
-        <div class="text-center mb-8">
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-            Get Early Access
-          </h2>
-          <p class="mt-2 text-gray-600 dark:text-gray-400">
-            Join leading AI developers already on the waitlist
-          </p>
+        class="rounded-2xl bg-white dark:bg-slate-800 p-8 shadow-lg ring-1 ring-gray-200 dark:ring-slate-700">
+        <!-- Step Indicators -->
+        <div id="stepIndicators" class="hidden mb-8">
+          <div class="flex items-center">
+            <div class="step-indicator active" data-step="1">1</div>
+            <div class="step-line inactive"></div>
+            <div class="step-indicator inactive" data-step="2">2</div>
+            <div class="step-line inactive"></div>
+            <div class="step-indicator inactive" data-step="3">3</div>
+            <div class="step-line inactive"></div>
+            <div class="step-indicator inactive" data-step="4">4</div>
+          </div>
+          <div
+            class="flex justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
+            <span>Basic Info</span>
+            <span>Experience</span>
+            <span>Discovery</span>
+            <span>Timeline</span>
+          </div>
         </div>
 
-        <form id="waitlistForm" class="space-y-6">
-          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <div>
-              <label
-                for="name"
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Name *
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                class="mt-1 block w-full rounded-md border-0 py-3 px-4 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
-                placeholder="Your full name"
-              />
-            </div>
-
-            <div>
-              <label
-                for="email"
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Work Email *
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                class="mt-1 block w-full rounded-md border-0 py-3 px-4 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
-                placeholder="your@email.com"
-              />
-            </div>
+        <!-- Step 1: Basic Info -->
+        <div id="step1" class="step-content">
+          <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+              Get Early Access
+            </h2>
+            <p class="mt-2 text-gray-600 dark:text-gray-400">
+              Join leading AI developers already on the waitlist
+            </p>
           </div>
 
-          <div>
-            <label
-              class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              What are you interested in? *
-            </label>
-            <div class="relative mt-1">
-              <button
-                type="button"
-                id="useCaseButton"
-                class="relative w-full cursor-pointer rounded-md border-0 py-3 pl-4 pr-10 bg-gray-50 dark:bg-gray-800 text-left text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
-                aria-haspopup="listbox"
-                aria-expanded="false">
-                <span id="useCaseButtonText" class="block truncate"
-                  >Select your interests...</span
-                >
-                <span
-                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                  <svg
-                    class="h-5 w-5 text-gray-400"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true">
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                </span>
-              </button>
+          <form id="waitlistForm" class="space-y-6">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <div>
+                <label
+                  for="name"
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Name *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  class="mt-1 block w-full rounded-md border-0 py-3 px-4 bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  placeholder="Your full name"
+                />
+              </div>
 
-              <div
-                id="useCaseDropdown"
-                class="hidden absolute z-10 mt-1 w-full rounded-md bg-white dark:bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5">
-                <div class="max-h-60 overflow-auto rounded-md py-1">
-                  <label
-                    class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      name="useCase"
-                      value="connect-app-to-ai"
-                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
-                    />
-                    <span class="ml-3 text-sm text-gray-900 dark:text-white"
-                      >Connect my app to AI</span
-                    >
-                  </label>
-                  <label
-                    class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      name="useCase"
-                      value="analytics-remote-mcp"
-                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
-                    />
-                    <span class="ml-3 text-sm text-gray-900 dark:text-white"
-                      >Analytics for remote MCP server</span
-                    >
-                  </label>
-                  <label
-                    class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      name="useCase"
-                      value="auth-remote-mcp"
-                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
-                    />
-                    <span class="ml-3 text-sm text-gray-900 dark:text-white"
-                      >Authentication for remote MCP server</span
-                    >
-                  </label>
-                  <label
-                    class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      name="useCase"
-                      value="opensource-mcp-gateway"
-                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
-                    />
-                    <span class="ml-3 text-sm text-gray-900 dark:text-white"
-                      >Get access to the opensource MCP gateway</span
-                    >
-                  </label>
-                  <label
-                    class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      name="useCase"
-                      value="learn-mcp-servers"
-                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
-                    />
-                    <span class="ml-3 text-sm text-gray-900 dark:text-white"
-                      >Learn about MCP servers</span
-                    >
-                  </label>
-                  <label
-                    class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      name="useCase"
-                      value="meet-team"
-                      class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
-                    />
-                    <span class="ml-3 text-sm text-gray-900 dark:text-white"
-                      >Get to know the team</span
-                    >
-                  </label>
+              <div>
+                <label
+                  for="email"
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Work Email *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="mt-1 block w-full rounded-md border-0 py-3 px-4 bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  placeholder="your@email.com"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                What are you interested in? *
+              </label>
+              <div class="relative mt-1">
+                <button
+                  type="button"
+                  id="useCaseButton"
+                  class="relative w-full cursor-pointer rounded-md border-0 py-3 pl-4 pr-10 bg-gray-50 dark:bg-slate-700 text-left text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  aria-haspopup="listbox"
+                  aria-expanded="false">
+                  <span id="useCaseButtonText" class="block truncate"
+                    >Select your interests...</span
+                  >
+                  <span
+                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                    <svg
+                      class="h-5 w-5 text-gray-400"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                  </span>
+                </button>
+
+                <div
+                  id="useCaseDropdown"
+                  class="hidden absolute z-10 mt-1 w-full rounded-md bg-white dark:bg-slate-700 shadow-lg ring-1 ring-black ring-opacity-5">
+                  <div class="max-h-60 overflow-auto rounded-md py-1">
+                    <label
+                      class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="useCase"
+                        value="connect-app-to-ai"
+                        class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                      />
+                      <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                        >Connect my app to AI</span
+                      >
+                    </label>
+                    <label
+                      class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="useCase"
+                        value="analytics-remote-mcp"
+                        class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                      />
+                      <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                        >Analytics for remote MCP server</span
+                      >
+                    </label>
+                    <label
+                      class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="useCase"
+                        value="auth-remote-mcp"
+                        class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                      />
+                      <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                        >Authentication for remote MCP server</span
+                      >
+                    </label>
+                    <label
+                      class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="useCase"
+                        value="opensource-mcp-gateway"
+                        class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                      />
+                      <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                        >Get access to the opensource MCP gateway</span
+                      >
+                    </label>
+                    <label
+                      class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="useCase"
+                        value="learn-mcp-servers"
+                        class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                      />
+                      <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                        >Learn about MCP servers</span
+                      >
+                    </label>
+                    <label
+                      class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="useCase"
+                        value="meet-team"
+                        class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                      />
+                      <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                        >Get to know the team</span
+                      >
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <div>
+              <label
+                for="notes"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Additional Notes
+              </label>
+              <textarea
+                id="notes"
+                name="notes"
+                rows="4"
+                class="mt-1 block w-full rounded-md border-0 py-3 px-4 bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                placeholder="Tell us about your MCP server plans, specific requirements, or questions..."
+              ></textarea>
+            </div>
+
+            <div class="pt-4">
+              <button
+                type="submit"
+                id="submitBtn"
+                class="w-full rounded-md bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 disabled:bg-gray-400 dark:disabled:bg-gray-400 px-6 py-3 text-sm font-semibold text-white dark:text-gray-900 shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors duration-200 cursor-pointer">
+                <span id="submitText">Join Waitlist</span>
+                <span id="loadingText" class="hidden">Joining...</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Step 2: Experience -->
+        <div id="step2" class="step-content hidden">
+          <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+              Tell us about yourself
+            </h2>
+            <p class="mt-2 text-gray-600 dark:text-gray-400">
+              Help us understand your background
+            </p>
           </div>
 
-          <div>
-            <label
-              for="notes"
-              class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Additional Notes
-            </label>
-            <textarea
-              id="notes"
-              name="notes"
-              rows="4"
-              class="mt-1 block w-full rounded-md border-0 py-3 px-4 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
-              placeholder="Tell us about your MCP server plans, specific requirements, or questions..."
-            ></textarea>
+          <form id="experienceForm" class="space-y-6">
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Area of expertise *
+              </label>
+              <div class="relative mt-1">
+                <button
+                  type="button"
+                  id="expertiseButton"
+                  class="relative w-full cursor-pointer rounded-md border-0 py-3 pl-4 pr-10 bg-gray-50 dark:bg-slate-700 text-left text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  aria-haspopup="listbox"
+                  aria-expanded="false">
+                  <span id="expertiseButtonText" class="block truncate"
+                    >Select your areas...</span
+                  >
+                  <span
+                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                    <svg
+                      class="h-5 w-5 text-gray-400"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                  </span>
+                </button>
+
+                <div
+                  id="expertiseDropdown"
+                  class="hidden absolute z-10 mt-1 w-full rounded-md bg-white dark:bg-slate-700 shadow-lg ring-1 ring-black ring-opacity-5">
+                  <div class="max-h-60 overflow-auto rounded-md py-1">
+                    <label
+                      class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="expertise"
+                        value="software-engineer"
+                        class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                      />
+                      <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                        >Software Engineer / Developer</span
+                      >
+                    </label>
+                    <label
+                      class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="expertise"
+                        value="product-manager"
+                        class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                      />
+                      <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                        >Product Manager</span
+                      >
+                    </label>
+                    <label
+                      class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="expertise"
+                        value="marketing-growth"
+                        class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                      />
+                      <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                        >Marketing / Growth</span
+                      >
+                    </label>
+                    <label
+                      class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="expertise"
+                        value="sales-bd"
+                        class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                      />
+                      <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                        >Sales / Business Development</span
+                      >
+                    </label>
+                    <label
+                      class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="expertise"
+                        value="data-scientist"
+                        class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                      />
+                      <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                        >Data Scientist / Analyst</span
+                      >
+                    </label>
+                    <label
+                      class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="expertise"
+                        value="operations-admin"
+                        class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                      />
+                      <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                        >Operations / Admin</span
+                      >
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label
+                for="role"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                What describes you best? *
+              </label>
+              <select
+                id="role"
+                name="role"
+                required
+                class="mt-1 block w-full rounded-md border-0 py-3 px-4 bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                <option value="">Select your role...</option>
+                <option value="founder">Founder / Co-Founder</option>
+                <option value="executive">Executive (C-Level / VP)</option>
+                <option value="director">Director / Head of Department</option>
+                <option value="senior">Senior (5+ years experience)</option>
+                <option value="mid">Mid-Level (2-5 years experience)</option>
+                <option value="junior">Junior / Entry Level</option>
+                <option value="intern">Intern / Student</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                for="companySize"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Company Size *
+              </label>
+              <select
+                id="companySize"
+                name="companySize"
+                required
+                class="mt-1 block w-full rounded-md border-0 py-3 px-4 bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+                <option value="">Select company size...</option>
+                <option value="2000+">2,000+ employees</option>
+                <option value="501-2000">501-2,000 employees</option>
+                <option value="201-500">201-500 employees</option>
+                <option value="51-200">51-200 employees</option>
+                <option value="11-50">11-50 employees</option>
+                <option value="2-10">2-10 employees</option>
+                <option value="solo">Just me / Solo</option>
+              </select>
+            </div>
+
+            <div class="pt-4">
+              <button
+                type="submit"
+                id="experienceSubmitBtn"
+                class="w-full rounded-md bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 disabled:bg-gray-400 dark:disabled:bg-gray-400 px-6 py-3 text-sm font-semibold text-white dark:text-gray-900 shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors duration-200 cursor-pointer">
+                <span id="experienceSubmitText">Continue</span>
+                <span id="experienceLoadingText" class="hidden">Saving...</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Step 3: Discovery -->
+        <div id="step3" class="step-content hidden">
+          <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+              How did you discover us?
+            </h2>
+            <p class="mt-2 text-gray-600 dark:text-gray-400">
+              Select all that apply
+            </p>
           </div>
 
-          <div class="pt-4">
-            <button
-              type="submit"
-              id="submitBtn"
-              class="w-full rounded-md bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 px-6 py-3 text-sm font-semibold text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors duration-200 cursor-pointer">
-              <span id="submitText">Join Waitlist</span>
-              <span id="loadingText" class="hidden">Joining...</span>
-            </button>
-          </div>
-        </form>
+          <form id="discoveryForm" class="space-y-6">
+            <div class="space-y-3">
+              <label
+                class="flex items-center p-3 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="discovery"
+                  value="google"
+                  class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                />
+                <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                  >Google</span
+                >
+              </label>
+              <label
+                class="flex items-center p-3 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="discovery"
+                  value="reddit"
+                  class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                />
+                <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                  >Reddit</span
+                >
+              </label>
+              <label
+                class="flex items-center p-3 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="discovery"
+                  value="hackernews"
+                  class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                />
+                <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                  >Hacker News</span
+                >
+              </label>
+              <label
+                class="flex items-center p-3 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="discovery"
+                  value="linkedin"
+                  class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                />
+                <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                  >LinkedIn</span
+                >
+              </label>
+              <label
+                class="flex items-center p-3 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="discovery"
+                  value="twitter"
+                  class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                />
+                <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                  >Twitter</span
+                >
+              </label>
+              <label
+                class="flex items-center p-3 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="discovery"
+                  value="recommendation"
+                  class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                />
+                <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                  >Recommendation (friend, co-worker, community)</span
+                >
+              </label>
+              <label
+                class="flex items-center p-3 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="discovery"
+                  value="llms"
+                  class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                />
+                <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                  >LLMs (ChatGPT, Claude, etc.)</span
+                >
+              </label>
+              <label
+                class="flex items-center p-3 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="discovery"
+                  value="offline-events"
+                  class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                />
+                <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                  >Offline Events / Meetups</span
+                >
+              </label>
+              <label
+                class="flex items-center p-3 border border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="discovery"
+                  value="other"
+                  class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                />
+                <span class="ml-3 text-sm text-gray-900 dark:text-white"
+                  >Other</span
+                >
+              </label>
+            </div>
 
-        <div
-          id="successMessage"
-          class="hidden mt-6 p-4 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-md">
-          <div class="flex items-center">
-            <Icon name="approve-check" class="h-5 w-5 text-green-600 mr-2" />
-            <p class="text-sm font-medium text-green-800 dark:text-green-200">
-              Successfully joined the waitlist! We'll be in touch soon.
+            <div class="pt-4">
+              <button
+                type="submit"
+                id="discoverySubmitBtn"
+                class="w-full rounded-md bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 disabled:bg-gray-400 dark:disabled:bg-gray-400 px-6 py-3 text-sm font-semibold text-white dark:text-gray-900 shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors duration-200 cursor-pointer">
+                <span id="discoverySubmitText">Continue</span>
+                <span id="discoveryLoadingText" class="hidden">Saving...</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Step 4: Timeline -->
+        <div id="step4" class="step-content hidden">
+          <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+              When do you want to get started?
+            </h2>
+            <p class="mt-2 text-gray-600 dark:text-gray-400">
+              Help us prioritize your onboarding
+            </p>
+          </div>
+
+          <form id="timelineForm" class="space-y-6">
+            <div class="space-y-3">
+              <label
+                class="flex items-center p-4 border-2 border-gray-200 dark:border-slate-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-500 cursor-pointer transition-colors">
+                <input
+                  type="radio"
+                  name="timeline"
+                  value="asap"
+                  required
+                  class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-600"
+                />
+                <div class="ml-3">
+                  <span
+                    class="block text-sm font-medium text-gray-900 dark:text-white"
+                    >ASAP</span
+                  >
+                  <span class="block text-xs text-gray-500 dark:text-gray-400"
+                    >Ready to start immediately</span
+                  >
+                </div>
+              </label>
+              <label
+                class="flex items-center p-4 border-2 border-gray-200 dark:border-slate-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-500 cursor-pointer transition-colors">
+                <input
+                  type="radio"
+                  name="timeline"
+                  value="next-weeks"
+                  required
+                  class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-600"
+                />
+                <div class="ml-3">
+                  <span
+                    class="block text-sm font-medium text-gray-900 dark:text-white"
+                    >In the next weeks</span
+                  >
+                  <span class="block text-xs text-gray-500 dark:text-gray-400"
+                    >Planning to start soon</span
+                  >
+                </div>
+              </label>
+              <label
+                class="flex items-center p-4 border-2 border-gray-200 dark:border-slate-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-500 cursor-pointer transition-colors">
+                <input
+                  type="radio"
+                  name="timeline"
+                  value="1-3-months"
+                  required
+                  class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-600"
+                />
+                <div class="ml-3">
+                  <span
+                    class="block text-sm font-medium text-gray-900 dark:text-white"
+                    >In 1-3 months</span
+                  >
+                  <span class="block text-xs text-gray-500 dark:text-gray-400"
+                    >Getting ready for implementation</span
+                  >
+                </div>
+              </label>
+              <label
+                class="flex items-center p-4 border-2 border-gray-200 dark:border-slate-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-500 cursor-pointer transition-colors">
+                <input
+                  type="radio"
+                  name="timeline"
+                  value="exploring"
+                  required
+                  class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-600"
+                />
+                <div class="ml-3">
+                  <span
+                    class="block text-sm font-medium text-gray-900 dark:text-white"
+                    >Not sure yet, just exploring</span
+                  >
+                  <span class="block text-xs text-gray-500 dark:text-gray-400"
+                    >Learning about MCP servers</span
+                  >
+                </div>
+              </label>
+            </div>
+
+            <div class="pt-4">
+              <button
+                type="submit"
+                id="timelineSubmitBtn"
+                class="w-full rounded-md bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 disabled:bg-gray-400 dark:disabled:bg-gray-400 px-6 py-3 text-sm font-semibold text-white dark:text-gray-900 shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 transition-colors duration-200 cursor-pointer">
+                <span id="timelineSubmitText">Complete Sign Up</span>
+                <span id="timelineLoadingText" class="hidden"
+                  >Completing...</span
+                >
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="hidden">
+          <div class="text-center py-12">
+            <div
+              class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
+              <Icon name="approve-check" class="h-6 w-6 text-green-600" />
+            </div>
+            <h3
+              class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">
+              Welcome aboard! 🚀
+            </h3>
+            <p class="mt-2 text-gray-600 dark:text-gray-400">
+              You're all set! We'll be in touch soon with your early access.
+            </p>
+            <p class="mt-4 text-sm text-gray-500 dark:text-gray-500">
+              Check your email for confirmation and next steps.
             </p>
           </div>
         </div>
 
+        <!-- Error Message -->
         <div
           id="errorMessage"
           class="hidden mt-6 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-md">
@@ -270,7 +752,7 @@ import {Icon} from '@astrojs/starlight/components';
           </div>
         </div>
 
-        <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+        <div class="mt-8 pt-6 border-t border-gray-200 dark:border-slate-700">
           <div
             class="flex items-center justify-center space-x-8 text-sm text-gray-500 dark:text-gray-400">
             <div class="flex items-center">
@@ -308,6 +790,10 @@ import {Icon} from '@astrojs/starlight/components';
   }
   const posthog = (window as any).posthog;
 
+  // Store user data across steps
+  let userData: any = {};
+  let currentStep = 1;
+
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('waitlistForm') as HTMLFormElement;
     const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
@@ -330,6 +816,33 @@ import {Icon} from '@astrojs/starlight/components';
     const useCaseButtonText = document.getElementById(
       'useCaseButtonText',
     ) as HTMLSpanElement;
+    const stepIndicators = document.getElementById(
+      'stepIndicators',
+    ) as HTMLDivElement;
+
+    // Experience form elements
+    const experienceForm = document.getElementById(
+      'experienceForm',
+    ) as HTMLFormElement;
+    const expertiseButton = document.getElementById(
+      'expertiseButton',
+    ) as HTMLButtonElement;
+    const expertiseDropdown = document.getElementById(
+      'expertiseDropdown',
+    ) as HTMLDivElement;
+    const expertiseButtonText = document.getElementById(
+      'expertiseButtonText',
+    ) as HTMLSpanElement;
+
+    // Discovery form
+    const discoveryForm = document.getElementById(
+      'discoveryForm',
+    ) as HTMLFormElement;
+
+    // Timeline form
+    const timelineForm = document.getElementById(
+      'timelineForm',
+    ) as HTMLFormElement;
 
     if (
       !form ||
@@ -343,58 +856,127 @@ import {Icon} from '@astrojs/starlight/components';
       return;
     }
 
-    // Multiselect dropdown logic
-    let isDropdownOpen = false;
+    // Generic dropdown handler
+    function setupDropdown(
+      button: HTMLButtonElement,
+      dropdown: HTMLDivElement,
+      buttonText: HTMLSpanElement,
+      checkboxName: string,
+    ) {
+      let isOpen = false;
 
-    function toggleDropdown(): void {
-      isDropdownOpen = !isDropdownOpen;
-      if (isDropdownOpen) {
-        useCaseDropdown.classList.remove('hidden');
-        useCaseButton.setAttribute('aria-expanded', 'true');
-      } else {
-        useCaseDropdown.classList.add('hidden');
-        useCaseButton.setAttribute('aria-expanded', 'false');
-      }
-    }
-
-    function updateButtonText(): void {
-      const checkboxes = form.querySelectorAll(
-        'input[name="useCase"]:checked',
-      ) as NodeListOf<HTMLInputElement>;
-      const count = checkboxes.length;
-
-      if (count === 0) {
-        useCaseButtonText.textContent = 'Select your interests...';
-      } else if (count === 1) {
-        const label = checkboxes[0].nextElementSibling?.textContent || '';
-        useCaseButtonText.textContent = label;
-      } else {
-        useCaseButtonText.textContent = `${count} interests selected`;
-      }
-    }
-
-    // Handle dropdown toggle
-    useCaseButton.addEventListener('click', toggleDropdown);
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        !useCaseButton.contains(target) &&
-        !useCaseDropdown.contains(target)
-      ) {
-        if (isDropdownOpen) {
-          toggleDropdown();
+      button.addEventListener('click', () => {
+        isOpen = !isOpen;
+        if (isOpen) {
+          dropdown.classList.remove('hidden');
+          button.setAttribute('aria-expanded', 'true');
+        } else {
+          dropdown.classList.add('hidden');
+          button.setAttribute('aria-expanded', 'false');
         }
+      });
+
+      // Close when clicking outside
+      document.addEventListener('click', (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        if (!button.contains(target) && !dropdown.contains(target)) {
+          if (isOpen) {
+            isOpen = false;
+            dropdown.classList.add('hidden');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        }
+      });
+
+      // Update text when checkboxes change
+      const checkboxes = dropdown.querySelectorAll(
+        `input[name="${checkboxName}"]`,
+      );
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+          const checked = dropdown.querySelectorAll(
+            `input[name="${checkboxName}"]:checked`,
+          );
+          const count = checked.length;
+
+          if (count === 0) {
+            buttonText.textContent =
+              checkboxName === 'useCase'
+                ? 'Select your interests...'
+                : 'Select your areas...';
+          } else if (count === 1) {
+            const label =
+              (checked[0] as HTMLInputElement).nextElementSibling
+                ?.textContent || '';
+            buttonText.textContent = label;
+          } else {
+            buttonText.textContent = `${count} selected`;
+          }
+        });
+      });
+    }
+
+    // Setup dropdowns
+    setupDropdown(useCaseButton, useCaseDropdown, useCaseButtonText, 'useCase');
+    if (expertiseButton && expertiseDropdown && expertiseButtonText) {
+      setupDropdown(
+        expertiseButton,
+        expertiseDropdown,
+        expertiseButtonText,
+        'expertise',
+      );
+    }
+
+    // Step navigation
+    function showStep(step: number) {
+      // Hide all steps
+      document.querySelectorAll('.step-content').forEach(el => {
+        el.classList.add('hidden');
+      });
+
+      // Show current step
+      const stepEl = document.getElementById(`step${step}`);
+      if (stepEl) {
+        stepEl.classList.remove('hidden');
       }
-    });
 
-    // Update button text when checkboxes change
-    const checkboxes = form.querySelectorAll('input[name="useCase"]');
-    checkboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', updateButtonText);
-    });
+      // Update indicators
+      updateStepIndicators(step);
+      currentStep = step;
+    }
 
+    function updateStepIndicators(step: number) {
+      const indicators = document.querySelectorAll('.step-indicator');
+      const lines = document.querySelectorAll('.step-line');
+
+      indicators.forEach((indicator, index) => {
+        const stepNum = index + 1;
+        indicator.classList.remove('active', 'completed', 'inactive');
+
+        if (stepNum < step) {
+          indicator.classList.add('completed');
+          indicator.innerHTML =
+            '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>';
+        } else if (stepNum === step) {
+          indicator.classList.add('active');
+          indicator.textContent = stepNum.toString();
+        } else {
+          indicator.classList.add('inactive');
+          indicator.textContent = stepNum.toString();
+        }
+      });
+
+      lines.forEach((line, index) => {
+        line.classList.remove('completed', 'inactive');
+        if (index < step - 1) {
+          line.classList.add('completed');
+        } else {
+          line.classList.add('inactive');
+        }
+      });
+    }
+
+    // Step 1: Initial form submission
     form.addEventListener('submit', async (e: Event) => {
       e.preventDefault();
 
@@ -414,6 +996,9 @@ import {Icon} from '@astrojs/starlight/components';
         notes: (formData.get('notes') as string) || '',
       };
 
+      // Store user data
+      userData = {...data, useCaseArray: selectedUseCases};
+
       // Validate required fields
       if (!data.name || !data.email || selectedUseCases.length === 0) {
         showError(
@@ -427,8 +1012,18 @@ import {Icon} from '@astrojs/starlight/components';
         posthog.identify(data.email, {
           name: data.name,
           email: data.email,
-          use_cases: data.useCase,
+          use_cases: selectedUseCases,
           notes: data.notes,
+        });
+
+        // Capture step 1 completion event
+        posthog.capture('waitlist_form_step_1_completed', {
+          $set: {
+            name: data.name,
+            email: data.email,
+            use_cases: selectedUseCases,
+            notes: data.notes,
+          },
         });
       }
 
@@ -438,7 +1033,6 @@ import {Icon} from '@astrojs/starlight/components';
 
       try {
         const response = await fetch(
-          // 'https://forms.glasskube.com/api/v1/jetski/waitlist',
           'http://localhost:8081/api/v1/jetski/waitlist',
           {
             method: 'POST',
@@ -448,10 +1042,11 @@ import {Icon} from '@astrojs/starlight/components';
             body: JSON.stringify(data),
           },
         );
+
         if (response.ok) {
-          showSuccess();
-          form.reset();
-          updateButtonText();
+          // Show step indicators and move to step 2
+          stepIndicators.classList.remove('hidden');
+          showStep(2);
         } else {
           const errorData = await response.json().catch(() => ({}));
           showError(
@@ -466,6 +1061,131 @@ import {Icon} from '@astrojs/starlight/components';
       }
     });
 
+    // Step 2: Experience form submission
+    if (experienceForm) {
+      experienceForm.addEventListener('submit', async (e: Event) => {
+        e.preventDefault();
+
+        const formData = new FormData(experienceForm);
+        const expertiseBoxes = experienceForm.querySelectorAll(
+          'input[name="expertise"]:checked',
+        ) as NodeListOf<HTMLInputElement>;
+        const expertise = Array.from(expertiseBoxes).map(cb => cb.value);
+
+        const stepData = {
+          expertise: expertise,
+          role: formData.get('role') as string,
+          companySize: formData.get('companySize') as string,
+        };
+
+        // Validate
+        if (expertise.length === 0 || !stepData.role || !stepData.companySize) {
+          showError('Please fill in all required fields.');
+          return;
+        }
+
+        // Capture step 2 completion event in PostHog
+        if (posthog && typeof posthog.capture === 'function') {
+          posthog.capture('waitlist_form_step_2_completed', {
+            $set: stepData,
+          });
+        }
+
+        // Send telemetry
+        await sendTelemetry(stepData);
+
+        // Move to step 3
+        showStep(3);
+      });
+    }
+
+    // Step 3: Discovery form submission
+    if (discoveryForm) {
+      discoveryForm.addEventListener('submit', async (e: Event) => {
+        e.preventDefault();
+
+        const discoveryBoxes = discoveryForm.querySelectorAll(
+          'input[name="discovery"]:checked',
+        ) as NodeListOf<HTMLInputElement>;
+        const discovery = Array.from(discoveryBoxes).map(cb => cb.value);
+
+        const stepData = {
+          discovery: discovery,
+        };
+
+        // Validate
+        if (discovery.length === 0) {
+          showError('Please select at least one option.');
+          return;
+        }
+
+        // Capture step 3 completion event in PostHog
+        if (posthog && typeof posthog.capture === 'function') {
+          posthog.capture('waitlist_form_step_3_completed', {
+            $set: stepData,
+          });
+        }
+
+        // Send telemetry
+        await sendTelemetry(stepData);
+
+        // Move to step 4
+        showStep(4);
+      });
+    }
+
+    // Step 4: Timeline form submission
+    if (timelineForm) {
+      timelineForm.addEventListener('submit', async (e: Event) => {
+        e.preventDefault();
+
+        const formData = new FormData(timelineForm);
+        const stepData = {
+          timeline: formData.get('timeline') as string,
+        };
+
+        // Validate
+        if (!stepData.timeline) {
+          showError('Please select an option.');
+          return;
+        }
+
+        // Capture step 4 completion event in PostHog
+        if (posthog && typeof posthog.capture === 'function') {
+          posthog.capture('waitlist_form_step_4_completed', {
+            $set: stepData,
+          });
+        }
+
+        // Send telemetry
+        await sendTelemetry(stepData);
+
+        // Show success message
+        document.querySelectorAll('.step-content').forEach(el => {
+          el.classList.add('hidden');
+        });
+        successMessage.classList.remove('hidden');
+        stepIndicators.classList.add('hidden');
+      });
+    }
+
+    async function sendTelemetry(stepData: any) {
+      try {
+        await fetch('https://forms.glasskube.com/api/v1/jetski/telemetry', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...userData,
+            notes: JSON.stringify(stepData),
+          }),
+        });
+      } catch (error) {
+        console.error('Telemetry error:', error);
+      }
+    }
+
     function setLoadingState(loading: boolean): void {
       submitBtn.disabled = loading;
       if (loading) {
@@ -477,18 +1197,15 @@ import {Icon} from '@astrojs/starlight/components';
       }
     }
 
-    function showSuccess(): void {
-      successMessage.classList.remove('hidden');
-      errorMessage.classList.add('hidden');
-    }
-
     function showError(message: string): void {
       const errorText = errorMessage.querySelector('p') as HTMLParagraphElement;
       if (errorText) {
         errorText.textContent = message;
       }
       errorMessage.classList.remove('hidden');
-      successMessage.classList.add('hidden');
+      setTimeout(() => {
+        errorMessage.classList.add('hidden');
+      }, 5000);
     }
 
     function hideMessages(): void {
