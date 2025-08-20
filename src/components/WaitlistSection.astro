@@ -423,7 +423,7 @@ import {Icon} from '@astrojs/starlight/components';
       }
 
       // Identify user in PostHog
-      if (posthog && typeof posthog.identify() === 'function') {
+      if (posthog && typeof posthog.identify === 'function') {
         posthog.identify(data.email, {
           name: data.name,
           email: data.email,
@@ -438,7 +438,8 @@ import {Icon} from '@astrojs/starlight/components';
 
       try {
         const response = await fetch(
-          'https://forms.glasskube.com/api/v1/jetski/waitlist',
+          // 'https://forms.glasskube.com/api/v1/jetski/waitlist',
+          'http://localhost:8081/api/v1/jetski/waitlist',
           {
             method: 'POST',
             headers: {
