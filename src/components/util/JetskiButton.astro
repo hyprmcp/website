@@ -1,39 +1,39 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type {HTMLAttributes} from 'astro/types';
 
 interface Props extends Omit<HTMLAttributes<'a'>, 'href'> {
-	href: string | URL;
-	variant?: 'primary' | 'secondary' | 'link';
-	target?: string;
+  href: string | URL;
+  variant?: 'primary' | 'secondary' | 'link';
+  target?: string;
 }
 
-const {
-	class: className,
-	variant = 'primary',
-	...attrs
-} = Astro.props;
+const {class: className, variant = 'primary', ...attrs} = Astro.props;
 
 const variantClasses = {
-	primary: 'no-underline inline-flex items-center justify-center text-gray-900 rounded-full border border-gray-200 dark:border-gray-700 transition-all dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800',
-	secondary: 'no-underline inline-flex items-center justify-center text-gray-900 rounded-full border border-gray-200 dark:border-gray-700 transition-all dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800',
-	link: 'no-underline dark:text-gray-100 text-gray-900 hover:underline'
+  primary:
+    'no-underline inline-flex items-center justify-center text-gray-900 rounded-full border border-gray-200 dark:border-gray-700 transition-all dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800',
+  secondary:
+    'no-underline inline-flex items-center justify-center text-gray-900 rounded-full border border-gray-200 dark:border-gray-700 transition-all dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800',
+  link: 'no-underline dark:text-gray-100 text-gray-900 hover:underline',
 };
 ---
 
-{variant === 'primary' ? (
-	<a class:list={[variantClasses[variant], className]} {...attrs}>
-		<span class="px-6 py-2 bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-full w-full text-center hover:bg-gray-800 dark:hover:bg-gray-200 transition-all">
-			<slot />
-		</span>
-	</a>
-) : variant === 'secondary' ? (
-	<a class:list={[variantClasses[variant], className]} {...attrs}>
-		<span class="px-6 py-2 bg-white dark:bg-gray-900 rounded-full w-full text-center hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
-			<slot />
-		</span>
-	</a>
-) : (
-	<a class:list={[variantClasses[variant], className]} {...attrs}>
-		<slot />
-	</a>
-)}
+{
+  variant === 'primary' ? (
+    <a class:list={[variantClasses[variant], className]} {...attrs}>
+      <span class="px-6 py-2 bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-full w-full text-center hover:bg-gray-800 dark:hover:bg-gray-200 transition-all">
+        <slot />
+      </span>
+    </a>
+  ) : variant === 'secondary' ? (
+    <a class:list={[variantClasses[variant], className]} {...attrs}>
+      <span class="px-6 py-2 bg-white dark:bg-gray-900 rounded-full w-full text-center hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+        <slot />
+      </span>
+    </a>
+  ) : (
+    <a class:list={[variantClasses[variant], className]} {...attrs}>
+      <slot />
+    </a>
+  )
+}

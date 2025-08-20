@@ -1,29 +1,26 @@
 ---
-import '../styles/embla.css'
+import '../styles/embla.css';
 import ThemedImage from './util/ThemedImage.astro';
 import Frame from './util/Frame.astro';
-import jetskiLogsLight from '../assets/index/jetski-logs-light.webp'
-import jetskiLogsDark from '../assets/index/jetski-logs-dark.webp'
-import jetskiDashboardLight from '../assets/index/jetski-dashboard-light.webp'
-import jetskiDashboardDark from '../assets/index/jetski-dashboard-dark.webp'
+import jetskiLogsLight from '../assets/index/jetski-logs-light.webp';
+import jetskiLogsDark from '../assets/index/jetski-logs-dark.webp';
+import jetskiDashboardLight from '../assets/index/jetski-dashboard-light.webp';
+import jetskiDashboardDark from '../assets/index/jetski-dashboard-dark.webp';
 ---
 
 <script>
-  import EmblaCarousel from 'embla-carousel'
-  import Autoplay from 'embla-carousel-autoplay'
+  import EmblaCarousel from 'embla-carousel';
+  import Autoplay from 'embla-carousel-autoplay';
 
+  const OPTIONS = {loop: true};
 
-  const OPTIONS = {loop: true}
-
-
-  const emblaNode = document.querySelector('.embla')
-  const viewportNode = emblaNode.querySelector('.embla__viewport')
+  const emblaNode = document.querySelector('.embla');
+  const viewportNode = emblaNode.querySelector('.embla__viewport');
 
   const emblaApi = EmblaCarousel(viewportNode, OPTIONS, [
-    Autoplay({ playOnInit: true, delay: 5000 })
-    ])
+    Autoplay({playOnInit: true, delay: 5000}),
+  ]);
 </script>
-
 
 <section class="embla">
   <div class="embla__viewport">

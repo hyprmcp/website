@@ -10,8 +10,8 @@ import McpSocialProof from '../../components/lp/mcp/McpSocialProof.astro';
 import McpCTA from '../../components/lp/mcp/McpCTA.astro';
 
 const pageTitle = 'Jetski - From Zero to MCP in Days, Not Weeks';
-const pageDescription = 'We build, host, and monitor your remote MCP so your application works instantly with ChatGPT, AI agents, and IDEs.';
-
+const pageDescription =
+  'We build, host, and monitor your remote MCP so your application works instantly with ChatGPT, AI agents, and IDEs.';
 ---
 
 <StandaloneLayout
@@ -20,11 +20,10 @@ const pageDescription = 'We build, host, and monitor your remote MCP so your app
   ogUrl="https://jetski.sh/lp/mcp-dev/"
   footerTagline="From Zero to MCP — in Days, Not Weeks. We build, host, and monitor your remote MCP."
   footerLinks={[
-    { href: '#features', text: 'Features' },
-    { href: '#demo', text: 'Demo' },
-    { href: '#pricing', text: 'Pricing' }
-  ]}
->
+    {href: '#features', text: 'Features'},
+    {href: '#demo', text: 'Demo'},
+    {href: '#pricing', text: 'Pricing'},
+  ]}>
   <McpNavigation />
   <McpHeroSection />
   <McpBenefits />

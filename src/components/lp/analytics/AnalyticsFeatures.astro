@@ -1,89 +1,128 @@
 ---
 const sectionTitle = 'Comprehensive Analytics';
 const sectionSubtitle = 'Everything you need to understand your MCP users';
-const sectionDescription = 'From prompt analysis to performance monitoring, get complete visibility into how your MCP server is being used.';
+const sectionDescription =
+  'From prompt analysis to performance monitoring, get complete visibility into how your MCP server is being used.';
 const features = [
   {
     title: 'Real-time Prompt Analysis',
-    description: 'Monitor every prompt sent to your MCP server in real-time. Understand user intent and optimize your tools accordingly.',
+    description:
+      'Monitor every prompt sent to your MCP server in real-time. Understand user intent and optimize your tools accordingly.',
     icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
-    color: 'blue'
+    color: 'blue',
   },
   {
     title: 'Tool Usage Metrics',
-    description: 'Track which tools are used most frequently. Identify patterns and optimize tool performance based on actual usage.',
+    description:
+      'Track which tools are used most frequently. Identify patterns and optimize tool performance based on actual usage.',
     icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
-    color: 'purple'
+    color: 'purple',
   },
   {
     title: 'User Behavior Insights',
-    description: 'Understand how different user segments interact with your MCP server. Segment by role, department, or custom attributes.',
+    description:
+      'Understand how different user segments interact with your MCP server. Segment by role, department, or custom attributes.',
     icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
-    color: 'green'
+    color: 'green',
   },
   {
     title: 'Performance Monitoring',
-    description: 'Track response times, error rates, and throughput. Get alerts when performance degrades.',
+    description:
+      'Track response times, error rates, and throughput. Get alerts when performance degrades.',
     icon: 'M13 10V3L4 14h7v7l9-11h-7z',
-    color: 'yellow'
+    color: 'yellow',
   },
   {
     title: 'Custom Dashboards',
-    description: 'Build custom dashboards tailored to your needs. Export data to your favorite analytics tools.',
+    description:
+      'Build custom dashboards tailored to your needs. Export data to your favorite analytics tools.',
     icon: 'M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z',
-    color: 'indigo'
+    color: 'indigo',
   },
   {
     title: 'Compliance & Security',
-    description: 'GDPR compliant data handling. End-to-end encryption for sensitive prompts. Role-based access control.',
+    description:
+      'GDPR compliant data handling. End-to-end encryption for sensitive prompts. Role-based access control.',
     icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z',
-    color: 'red'
-  }
+    color: 'red',
+  },
 ];
 
 const colorClasses = {
   blue: 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400',
-  purple: 'bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400',
+  purple:
+    'bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400',
   green: 'bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400',
-  yellow: 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400',
-  indigo: 'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400',
-  red: 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400'
+  yellow:
+    'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400',
+  indigo:
+    'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400',
+  red: 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400',
 };
 ---
 
-<div id="comprehensive-analytics" class="bg-gray-50 dark:bg-slate-900 py-24 sm:py-32">
+<div
+  id="comprehensive-analytics"
+  class="bg-gray-50 dark:bg-slate-900 py-24 sm:py-32">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="text-center">
-      <a href="#comprehensive-analytics" class="inline-flex items-center rounded-full bg-indigo-100 dark:bg-indigo-900/30 px-4 py-1.5 text-sm font-medium text-indigo-800 dark:text-indigo-200 mb-4 hover:bg-indigo-200 dark:hover:bg-indigo-900/50 transition-colors cursor-pointer">
-        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+      <a
+        href="#comprehensive-analytics"
+        class="inline-flex items-center rounded-full bg-indigo-100 dark:bg-indigo-900/30 px-4 py-1.5 text-sm font-medium text-indigo-800 dark:text-indigo-200 mb-4 hover:bg-indigo-200 dark:hover:bg-indigo-900/50 transition-colors cursor-pointer">
+        <svg
+          class="w-4 h-4 mr-1.5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+          ></path>
         </svg>
         Comprehensive Analytics
       </a>
-      <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-        Everything you need to understand your <span class="text-indigo-600 dark:text-indigo-400">MCP users</span>
+      <h2
+        class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+        Everything you need to understand your <span
+          class="text-indigo-600 dark:text-indigo-400">MCP users</span
+        >
       </h2>
-      <p class="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+      <p
+        class="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
         {sectionDescription}
       </p>
     </div>
 
     <div class="mt-20 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      {features.map((feature) => (
-        <div class="relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-8">
-          <div class={`inline-flex p-3 rounded-lg ${colorClasses[feature.color as keyof typeof colorClasses]}`}>
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={feature.icon} />
-            </svg>
+      {
+        features.map(feature => (
+          <div class="relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-8">
+            <div
+              class={`inline-flex p-3 rounded-lg ${colorClasses[feature.color as keyof typeof colorClasses]}`}>
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d={feature.icon}
+                />
+              </svg>
+            </div>
+            <h3 class="mt-6 text-lg font-semibold text-gray-900 dark:text-white">
+              {feature.title}
+            </h3>
+            <p class="mt-2 text-gray-600 dark:text-gray-400">
+              {feature.description}
+            </p>
           </div>
-          <h3 class="mt-6 text-lg font-semibold text-gray-900 dark:text-white">
-            {feature.title}
-          </h3>
-          <p class="mt-2 text-gray-600 dark:text-gray-400">
-            {feature.description}
-          </p>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </div>

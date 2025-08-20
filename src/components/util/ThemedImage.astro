@@ -9,19 +9,26 @@ export interface Props {
   width?: number;
   height?: number;
 }
-const {lightSrc, darkSrc, alt, class: className = "", width, height} = Astro.props;
+const {
+  lightSrc,
+  darkSrc,
+  alt,
+  class: className = '',
+  width,
+  height,
+} = Astro.props;
 ---
 
-<Image 
-  src={lightSrc} 
-  alt={alt} 
+<Image
+  src={lightSrc}
+  alt={alt}
   class={`dark:hidden max-w-full h-auto ${className}`}
   width={width}
   height={height}
 />
-<Image 
-  src={darkSrc} 
-  alt={alt} 
+<Image
+  src={darkSrc}
+  alt={alt}
   class={`hidden dark:block max-w-full h-auto ${className}`}
   width={width}
   height={height}

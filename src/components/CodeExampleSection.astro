@@ -6,7 +6,8 @@ import Frame from './util/Frame.astro';
 <div class="py-24 sm:py-32 border-b border-gray-200 dark:border-gray-800">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+      <h2
+        class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
         Deploy in seconds
       </h2>
       <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
@@ -17,9 +18,9 @@ import Frame from './util/Frame.astro';
     <div class="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2">
       {/* Code Block */}
       <div>
-
-      <Frame title="Terminal">
-        <pre class="text-gray-800 dark:text-green-400 font-mono text-sm mx-6 ">
+        <Frame title="Terminal">
+          <pre
+            class="text-gray-800 dark:text-green-400 font-mono text-sm mx-6">
             <code>
 $ jetski deploy
 
@@ -35,38 +36,62 @@ URL: https://org.jetski.cloud/project
 Status: Ready to serve requests
             </code>
           </pre>
-      </Frame>
-        </div>
+        </Frame>
+      </div>
 
       {/* Features List */}
       <div class="space-y-6">
         <div class="flex items-start space-x-4">
-          <div class="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
-            <Icon name="rocket" class="w-5 h-5 text-blue-600 dark:text-blue-400" />
+          <div
+            class="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+            <Icon
+              name="rocket"
+              class="w-5 h-5 text-blue-600 dark:text-blue-400"
+            />
           </div>
           <div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Lightning Fast</h3>
-            <p class="text-gray-600 dark:text-gray-400">High availability deployment with zero cold starts</p>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              Lightning Fast
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              High availability deployment with zero cold starts
+            </p>
           </div>
         </div>
 
         <div class="flex items-start space-x-4">
-          <div class="flex-shrink-0 w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
-            <Icon name="approve-check" class="w-5 h-5 text-purple-600 dark:text-purple-400" />
+          <div
+            class="flex-shrink-0 w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
+            <Icon
+              name="approve-check"
+              class="w-5 h-5 text-purple-600 dark:text-purple-400"
+            />
           </div>
           <div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Secure by Default</h3>
-            <p class="text-gray-600 dark:text-gray-400">Built-in OAuth2 and Session Context</p>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              Secure by Default
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              Built-in OAuth2 and Session Context
+            </p>
           </div>
         </div>
 
         <div class="flex items-start space-x-4">
-          <div class="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
-            <Icon name="information" class="w-5 h-5 text-green-600 dark:text-green-400" />
+          <div
+            class="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
+            <Icon
+              name="information"
+              class="w-5 h-5 text-green-600 dark:text-green-400"
+            />
           </div>
           <div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Rich Analytics</h3>
-            <p class="text-gray-600 dark:text-gray-400">Detailed insights and usage metrics</p>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              Rich Analytics
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              Detailed insights and usage metrics
+            </p>
           </div>
         </div>
       </div>
