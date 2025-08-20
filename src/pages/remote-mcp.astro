@@ -1,0 +1,48 @@
+---
+import StandaloneLayout from '../layouts/StandaloneLayout.astro';
+import McpNavigation from '../components/lp/mcp/McpNavigation.astro';
+import McpHeroSection from '../components/lp/mcp/McpHeroSection.astro';
+import McpBenefits from '../components/lp/mcp/McpBenefits.astro';
+import McpFeatures from '../components/lp/mcp/McpFeatures.astro';
+import McpVideoDemo from '../components/lp/mcp/McpVideoDemo.astro';
+import McpPricing from '../components/lp/mcp/McpPricing.astro';
+import McpSocialProof from '../components/lp/mcp/McpSocialProof.astro';
+import McpCTA from '../components/lp/mcp/McpCTA.astro';
+
+const pageTitle = 'Jetski - From Zero to MCP in Days, Not Weeks';
+const pageDescription =
+  'We build, host, and monitor your remote MCP so your application works instantly with ChatGPT, AI agents, and IDEs.';
+const ctaHref = 'https://tally.so/r/woj4kX';
+const demoHref = 'https://cal.glasskube.com/team/hyprmcp/remote-mcp';
+const navLinks = [
+  {href: '#features', text: 'Features'},
+  {href: '#demo', text: 'Demo'},
+  {href: '#pricing', text: 'Pricing'},
+];
+---
+
+<StandaloneLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogUrl="https://jetski.sh/remote-mcp/"
+  footerTagline="From Zero to MCP — in Days, Not Weeks. We build, host, and monitor your remote MCP."
+  footerLinks={navLinks}>
+  <McpNavigation navLinks={navLinks} ctaHref={ctaHref} demoHref={demoHref} />
+  <McpHeroSection
+    title="From Zero to MCP — in Days, Not Weeks"
+    description="We build, host, and monitor your remote MCP so your application works instantly with ChatGPT, AI agents, and IDEs."
+    ctaHref={ctaHref}
+    demoHref={demoHref}
+  />
+  <McpBenefits />
+  <McpFeatures />
+  <McpVideoDemo />
+  <McpPricing />
+  <McpSocialProof />
+  <McpCTA
+    title="Ready to get started?"
+    subtitle="Deploy your first MCP server in minutes"
+    ctaHref={ctaHref}
+    demoHref={demoHref}
+  />
+</StandaloneLayout>

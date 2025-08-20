@@ -1,5 +1,19 @@
 ---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaHref?: string;
+  ctaText?: string;
+  demoHref?: string;
+}
 
+const {
+  title,
+  subtitle,
+  ctaHref,
+  ctaText = 'Get Started',
+  demoHref,
+} = Astro.props;
 ---
 
 <section class="py-24 sm:py-32 bg-gray-50 dark:bg-slate-900">
@@ -7,18 +21,29 @@
     <div class="text-center">
       <h2
         class="text-3xl font-bold tracking-tight sm:text-4xl text-gray-900 dark:text-white">
-        Ready to get started?
+        {title}
       </h2>
       <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
-        Deploy your first MCP server in minutes
+        {subtitle}
       </p>
-      <div class="mt-8">
+      <div class="mt-8 flex justify-center items-center gap-4">
+        {
+          demoHref && (
+            <a
+              href={demoHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block px-6 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-full hover:bg-gray-50 dark:hover:bg-gray-800 transition-all no-underline">
+              Book Demo
+            </a>
+          )
+        }
         <a
-          href="https://tally.so/r/woj4kX"
+          href={ctaHref}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-block px-6 py-3 bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-full hover:bg-gray-800 dark:hover:bg-gray-200 transition-all no-underline">
-          Get Started
+          {ctaText}
         </a>
       </div>
     </div>
