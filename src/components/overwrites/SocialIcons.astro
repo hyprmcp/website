@@ -1,6 +1,6 @@
 ---
 import Default from '@astrojs/starlight/components/SocialIcons.astro';
-import JetskiButton from '../util/JetskiButton.astro';
+import HyprMcpButton from '../util/HyprMcpButton.astro';
 ---
 
 <Default {...Astro.props}>
@@ -8,18 +8,18 @@ import JetskiButton from '../util/JetskiButton.astro';
 </Default>
 
 <div class="hidden lg:block">
-  <JetskiButton
+  <HyprMcpButton
     href="https://cal.glasskube.com/team/hyprmcp/demo"
     target="_blank"
     variant="secondary">
     Get a Demo
-  </JetskiButton>
+  </HyprMcpButton>
 </div>
 
 <div class="hidden lg:block">
-  <JetskiButton href="/waitlist/" variant="primary">
+  <HyprMcpButton href="/waitlist/" variant="primary">
     Start Deploying
-  </JetskiButton>
+  </HyprMcpButton>
 </div>
 
-<JetskiButton href="/waitlist/" variant="link"> Login </JetskiButton>
+<HyprMcpButton href="/waitlist/" variant="link"> Login </HyprMcpButton>

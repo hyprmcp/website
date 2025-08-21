@@ -1,7 +1,7 @@
 ---
 import ThemedImage from '../../util/ThemedImage.astro';
-import jetskiBlack from '../../../assets/jetski-black.svg';
-import jetskiWhite from '../../../assets/jetski-white.svg';
+import hyprmcpBlack from '../../../assets/hyprmcp-black.svg';
+import hyprmcpWhite from '../../../assets/hyprmcp-white.svg';
 
 interface Props {
   navLinks?: Array<{href: string; text: string}>;
@@ -19,9 +19,9 @@ const {navLinks, ctaHref, ctaText = 'Get Started', demoHref} = Astro.props;
     <div class="flex justify-between items-center h-16">
       <div class="flex items-center">
         <ThemedImage
-          lightSrc={jetskiBlack}
-          darkSrc={jetskiWhite}
-          alt="Jetski Logo"
+          lightSrc={hyprmcpBlack}
+          darkSrc={hyprmcpWhite}
+          alt="Hypr MCP Logo"
           class="w-14 h-14"
         />
       </div>

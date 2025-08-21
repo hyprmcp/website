@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jetski.sh/sitemap-index.xml
+Sitemap: https://hyprmcp.com/sitemap-index.xml

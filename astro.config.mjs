@@ -9,21 +9,21 @@ import starlightLinksValidator from 'starlight-links-validator';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://jetski.sh',
+  site: 'https://hyprmcp.com',
 
   integrations: [
     starlight({
-      title: 'jetski',
+      title: 'hyprmcp',
       description:
         'Serverless hosting and analytics provider for remote, authenticated streamable HTTP MCP server',
       logo: {
-        light: './src/assets/jetski-black.svg',
-        dark: './src/assets/jetski-white.svg',
+        light: './src/assets/hyprmcp-black.svg',
+        dark: './src/assets/hyprmcp-white.svg',
         replacesTitle: true,
       },
       customCss: ['./src/styles/global.css'],
       editLink: {
-        baseUrl: 'https://github.com/jetski-sh/website/tree/main',
+        baseUrl: 'https://github.com/hyprmcp/website/tree/main',
       },
       components: {
         // Components can be overwritten here
@@ -62,7 +62,7 @@ export default defineConfig({
         {
           icon: 'github',
           label: 'GitHub',
-          href: 'https://github.com/jetski-sh/jetski',
+          href: 'https://github.com/hyprmcp/hyprmcp',
         },
         {
           icon: 'discord',

@@ -1,6 +1,6 @@
 ---
-title: Jetski Quickstart - Deploy Your First MCP Server
-description: Get started with Jetski in minutes. Install CLI, deploy MCP servers with HTTP support, connect to Claude/ChatGPT. Step-by-step guide included.
+title: Hypr MCP Quickstart - Deploy Your First MCP Server
+description: Get started with Hypr MCP in minutes. Install CLI, deploy MCP servers with HTTP support, connect to Claude/ChatGPT. Step-by-step guide included.
 slug: docs/quickstart
 sidebar:
   order: 2
@@ -8,7 +8,7 @@ sidebar:
 
 import {Aside, Code, Steps, TabItem, Tabs} from '@astrojs/starlight/components';
 
-Jetski only supports MCP servers that use the [streamable HTTP standard](https://modelcontextprotocol.io/specification/draft/basic/transports#streamable-http).
+Hypr MCP only supports MCP servers that use the [streamable HTTP standard](https://modelcontextprotocol.io/specification/draft/basic/transports#streamable-http).
 This ensures optimal performance and compatibility with browser-based MCP clients and support for the latest OAuth2 authorization standard.
 
 <Aside type="tip">
@@ -16,52 +16,52 @@ This ensures optimal performance and compatibility with browser-based MCP client
   usually straightforward and only requires a different initialization method.
 </Aside>
 
-## Install the Jetski CLI
+## Install the Hypr MCP CLI
 
 <Aside type="caution">
-  Jetski is currently in early access. Join our [waitlist](/waitlist) to get
+  Hypr MCP is currently in early access. Join our [waitlist](/waitlist) to get
   priority access and CLI installation instructions.
 </Aside>
 
-You can either install the Jetski CLI via Homebrew or download the binary directly from the [releases page](https://github.com/jetski-sh)
+You can either install the Hypr MCP CLI via Homebrew or download the binary directly from the [releases page](https://github.com/hyprmcp)
 
 ```shell
-brew install jetski-sh/tap/jetski
+brew install hyprmcp/tap/hyprmcp
 ```
 
 Alternatively, you can run the CLI directly using `npx` or `uvx` to directly run the latest version of the binary.
 
 <Tabs>
   <TabItem label="npm">
-    <Code lang="shell" code="npx @jetski-sh/jetski@latest --help" />
+    <Code lang="shell" code="npx @hyprmcp/hyprmcp@latest --help" />
   </TabItem>
   <TabItem label="pnpm">
-    <Code lang="shell" code="pnpm dlx @jetski-sh/jetski@latest --help" />
+    <Code lang="shell" code="pnpm dlx @hyprmcp/hyprmcp@latest --help" />
   </TabItem>
-  <TabItem label="uvx" code="uvx @jetski-sh/jetski@latest --help"></TabItem>
+  <TabItem label="uvx" code="uvx @hyprmcp/hyprmcp@latest --help"></TabItem>
 </Tabs>
 
 ## Deploy your first remote MCP server
 
-You can also just run the single command `jetski deploy` to deploy your MCP server to Jetski Cloud,
+You can also just run the single command `hyprmcp deploy` to deploy your MCP server to Hypr MCP Cloud,
 which will automatically guide you through the setup process.
 If you want to set up your project step-by-step, follow these steps:
 
 <Steps>
-1.  <Code code="jetski login" lang="shell"></Code>
-    Authenticate and connect your project with Jetski Cloud
+1.  <Code code="hyprmcp login" lang="shell"></Code>
+    Authenticate and connect your project with Hypr MCP Cloud
     Make sure to have already joined our [waitlist](/waitlist) to get early access.
-    Then run the following command to connect with the Jetski Cloud:
+    Then run the following command to connect with the Hypr MCP Cloud:
 
-2.  <Code code="jetski connect" lang="shell"></Code>
-    Create your MCP server project on Jetski Cloud Connecting your MCP server to
-    Jetski will create a `jetski.json` file in your project directory containing
-    the project ID and other configuration details.
+2.  <Code code="hyprmcp connect" lang="shell"></Code>
+    Create your MCP server project on Hypr MCP Cloud Connecting your MCP server
+    to Hypr MCP will create a `hyprmcp.json` file in your project directory
+    containing the project ID and other configuration details.
 
-3.  <Code code="jetski deploy" lang="shell"></Code>
-    This step will deploy your MCP server to Jetski Cloud.
+3.  <Code code="hyprmcp deploy" lang="shell"></Code>
+    This step will deploy your MCP server to Hypr MCP Cloud.
     After this step succeeded you will be able to work with your MCP server under
-    <Code code="https://<org>.jetski.cloud/<project>/mcp"></Code>
+    <Code code="https://<org>.hyprmcp.cloud/<project>/mcp"></Code>
 </Steps>
 
 ## Test your remote MCP server

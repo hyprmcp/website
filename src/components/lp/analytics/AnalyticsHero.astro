@@ -1,5 +1,5 @@
 ---
-import JetskiButton from '../../util/JetskiButton.astro';
+import HyprMcpButton from '../../util/HyprMcpButton.astro';
 import AnalyticsDashboard from './AnalyticsDashboard.astro';
 
 const badge = 'Analytics Gateway for MCP';
@@ -98,13 +98,13 @@ const stats = [
 
         <div
           class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <JetskiButton href={primaryCTA.href} variant="primary">
+          <HyprMcpButton href={primaryCTA.href} variant="primary">
             {primaryCTA.text}
-          </JetskiButton>
-          <JetskiButton href={secondaryCTA.href} variant="secondary">
+          </HyprMcpButton>
+          <HyprMcpButton href={secondaryCTA.href} variant="secondary">
             {secondaryCTA.text}
             <span aria-hidden="true">→</span>
-          </JetskiButton>
+          </HyprMcpButton>
         </div>
 
         <div class="mt-16 grid grid-cols-3 gap-8 max-w-3xl mx-auto">
