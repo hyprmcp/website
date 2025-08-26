@@ -811,7 +811,7 @@ import {Icon} from '@astrojs/starlight/components';
 
     // Send to Google Tag Manager
     dataLayer.push({
-      event: eventName
+      event: eventName,
     });
   }
 
@@ -1134,13 +1134,17 @@ import {Icon} from '@astrojs/starlight/components';
       discoveryOtherCheckbox.addEventListener('change', () => {
         if (discoveryOtherCheckbox.checked) {
           discoveryOtherInput.classList.remove('hidden');
-          const textInput = discoveryOtherInput.querySelector('input') as HTMLInputElement;
+          const textInput = discoveryOtherInput.querySelector(
+            'input',
+          ) as HTMLInputElement;
           if (textInput) {
             textInput.focus();
           }
         } else {
           discoveryOtherInput.classList.add('hidden');
-          const textInput = discoveryOtherInput.querySelector('input') as HTMLInputElement;
+          const textInput = discoveryOtherInput.querySelector(
+            'input',
+          ) as HTMLInputElement;
           if (textInput) {
             textInput.value = '';
           }
@@ -1159,9 +1163,12 @@ import {Icon} from '@astrojs/starlight/components';
         const discovery = Array.from(discoveryBoxes).map(cb => cb.value);
 
         // Get the "Other" text if Other is selected
-        const otherText = (discoveryForm.querySelector(
-          'input[name="discoveryOtherText"]',
-        ) as HTMLInputElement)?.value || '';
+        const otherText =
+          (
+            discoveryForm.querySelector(
+              'input[name="discoveryOtherText"]',
+            ) as HTMLInputElement
+          )?.value || '';
 
         const stepData: any = {
           discovery: discovery,
