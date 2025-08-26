@@ -90,6 +90,7 @@ export default defineConfig({
             {label: 'Home', link: '/'},
             {label: 'Pricing', link: '/pricing/'},
             {label: 'Docs', link: '/docs/getting-started/'},
+            {label: 'Blog', link: '/blog/'},
           ],
         },
       ],

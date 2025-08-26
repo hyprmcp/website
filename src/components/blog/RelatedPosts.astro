@@ -1,0 +1,37 @@
+---
+import { getRelatedPosts } from '~/utils/blog';
+import Grid from '~/components/blog/Grid.astro';
+import type { Post } from '~/types';
+import { getBlogPermalink } from '~/utils/permalinks';
+import Button from '~/components/ui/Button.astro';
+
+export interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+
+const relatedPosts = post.tags ? await getRelatedPosts(post, 4) : [];
+---
+
+{relatedPosts.length > 0 && (
+  <section class="pt-0 lg:pt-0 md:pt-0 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="py-12 md:py-20">
+        <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+          <h2 class="text-3xl md:text-4xl font-bold leading-tighter tracking-tighter mb-4 font-heading">
+            Related Posts
+          </h2>
+        </div>
+        
+        <Grid posts={relatedPosts} />
+        
+        <div class="text-center mt-8">
+          <Button variant="tertiary" href={getBlogPermalink()}>
+            View All Posts
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+)}

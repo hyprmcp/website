@@ -1,0 +1,45 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Layout from '~/layouts/BlogLayout.astro';
+import SinglePost from '~/components/blog/SinglePost.astro';
+import RelatedPosts from '~/components/blog/RelatedPosts.astro';
+import ToBlogLink from '~/components/blog/ToBlogLink.astro';
+import { fetchPosts, getRelatedPosts } from '~/utils/blog';
+import type { Post } from '~/types';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await fetchPosts();
+
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+};
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const relatedPosts = await getRelatedPosts(post, 4);
+
+const metadata = {
+  title: post.title,
+  description: post.excerpt,
+  image: post.image,
+};
+---
+
+<Layout title={metadata.title} description={metadata.description}>
+  <div class="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+    <SinglePost post={post} url={Astro.url} />
+
+    <div class="mt-8">
+      <ToBlogLink />
+    </div>
+
+    {relatedPosts.length > 0 && (
+      <RelatedPosts posts={relatedPosts} />
+    )}
+  </div>
+</Layout>
