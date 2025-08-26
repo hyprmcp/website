@@ -125,7 +125,22 @@ export default defineConfig({
     }),
     partytown({
       config: {
+        debug: true,
+        logGetters: true,
         forward: ['dataLayer.push'],
+        resolveUrl: (url, location, type) => {
+          if (
+            url.host === 'www.redditstatic.com' &&
+            !url.pathname.startsWith('/ggr/')
+          ) {
+            url.host = 'hyprmcp.com';
+            url.hostname = url.host;
+            url.pathname = '/ggr' + url.pathname;
+            return url;
+          }
+
+          return url;
+        },
       },
     }),
   ],
