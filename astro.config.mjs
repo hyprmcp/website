@@ -58,7 +58,7 @@ export default defineConfig({
         {
           tag: 'script',
           attrs: {
-            type: 'text/partytown',
+            // type: 'text/partytown',
           },
           content: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://hyprmcp.com/ggg/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-MM92PXX4');`,
         },
@@ -127,15 +127,15 @@ export default defineConfig({
       config: {
         forward: ['dataLayer.push'],
         resolveUrl: (url, location, type) => {
-          // if (
-          //   url.host === 'www.redditstatic.com' &&
-          //   !url.pathname.startsWith('/ggr/')
-          // ) {
-          //   url.host = 'hyprmcp.com';
-          //   url.hostname = url.host;
-          //   url.pathname = '/ggr' + url.pathname;
-          //   return url;
-          // }
+          if (
+            url.host === 'www.redditstatic.com' &&
+            !url.pathname.startsWith('/ggr/')
+          ) {
+            url.host = 'hyprmcp.com';
+            url.hostname = url.host;
+            url.pathname = '/ggr' + url.pathname;
+            return url;
+          }
 
           return url;
         },
