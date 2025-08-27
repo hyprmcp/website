@@ -1,7 +1,8 @@
 ---
-publishDate: 2025-01-18
 title: "Getting Started with MCP Servers: A Complete Guide"
 description: "Learn how to build, deploy, and manage your first Model Context Protocol server with Hypr MCP."
+publishDate: 2025-01-18
+updateDate: 2025-01-18
 slug: "getting-started-with-mcp-servers"
 author: "Engineering Team"
 image: "/src/assets/blog/getting-started-mcp.svg"

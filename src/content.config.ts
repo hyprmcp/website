@@ -9,7 +9,7 @@ export const collections = {
     schema: docsSchema(),
   }),
   post: defineCollection({
-    loader: glob({pattern: ['*.md', '*.mdx'], base: 'src/data/post'}),
+    loader: glob({pattern: ['*.md', '*.mdx'], base: 'src/content/blog'}),
     schema: ({image}) =>
       z.object({
         title: z.string(),
