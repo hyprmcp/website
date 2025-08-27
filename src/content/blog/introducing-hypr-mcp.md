@@ -1,11 +1,13 @@
 ---
-title: "Introducing Hypr MCP: The Easiest Way to Deploy MCP Servers"
-description: "Hypr MCP is an open-source serverless platform to deploy MCP servers with one command, OAuth2 auth, analytics & browser-based access."
+title: 'Introducing Hypr MCP: The Easiest Way to Deploy MCP Servers'
+description: 'Hypr MCP is an open-source serverless platform to deploy MCP servers with one command, OAuth2 auth, analytics & browser-based access.'
 publishDate: 2025-08-27
 updateDate: 2025-08-27
-slug: "introducting-hypr-mcp"
-author: "Product Team"
-image: "/src/assets/blog/introducing-hypr-mcp.svg"
+slug: 'introducting-hypr-mcp'
+author: 'Product Team'
+image: '/src/assets/blog/introducing-hypr-mcp.svg'
+tags:
+  - b
 ---
 
 We're excited to announce Hypr MCP, an open-source serverless hosting platform designed specifically for Model Context Protocol (MCP) servers.
@@ -73,11 +75,13 @@ That's why we offer a generous free tier that includes:
 Getting started with Hypr MCP is simple:
 
 1. Install the Hypr CLI:
+
    ```bash
    npm install -g @hyprmcp/cli
    ```
 
 2. Initialize your MCP server:
+
    ```bash
    hypr init my-mcp-server
    ```

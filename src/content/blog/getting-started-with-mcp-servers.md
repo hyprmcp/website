@@ -1,11 +1,13 @@
 ---
-title: "Getting Started with MCP Servers: A Complete Guide"
-description: "Learn how to build, deploy, and manage your first Model Context Protocol server with Hypr MCP."
+title: 'Getting Started with MCP Servers: A Complete Guide'
+description: 'Learn how to build, deploy, and manage your first Model Context Protocol server with Hypr MCP.'
 publishDate: 2025-01-18
 updateDate: 2025-01-18
-slug: "getting-started-with-mcp-servers"
-author: "Engineering Team"
-image: "/src/assets/blog/getting-started-mcp.svg"
+slug: 'getting-started-with-mcp-servers'
+author: 'Engineering Team'
+image: '/src/assets/blog/getting-started-mcp.svg'
+tags:
+  - a
 ---
 
 Model Context Protocol (MCP) servers are revolutionizing how AI agents interact with external tools and data.
@@ -48,6 +50,7 @@ cd weather-mcp
 ```
 
 This creates a basic MCP server structure with:
+
 - `server.js` - Main server logic
 - `tools.json` - Tool definitions
 - `hypr.config.json` - Deployment configuration
@@ -87,22 +90,22 @@ Edit `tools.json` to define what tools your MCP server exposes:
 Update `server.js` with your tool implementation:
 
 ```javascript
-import { MCPServer } from '@hyprmcp/sdk';
+import {MCPServer} from '@hyprmcp/sdk';
 
 const server = new MCPServer({
   name: 'weather-mcp',
-  version: '1.0.0'
+  version: '1.0.0',
 });
 
-server.tool('getWeather', async ({ location, units = 'celsius' }) => {
+server.tool('getWeather', async ({location, units = 'celsius'}) => {
   // Your weather API logic here
   const weatherData = await fetchWeatherAPI(location);
-  
+
   return {
     location,
     temperature: convertUnits(weatherData.temp, units),
     conditions: weatherData.conditions,
-    humidity: weatherData.humidity
+    humidity: weatherData.humidity,
   };
 });
 
@@ -147,11 +150,13 @@ hypr deploy
 ```
 
 You'll receive:
+
 - A unique URL for your MCP server
 - OAuth2 client credentials
 - Analytics dashboard access
 
 Example output:
+
 ```
 🚀 Deployment successful!
 Server URL: https://weather-mcp.hyprmcp.com
@@ -170,18 +175,18 @@ Dashboard: https://dashboard.hyprmcp.com/weather-mcp
 ### Using with Custom Applications
 
 ```javascript
-import { MCPClient } from '@hyprmcp/client';
+import {MCPClient} from '@hyprmcp/client';
 
 const client = new MCPClient({
   serverUrl: 'https://weather-mcp.hyprmcp.com',
   auth: {
     clientId: 'your-client-id',
-    clientSecret: 'your-client-secret'
-  }
+    clientSecret: 'your-client-secret',
+  },
 });
 
 const weather = await client.call('getWeather', {
-  location: 'Tokyo'
+  location: 'Tokyo',
 });
 ```
 
@@ -192,15 +197,15 @@ const weather = await client.call('getWeather', {
 Always implement robust error handling:
 
 ```javascript
-server.tool('getWeather', async (params) => {
+server.tool('getWeather', async params => {
   try {
     const data = await fetchWeatherAPI(params.location);
-    return { success: true, data };
+    return {success: true, data};
   } catch (error) {
-    return { 
-      success: false, 
+    return {
+      success: false,
       error: error.message,
-      retryable: error.code === 'RATE_LIMIT'
+      retryable: error.code === 'RATE_LIMIT',
     };
   }
 });
@@ -225,6 +230,7 @@ Protect your resources with built-in rate limiting:
 ### 3. Monitoring
 
 Use the analytics dashboard to monitor:
+
 - Tool call frequency
 - Error rates
 - Response times
@@ -259,11 +265,11 @@ hypr domain add weather.yourcompany.com
 Set up webhooks for real-time notifications:
 
 ```javascript
-server.on('toolCall', async (event) => {
+server.on('toolCall', async event => {
   await notifyWebhook({
     tool: event.toolName,
     user: event.userId,
-    timestamp: event.timestamp
+    timestamp: event.timestamp,
   });
 });
 ```
@@ -273,16 +279,19 @@ server.on('toolCall', async (event) => {
 ### Common Issues
 
 **Authentication Errors**
+
 - Verify OAuth2 credentials
 - Check allowed domains configuration
 - Ensure user has proper permissions
 
 **Tool Not Found**
+
 - Verify tool name in tools.json
 - Check server deployment status
 - Clear client cache
 
 **Rate Limit Exceeded**
+
 - Review rate limit configuration
 - Implement exponential backoff
 - Consider upgrading your plan

@@ -1,11 +1,19 @@
-import {type CollectionEntry} from 'astro:content';
+import type {RenderedContent} from 'astro:content';
 
-export interface Post extends CollectionEntry<'post'> {
+export interface Post {
+  id: string;
+  data: PostData;
+  body: string;
+  rendered: RenderedContent;
+}
+
+export interface PostData {
   title: string;
   description: string;
-  publishDate: string;
-  updateDate: string;
+  publishDate: Date;
+  updateDate: Date;
   slug: string;
   author: string;
   image: ImageMetadata;
+  tags: string[];
 }

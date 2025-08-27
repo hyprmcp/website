@@ -2,12 +2,9 @@
 import Layout from '~/layouts/BlogLayout.astro';
 import Headline from '~/components/blog/Headline.astro';
 import Grid from '~/components/blog/Grid.astro';
-import {fetchPosts} from '../../utils/blog';
+import {getSortedPosts} from '../../utils/blog';
 
-const posts = await fetchPosts();
-const sortedPosts = posts.sort(
-  (a, b) => b.publishDate.valueOf() - a.publishDate.valueOf(),
-);
+const posts = await getSortedPosts();
 ---
 
 <Layout title="Blog" description="Latest blog posts and updates from Hypr MCP">
@@ -17,6 +14,6 @@ const sortedPosts = posts.sort(
       subtitle="Latest updates, tutorials, and insights about MCP servers and serverless hosting"
     />
 
-    <Grid posts={sortedPosts} />
+    <Grid posts={posts} />
   </div>
 </Layout>

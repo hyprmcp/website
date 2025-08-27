@@ -8,7 +8,7 @@ export const collections = {
     loader: docsLoader(),
     schema: docsSchema(),
   }),
-  post: defineCollection({
+  blog: defineCollection({
     loader: glob({pattern: ['*.md', '*.mdx'], base: 'src/content/blog'}),
     schema: ({image}) =>
       z.object({
@@ -19,6 +19,7 @@ export const collections = {
         slug: z.string(),
         author: z.string(),
         image: image().optional(),
+        tags: z.array(z.string()),
       }),
   }),
 };

@@ -1,51 +1,29 @@
-import type {CollectionEntry} from 'astro:content';
-import {getCollection, render} from 'astro:content';
-import type {Post} from '~/types.ts';
-
-const getNormalizedPost = async (
-  post: CollectionEntry<'post'>,
-): Promise<Post> => {
-  const {id, slug, collection, data, body} = post;
-  const {Content, remarkPluginFrontmatter} = await render(post);
-
-  return {
-    id,
-    slug,
-    collection,
-    data,
-    body,
-    slug,
-    readingTime: remarkPluginFrontmatter?.readingTime,
-    publishDate: data.publishDate,
-    title: data.title,
-    excerpt: data.excerpt,
-    image: data.image,
-    category: data.category,
-    tags: data.tags,
-    author: data.author,
-  };
-};
+import {getCollection, type RenderedContent} from 'astro:content';
+import type {Post, PostData} from '~/types.ts';
 
 const load = async function (): Promise<Array<Post>> {
-  const posts = await getCollection('post');
-  const normalizedPosts = posts.map(
-    async post => await getNormalizedPost(post),
-  );
-
-  const results = (await Promise.all(normalizedPosts))
+  return (await getCollection('blog'))
+    .map(
+      post =>
+        ({
+          data: post.data as PostData,
+          rendered: post.rendered! as RenderedContent,
+        }) as Post,
+    )
     .sort((a, b) => {
-      const dateA = a.publishDate ? new Date(a.publishDate).valueOf() : 0;
-      const dateB = b.publishDate ? new Date(b.publishDate).valueOf() : 0;
+      const dateA = a.data.publishDate
+        ? new Date(a.data.publishDate).valueOf()
+        : 0;
+      const dateB = b.data.publishDate
+        ? new Date(b.data.publishDate).valueOf()
+        : 0;
       return dateB - dateA;
-    })
-    .filter(post => !post.data.draft);
-
-  return results;
+    });
 };
 
 let _posts: Array<Post>;
 
-export const fetchPosts = async (): Promise<Array<Post>> => {
+export const getSortedPosts = async (): Promise<Array<Post>> => {
   if (!_posts) {
     _posts = await load();
   }
@@ -53,11 +31,17 @@ export const fetchPosts = async (): Promise<Array<Post>> => {
   return _posts;
 };
 
+export const getPostBySlug = async (
+  slug: string,
+): Promise<Post | undefined> => {
+  return (await getSortedPosts()).find(p => slug === p.data.slug);
+};
+
 export const getRelatedPosts = async (
   originalPost: Post,
   maxResults: number = 4,
 ): Promise<Array<Post>> => {
-  const allPosts = await fetchPosts();
+  const allPosts = await getSortedPosts();
   const originalTags = originalPost.tags || [];
 
   if (originalTags.length === 0) {
