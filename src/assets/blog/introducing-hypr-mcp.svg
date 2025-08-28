@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Gradient background -->
+  <defs>
+    <linearGradient id="bg-gradient-intro" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="grid-intro" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.5" opacity="0.1"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg-gradient-intro)"/>
+  <rect width="1200" height="630" fill="url(#grid-intro)"/>
+  
+  <!-- Cloud shapes -->
+  <ellipse cx="150" cy="100" rx="80" ry="40" fill="white" opacity="0.1"/>
+  <ellipse cx="200" cy="110" rx="100" ry="45" fill="white" opacity="0.08"/>
+  <ellipse cx="1000" cy="500" rx="120" ry="50" fill="white" opacity="0.07"/>
+  <ellipse cx="950" cy="480" rx="90" ry="40" fill="white" opacity="0.09"/>
+  
+  <!-- Server icon representation -->
+  <g transform="translate(500, 200)">
+    <rect x="0" y="0" width="200" height="40" rx="5" fill="white" opacity="0.9"/>
+    <rect x="0" y="50" width="200" height="40" rx="5" fill="white" opacity="0.9"/>
+    <rect x="0" y="100" width="200" height="40" rx="5" fill="white" opacity="0.9"/>
+    <circle cx="170" cy="20" r="5" fill="#667eea"/>
+    <circle cx="170" cy="70" r="5" fill="#764ba2"/>
+    <circle cx="170" cy="120" r="5" fill="#667eea"/>
+  </g>
+  
+  <!-- MCP Text -->
+  <text x="600" y="420" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="bold" text-anchor="middle" fill="white" opacity="0.9">
+    Hypr MCP
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="470" font-family="system-ui, -apple-system, sans-serif" font-size="24" text-anchor="middle" fill="white" opacity="0.7">
+    Serverless MCP Hosting Platform
+  </text>
+  
+  <!-- Decorative elements -->
+  <circle cx="100" cy="500" r="3" fill="white" opacity="0.5"/>
+  <circle cx="120" cy="510" r="2" fill="white" opacity="0.4"/>
+  <circle cx="140" cy="495" r="2.5" fill="white" opacity="0.45"/>
+  
+  <circle cx="1100" cy="150" r="3" fill="white" opacity="0.5"/>
+  <circle cx="1080" cy="160" r="2" fill="white" opacity="0.4"/>
+  <circle cx="1060" cy="145" r="2.5" fill="white" opacity="0.45"/>
+</svg>
