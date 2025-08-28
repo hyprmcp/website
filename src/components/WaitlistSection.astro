@@ -595,12 +595,21 @@ import {Icon} from '@astrojs/starlight/components';
                   type="checkbox"
                   name="discovery"
                   value="other"
+                  id="discoveryOther"
                   class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
                 />
                 <span class="ml-3 text-sm text-gray-900 dark:text-white"
                   >Other</span
                 >
               </label>
+              <div id="discoveryOtherInput" class="hidden">
+                <input
+                  type="text"
+                  name="discoveryOtherText"
+                  placeholder="Please specify..."
+                  class="mt-2 block w-full rounded-md border-0 py-3 px-4 bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                />
+              </div>
             </div>
 
             <div class="pt-4">
@@ -752,9 +761,10 @@ import {Icon} from '@astrojs/starlight/components';
           </div>
         </div>
 
+        <!-- Waitlist promises -->
         <div class="mt-8 pt-6 border-t border-gray-200 dark:border-slate-700">
           <div
-            class="flex items-center justify-center space-x-8 text-sm text-gray-500 dark:text-gray-400">
+            class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 text-sm text-gray-500 dark:text-gray-400">
             <div class="flex items-center">
               <Icon name="approve-check" class="mr-2 h-4 w-4 text-green-600" />
               No spam, ever
@@ -782,13 +792,29 @@ import {Icon} from '@astrojs/starlight/components';
     notes: string;
   }
 
-  // Declare posthog as a global variable
+  // Declare posthog and dataLayer as global variables
   declare global {
     interface Window {
       posthog: any;
+      dataLayer: any[];
     }
   }
   const posthog = (window as any).posthog;
+  const dataLayer = (window as any).dataLayer || [];
+  (window as any).dataLayer = dataLayer;
+
+  // Helper function to send events to both PostHog and GTM
+  function trackEvent(eventName: string, properties: any = {}) {
+    // Send to PostHog
+    if (posthog && typeof posthog.capture === 'function') {
+      posthog.capture(eventName, properties);
+    }
+
+    // Send to Google Tag Manager
+    dataLayer.push({
+      event: eventName,
+    });
+  }
 
   // Store user data across steps
   let userData: any = {};
@@ -1015,17 +1041,17 @@ import {Icon} from '@astrojs/starlight/components';
           use_cases: selectedUseCases,
           notes: data.notes,
         });
-
-        // Capture step 1 completion event
-        posthog.capture('waitlist_form_step_1_completed', {
-          $set: {
-            name: data.name,
-            email: data.email,
-            use_cases: selectedUseCases,
-            notes: data.notes,
-          },
-        });
       }
+
+      // Track step 1 completion event in both PostHog and GTM
+      trackEvent('generate_lead', {
+        $set: {
+          name: data.name,
+          email: data.email,
+          use_cases: selectedUseCases,
+          notes: data.notes,
+        },
+      });
 
       // Show loading state
       setLoadingState(true);
@@ -1084,18 +1110,46 @@ import {Icon} from '@astrojs/starlight/components';
           return;
         }
 
-        // Capture step 2 completion event in PostHog
-        if (posthog && typeof posthog.capture === 'function') {
-          posthog.capture('waitlist_form_step_2_completed', {
-            $set: stepData,
-          });
-        }
+        // Track step 2 completion event in both PostHog and GTM
+        trackEvent('generate_lead_additional_info_2_completed', {
+          $set: stepData,
+        });
 
         // Send telemetry
         await sendTelemetry(stepData);
 
         // Move to step 3
         showStep(3);
+      });
+    }
+
+    // Handle "Other" checkbox toggle
+    const discoveryOtherCheckbox = document.getElementById(
+      'discoveryOther',
+    ) as HTMLInputElement;
+    const discoveryOtherInput = document.getElementById(
+      'discoveryOtherInput',
+    ) as HTMLDivElement;
+
+    if (discoveryOtherCheckbox && discoveryOtherInput) {
+      discoveryOtherCheckbox.addEventListener('change', () => {
+        if (discoveryOtherCheckbox.checked) {
+          discoveryOtherInput.classList.remove('hidden');
+          const textInput = discoveryOtherInput.querySelector(
+            'input',
+          ) as HTMLInputElement;
+          if (textInput) {
+            textInput.focus();
+          }
+        } else {
+          discoveryOtherInput.classList.add('hidden');
+          const textInput = discoveryOtherInput.querySelector(
+            'input',
+          ) as HTMLInputElement;
+          if (textInput) {
+            textInput.value = '';
+          }
+        }
       });
     }
 
@@ -1109,9 +1163,22 @@ import {Icon} from '@astrojs/starlight/components';
         ) as NodeListOf<HTMLInputElement>;
         const discovery = Array.from(discoveryBoxes).map(cb => cb.value);
 
-        const stepData = {
+        // Get the "Other" text if Other is selected
+        const otherText =
+          (
+            discoveryForm.querySelector(
+              'input[name="discoveryOtherText"]',
+            ) as HTMLInputElement
+          )?.value || '';
+
+        const stepData: any = {
           discovery: discovery,
         };
+
+        // Include other text if "Other" is selected and text is provided
+        if (discovery.includes('other') && otherText.trim()) {
+          stepData.discoveryOtherText = otherText.trim();
+        }
 
         // Validate
         if (discovery.length === 0) {
@@ -1119,12 +1186,16 @@ import {Icon} from '@astrojs/starlight/components';
           return;
         }
 
-        // Capture step 3 completion event in PostHog
-        if (posthog && typeof posthog.capture === 'function') {
-          posthog.capture('waitlist_form_step_3_completed', {
-            $set: stepData,
-          });
+        // Validate that if "Other" is selected, the text field is filled
+        if (discovery.includes('other') && !otherText.trim()) {
+          showError('Please specify what "Other" refers to.');
+          return;
         }
+
+        // Track step 3 completion event in both PostHog and GTM
+        trackEvent('generate_lead_additional_info_3_completed', {
+          $set: stepData,
+        });
 
         // Send telemetry
         await sendTelemetry(stepData);
@@ -1150,12 +1221,10 @@ import {Icon} from '@astrojs/starlight/components';
           return;
         }
 
-        // Capture step 4 completion event in PostHog
-        if (posthog && typeof posthog.capture === 'function') {
-          posthog.capture('waitlist_form_step_4_completed', {
-            $set: stepData,
-          });
-        }
+        // Track step 4 completion event in both PostHog and GTM
+        trackEvent('generate_lead_additional_info_4_completed', {
+          $set: stepData,
+        });
 
         // Send telemetry
         await sendTelemetry(stepData);
