@@ -99,27 +99,31 @@ const colorClasses = {
       {
         features.map(feature => (
           <div class="relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-8">
-            <div
-              class={`inline-flex p-3 rounded-lg ${colorClasses[feature.color as keyof typeof colorClasses]}`}>
-              <svg
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d={feature.icon}
-                />
-              </svg>
+            <div class="flex items-start sm:block">
+              <div
+                class={`inline-flex p-3 rounded-lg flex-shrink-0 ${colorClasses[feature.color as keyof typeof colorClasses]}`}>
+                <svg
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d={feature.icon}
+                  />
+                </svg>
+              </div>
+              <div class="ml-4 sm:ml-0">
+                <h3 class="sm:mt-6 text-lg font-semibold text-gray-900 dark:text-white">
+                  {feature.title}
+                </h3>
+                <p class="mt-2 text-gray-600 dark:text-gray-400">
+                  {feature.description}
+                </p>
+              </div>
             </div>
-            <h3 class="mt-6 text-lg font-semibold text-gray-900 dark:text-white">
-              {feature.title}
-            </h3>
-            <p class="mt-2 text-gray-600 dark:text-gray-400">
-              {feature.description}
-            </p>
           </div>
         ))
       }
