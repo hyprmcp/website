@@ -67,7 +67,7 @@ export default defineConfig({
         {
           icon: 'github',
           label: 'GitHub',
-          href: 'https://github.com/hyprmcp/hyprmcp',
+          href: 'https://github.com/hyprmcp/mcp-gateway',
         },
         {
           icon: 'discord',
