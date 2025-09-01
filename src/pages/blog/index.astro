@@ -1,19 +1,26 @@
 ---
-import Layout from '~/layouts/BlogLayout.astro';
-import Headline from '~/components/blog/Headline.astro';
+import Layout from '~/layouts/StarlightLayout.astro';
 import Grid from '~/components/blog/Grid.astro';
 import {getSortedPosts} from '../../utils/blog';
 
 const posts = await getSortedPosts();
+const title = 'Blog';
+const subtitle =
+  'Latest updates, tutorials, and insights about MCP servers and serverless hosting';
 ---
 
-<Layout title="Blog" description="Latest blog posts and updates from Hypr MCP">
-  <div class="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
-    <Headline
-      title="Blog"
-      subtitle="Latest updates, tutorials, and insights about MCP servers and serverless hosting"
-    />
-
+<Layout frontmatter={{title, description: subtitle, hasSidebar: false}}>
+  <div class="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 my-16">
+    <div class="mb-12 text-center">
+      <h1
+        class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl md:text-6xl mb-4">
+        {title}
+      </h1>
+      <h2
+        class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+        {subtitle}
+      </h2>
+    </div>
     <Grid posts={posts} />
   </div>
 </Layout>

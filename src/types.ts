@@ -1,19 +1,7 @@
 import type {RenderedContent} from 'astro:content';
+import type {BlogPostConfig} from '~/content.config.ts';
 
 export interface Post {
-  id: string;
-  data: PostData;
-  body: string;
+  data: BlogPostConfig;
   rendered: RenderedContent;
-}
-
-export interface PostData {
-  title: string;
-  description: string;
-  publishDate: Date;
-  updateDate: Date;
-  slug: string;
-  author: string;
-  image: ImageMetadata;
-  tags: string[];
 }

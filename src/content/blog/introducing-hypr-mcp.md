@@ -2,9 +2,14 @@
 title: 'Introducing Hypr MCP: The Easiest Way to Deploy MCP Servers'
 description: 'Hypr MCP is an open-source serverless platform to deploy MCP servers with one command, OAuth2 auth, analytics & browser-based access.'
 publishDate: 2025-08-27
-updateDate: 2025-08-27
+lastUpdated: 2025-08-27
 slug: 'introducting-hypr-mcp'
-author: 'Product Team'
+authors:
+  - name: 'Philip Miglinci'
+    role: 'Co-founder'
+    image: '/src/assets/blog/getting-started-mcp.svg'
+    linkedIn: https://www.linkedin.com/in/pmigat/
+    gitHub: https://github.com/pmig/
 image: '/src/assets/blog/introducing-hypr-mcp.svg'
 tags:
   - b

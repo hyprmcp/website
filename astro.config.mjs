@@ -6,6 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 import {defineConfig} from 'astro/config';
 import rehypeMermaid from 'rehype-mermaid';
 import starlightLinksValidator from 'starlight-links-validator';
+import {remarkReadingTime} from './src/utils/remark-reading-time.mjs';
 
 import partytown from '@astrojs/partytown';
 
@@ -149,6 +150,7 @@ export default defineConfig({
       excludeLangs: ['mermaid', 'math'],
     },
     rehypePlugins: [rehypeMermaid],
+    remarkPlugins: [remarkReadingTime],
   },
   vite: {
     plugins: [tailwindcss()],
