@@ -22,8 +22,8 @@ export default defineConfig({
       description:
         'Serverless hosting and analytics provider for remote, authenticated streamable HTTP MCP server',
       logo: {
-        light: './src/assets/hyprmcp-black.svg',
-        dark: './src/assets/hyprmcp-white.svg',
+        light: './src/assets/hm.svg',
+        dark: './src/assets/hm.svg',
         replacesTitle: true,
       },
       customCss: ['./src/styles/global.css'],

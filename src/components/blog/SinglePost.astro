@@ -41,7 +41,7 @@ const formatDate = (date: Date) => {
       </h1>
 
       <!-- Authors -->
-      <div class="flex flex-col justify-center items-center gap-2 mt-8 mb-16">
+      <div class="flex flex-col justify-center items-center gap-2 mt-8 sm:mb-16 mb-8">
         {
           post.data.authors.map(author => (
             <div class="flex items-center gap-3 mt-0">
@@ -85,14 +85,14 @@ const formatDate = (date: Date) => {
 
       <!-- Description -->
       <p
-        class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-16 leading-relaxed max-w-3xl mx-auto">
+        class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 sm:mb-16 mb-8 leading-relaxed max-w-3xl mx-auto">
         {post.data.description}
       </p>
 
       <!-- Meta information row -->
       <div
-        class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400 pb-8 border-b border-gray-200 dark:border-gray-800 max-w-3xl mx-auto">
-        <!-- Reading time and copy button (left aligned) -->
+        class="flex flex-col sm:flex-row sm:justify-between sm:items-center text-sm text-gray-600 dark:text-gray-400 pb-8 border-b border-gray-200 dark:border-gray-800 max-w-3xl mx-auto">
+        <!-- Reading time and copy button -->
         <div class="flex items-center gap-3">
           <span class="flex items-center gap-1">
             <Icon name="seti:clock" class="w-4 h-4 mr-1" />
@@ -118,8 +118,8 @@ const formatDate = (date: Date) => {
           </a>
         </div>
 
-        <!-- Date (right aligned) -->
-        <time datetime={post.data.publishDate.toISOString()} class="mt-0">
+        <!-- Date -->
+        <time datetime={post.data.publishDate.toISOString()} class="mt-2 sm:mt-0 self-start">
           {formatDate(post.data.publishDate)}
         </time>
       </div>
