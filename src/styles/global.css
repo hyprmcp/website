@@ -43,6 +43,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .anchor-link {
   text-decoration: none;
   margin-left: -24px;
@@ -53,5 +57,3 @@
 .anchor-link:hover {
   opacity: 0.75;
 }
-
-

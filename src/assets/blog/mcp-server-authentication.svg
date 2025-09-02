@@ -88,19 +88,10 @@
     </g>
   </g>
   
-  <!-- Title with glitch effect -->
-  <g>
-    <!-- Glitch layers -->
-    <text x="600" y="420" font-family="monospace" font-size="56" font-weight="bold" text-anchor="middle" fill="#ff00ff" opacity="0.5" transform="translate(-2, 2)">
-      OAuth for MCP Servers
-    </text>
-    <text x="600" y="420" font-family="monospace" font-size="56" font-weight="bold" text-anchor="middle" fill="#00ffff" opacity="0.5" transform="translate(2, -2)">
-      OAuth for MCP Servers
-    </text>
-    <text x="600" y="420" font-family="monospace" font-size="56" font-weight="bold" text-anchor="middle" fill="white">
-      OAuth for MCP Servers
-    </text>
-  </g>
+  <!-- Title -->
+  <text x="600" y="420" font-family="monospace" font-size="56" font-weight="bold" text-anchor="middle" fill="white">
+    OAuth for MCP Servers
+  </text>
   
   <!-- Subtitle -->
   <text x="600" y="470" font-family="monospace" font-size="20" text-anchor="middle" fill="#00ffff" opacity="0.8" filter="url(#neon-glow)">

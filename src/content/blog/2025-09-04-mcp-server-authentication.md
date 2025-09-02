@@ -17,6 +17,8 @@ tags:
   - mcp-gateway
 ---
 
+I am Jakob, an Engineer at Hypr MCP, where we help companies connect their internal applications to LLM-based workflows with the power of MCP servers.
+[Join our waitlist](/waitlist) or [book a demo](https://cal.glasskube.com/team/hyprmcp/demo) to learn more.
 In this blog post, I want to show you how and why we built an MCP Server Gateway that acts as a reverse proxy for one or more upstream MCP servers while adding support for the authorization framework provided by the MCP specification.
 
 ## Introduction
@@ -27,7 +29,10 @@ One of the most anticipated additions to the specification, which was added in M
 The MCP authorization framework is built on top of the well-established OAuth2 authorization standard, specifically the currently in-progress draft version 2.1, additionally requiring identity providers (IdPs) to implement the Authorization Server Metadata (ASM) and Dynamic Client Registration (DCR) optional extensions.
 In June 2025, the specification was further revised to also require MCP servers to act as OAuth2 compatible Protected Resource Servers (PRS), another optional extension.
 
-In a nutshell, the protocol requires the client to first discover the authorization server URI by querying the PRS endpoint and the DCR and authorization endpoints by querying the authorization server's ASM endpoint. It must then an OAuth2 client using the DCR protocol and use that client to perform a regular OAuth2 authorization flow.
+In a nutshell, the protocol requires the client to first discover the authorization server URI by querying the PRS endpoint and the DCR and authorization endpoints by querying the authorization server's ASM endpoint.
+It must then create an OAuth2 client using the DCR protocol and use that client to perform a regular OAuth2 authorization flow.
+
+### Comparing authentication providers for MCP servers
 
 This is a well-thought-through authorization framework, as, theoretically, it does not require implementers to add anything that is not part of the OAuth2 specification, while also allowing to authorize MCP clients without any OAuth2 client configuration.
 In practice though, we discovered that actually implementing this framework is not as straight-forward as it might seem at first glance, for several reasons:
@@ -35,14 +40,21 @@ In practice though, we discovered that actually implementing this framework is n
 1. Most existing authorization infrastructure is built on Open ID Connect (OIDC), rather than OAuth2.
    In a lot of cases, this does not matter, since OIDC is itself an extension of OAuth2.
    However, the MCP authorization framework requires the aforementioned ASM extension which OIDC includes in a slightly incompatible way.
-   In principle, an IdP can implement both OAuth2 and OIDC ASM, but most we found do not
+   In principle, an IdP can implement both OAuth2 and OIDC ASM, but most we found do not.
 2. There have not been many legitimate use-cases for DCR before the advent of the MCP.
    Therefore, support for it among IdP software is very sparse.
 
 An honorable mention at this point is deserved by Keycloak, which does implement both the ASM and DCR extensions, however it does not allow configuration of CORS headers for the DCR endpoint which makes it incompatible with most web-based MCP client software.
 Dex used to have partial support for OIDC DCR, but from what we could gather, it was never possible to enable it via configuration and has since been dropped completely.
 
-After discovering these issues, we made it our goal to build an easy to use component that would help MCP server implementers by providing everything explained in the rest of this blog post in a ready-to-use package.
+| Project          | GitHub Url                                                                | Authorization Server Metadata (ASM) support | Dynamic Client Registration (DCR) support | Cross-Origin Resource Sharing (CORS) support |
+| ---------------- | ------------------------------------------------------------------------- | ------------------------------------------- | ----------------------------------------- | -------------------------------------------- |
+| Dex              | [dexidp/dex](https://github.com/dexidp/dex)                               | ⚠️ (Only compatible with OIDC)              | ❌ (Only via gRPC API)                    | ❌ (no)                                      |
+| OAuth2-Proxy     | [oauth2-proxy/oauth2-proxy](https://github.com/oauth2-proxy/oauth2-proxy) | ✅ (yes)                                    | ❌ (no)                                   | ❌ (no)                                      |
+| Keycloak         | [keycloak/keycloak](https://github.com/keycloak/keycloak)                 | ✅ (yes)                                    | ✅ (yes)                                  | ❌ (no)                                      |
+| Hypr MCP Gateway | [hyprmcp/mcp-gateway](https://github.com/hyprmcp/mcp-gateway)             | ✅ (yes)                                    | ✅ (yes)                                  | ✅ (yes)                                     |
+
+After discovering these issues, we made it our goal to build an easy-to-use component that would help MCP server implementers by providing everything explained in the rest of this blog post in a ready-to-use package.
 Check out the https://github.com/hyprmcp/mcp-gateway/ project if you want to learn more.
 
 ## Implementation
@@ -52,31 +64,31 @@ Dex is a flexible OIDC provider that, while not natively supporting all the requ
 
 For code examples in this blog post, we will use Go, which provides excellent built-in support for HTTP proxying and comes with a mature ecosystem of OAuth2 and JWT-related libraries.
 Please note that these code examples are designed for the purpose of education.
-As such, they do not include error handling and io closing in order to not distract from the essential concepts that they convey.
-Furthermore they do not contain rate-limiting, graceful shutdown, or any other requirements for a robust production system.
+As such, they do not include error handling and I/O closing in order to not distract from the essential concepts that they convey.
+Furthermore, they do not contain rate-limiting, graceful shutdown, or any other requirements for a robust production system.
 To keep things simple, we will use Dex with in-memory storage and static password authentication. The complete Dex configuration looks like this:
 
 ```yaml
 issuer: http://localhost:5556
 web:
   http: 0.0.0.0:5556
-  allowedOrigins: [ "*" ]
+  allowedOrigins: ['*']
 grpc:
   addr: 0.0.0.0:5557
 storage:
   type: memory
 enablePasswordDB: true
 staticPasswords:
-  - email: "admin@example.com"
+  - email: 'admin@example.com'
     # bcrypt hash of the string "password" for user admin: $(echo password | htpasswd -BinC 10 admin | cut -d: -f2)
-    hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
-    username: "admin"
-    userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
+    hash: '$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W'
+    username: 'admin'
+    userID: '08a8684b-db88-4b73-90a9-3cd1661f5466'
 ```
 
 ### Basic Reverse Proxy
 
-Before adding any authentication related features, it is necessary to get the basic reverse proxy part of the gateway working.
+Before adding any authentication-related features, it is necessary to get the basic reverse proxy part of the gateway working.
 Fortunately, the Go standard library comes with the `httputil.ReverseProxy` that does exactly what we need:
 
 ```go
@@ -100,7 +112,7 @@ mux.Handle("/myserver/mcp", proxy)
 http.ListenAndServe(":9000", mux)
 ```
 
-With this setup, it will be straight forward to build a gateway for basically as many upstream MCP servers as you want.
+With this setup, it will be straightforward to build a gateway for basically as many upstream MCP servers as you want.
 Also, the `httputil.ReverseProxy` is very flexible and has support for specifying your own `http.RoundTripper` to use for transport.
 
 When using the mcp-gateway you can add proxy servers by adding them in your config file:
@@ -116,7 +128,7 @@ proxy:
 
 While not strictly required by the MCP specification, most web-based MCP clients require that CORS preflight checks succeed for our endpoints.
 I recommend using the `github.com/go-chi/cors` to handle this.
-To keep thinks simple for now, you can simply wrap your proxy with the `cors.AllowAll()` utility:
+To keep things simple for now, you can simply wrap your proxy with the `cors.AllowAll()` utility:
 
 ```go
 http.ListenAndServe(":9000", cors.AllowAll().Handler(mux))
@@ -132,7 +144,7 @@ In order to be compliant with the specification we have to do two things:
 
 We can achieve this by building a HTTP middleware.
 In case you are not familiar with the Go `http` package, it is probably worth noting that middlewares don't really exist as an explicit concept.
-The way to do build a middleware in Go is to instead create a function that takes an `http.Handler` as argument and returns a different `http.Handler` that “wraps” the one provided as argument.
+The way to build a middleware in Go is to instead create a function that takes an `http.Handler` as argument and returns a different `http.Handler` that “wraps” the one provided as argument.
 Note that OAuth2 does not dictate the format of access tokens, but since our IdP is actually an OIDC issuer, we can be certain that our access tokens will be JWTs.
 We will use the `github.com/lestrrat-go/jwx` suite of libraries for validating these JWTs:
 
@@ -167,7 +179,7 @@ To enable authentication when using the mcp-gateway, simply add the `authorizati
 authorization:
   server: http://localhost:5556/
 proxy:
-  - path: /weather/mcp
+  - path: /path/mcp
     http:
       url: http://localhost:8000/mcp/
     authentication:
@@ -189,11 +201,11 @@ json.NewEncoder(w).Encode(map[string]any{
 })
 ```
 
-The `authorization_servers` property is not required by the PRS specification, but the MCP specification requires at least one authorization server, so the client can query the authorization server metadata.
+The `authorization_servers` property is not required by the PRS specification, but the MCP specification requires at least one authorization server so the client can query the authorization server metadata.
 
 ### Proxying The IdP's Authorization Server Metadata Endpoint
 
-As I alluded to above, most OIDC compliant IdPs do not implement the OAuth2 ASM extension.
+As I alluded to above, most OIDC-compliant IdPs do not implement the OAuth2 ASM extension.
 However, the OAuth2 ASM specification is actually an adaptation of the OIDC Discovery mechanism.
 As a result, most OIDC issuers do already provide the necessary data, just under a different well-known URI `/.well-known/openid-configuration`.
 Another key insight is that the OAuth2 PRS specification does not pose any restrictions on what the server metadata for the authorization server may contain.
@@ -295,6 +307,21 @@ dexGRPCClient:
   addr: localhost:5557
 ```
 
+## Testing Authentication for MCP Servers
+
+Using the JWT from the request to perform actions as the user is a functionality that MCP servers must implement themselves.
+We also wanted to create an MCP server for end-to-end testing.
+
+In order to do so, we created a simple MCP called "MCP, Who am I?", which we also open-sourced on GitHub: https://github.com/hyprmcp/mcp-who-am-i/
+
+It reports auth information about the current request.
+It parses the Authorization header as a JWT and reports some decoded payload items from the JWT.
+The name is inspired by the whoami coreutils package.
+
+We also created a step-by-step walkthrough on how to use the Hypr MCP Gateway in combination with the "MCP, Who am I?" MCP server.
+
+You can find a [README.md](https://github.com/hyprmcp/mcp-gateway/blob/main/examples/who-am-i/README.md) in the [examples directory](https://github.com/hyprmcp/mcp-gateway/tree/main/examples/who-am-i) of the MCP Gateway.
+
 ## Additional Problems
 
 While building and testing the mcp-gateway, we stumbled upon some issues that I think are worth noting.
@@ -310,14 +337,16 @@ Conversely, the official MCP Inspector tool was not able to authenticate with a 
 ### Client Persistence
 
 The clients created via DCR are stored in Dex's storage mechanism.
-If an ephemeral storage mechanism is used, this means that the clients do no survive a Dex restart.
+If an ephemeral storage mechanism is used, this means that the clients do not survive a Dex restart.
 When that happens or a client becomes invalid for other reasons, trying to authenticate with it will lead to an error response.
-Unfortunately, some client implementations, do not handle this error appropriately, requiring manual user action to reset the client configuration.
+Unfortunately, some client implementations do not handle this error appropriately, requiring manual user action to reset the client configuration.
 In Visual Studio Code, this can be achieved with the `Authentication: Remove Dynamic Authentication Providers` action.
 
 ## Conclusion
 
-In this blog post we demonstrated that it is possible to add authentication to an existing MCP server by proxying through a custom MCP server gateway.
-While lacking support for some OAuth2 extensions required additional implementation effort, we hope that with growing adoption of MCP servers, implemeters of IdP software will step up and implement the parts that are missing.
+In this blog post, we demonstrated that it is possible to add authentication to an existing MCP server by proxying through a custom MCP server gateway.
+While lacking support for some OAuth2 extensions required additional implementation effort, we hope that with growing adoption of MCP servers, implementers of IdP software will step up and implement the parts that are missing.
 
-If you are looking for a battle-tested, batteries-included MCP server gateway check out our `https://github.com/hyprmcp/mcp-gateway`, which implements everything we discussed above, and more.
+If you are looking for a battle-tested, batteries-included MCP server gateway, check out our https://github.com/hyprmcp/mcp-gateway, which implements everything we discussed above, and more.
+
+[Join our waitlist](/waitlist) or [book a demo](https://cal.glasskube.com/team/hyprmcp/demo) to learn more.

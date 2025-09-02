@@ -9,8 +9,8 @@ import starlightLinksValidator from 'starlight-links-validator';
 import {remarkReadingTime} from './src/utils/remark-reading-time.mjs';
 
 import partytown from '@astrojs/partytown';
-import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeSlug from 'rehype-slug';
 
 // https://astro.build/config
 export default defineConfig({
@@ -75,7 +75,7 @@ export default defineConfig({
         {
           icon: 'discord',
           label: 'Discord',
-          href: 'https://discord.gg/6qqBSAWZfW',
+          href: 'https://discord.gg/CgZ775fcsy',
         },
       ],
       sidebar: [
@@ -151,23 +151,26 @@ export default defineConfig({
       type: 'shiki',
       excludeLangs: ['mermaid', 'math'],
     },
-    rehypePlugins: [rehypeMermaid, rehypeSlug,
-    [
-      rehypeAutolinkHeadings,
-      {
-        behavior: 'prepend',
-        content: {
-          type: 'text',
-          value: '# ',
+    rehypePlugins: [
+      rehypeMermaid,
+      rehypeSlug,
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: 'prepend',
+          content: {
+            type: 'text',
+            value: '# ',
+          },
+          headingProperties: {
+            className: ['anchor'],
+          },
+          properties: {
+            className: ['anchor-link'],
+          },
         },
-        headingProperties: {
-          className: ['anchor'],
-        },
-        properties: {
-          className: ['anchor-link'],
-        },
-      },
-    ]],
+      ],
+    ],
     remarkPlugins: [remarkReadingTime],
   },
   vite: {
