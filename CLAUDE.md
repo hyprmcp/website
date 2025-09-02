@@ -2,7 +2,6 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-
 ## Writing Documentation
 
 Documentation is written in MDX format, allowing you to use React components alongside Markdown content.
@@ -18,7 +17,6 @@ When writing page titles and descriptions, follow these SEO best practices:
 - Make titles and descriptions unique for each page
 - Focus on user intent and value proposition
 - Include action words like "Deploy", "Learn", "Get Started"
-
 
 ## Component Overrides
 
