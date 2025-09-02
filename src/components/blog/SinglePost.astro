@@ -41,10 +41,10 @@ const formatDate = (date: Date) => {
       </h1>
 
       <!-- Authors -->
-      <div class="flex flex-col justify-center items-center gap-2 mt-8ŝ mb-16">
+      <div class="flex flex-col justify-center items-center gap-2 mt-8 mb-16">
         {
           post.data.authors.map(author => (
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 mt-0">
               <Image
                 src={author.image}
                 alt={author.name}
@@ -119,7 +119,7 @@ const formatDate = (date: Date) => {
         </div>
 
         <!-- Date (right aligned) -->
-        <time datetime={post.data.publishDate.toISOString()}>
+        <time datetime={post.data.publishDate.toISOString()} class="mt-0">
           {formatDate(post.data.publishDate)}
         </time>
       </div>

@@ -43,7 +43,15 @@
   }
 }
 
-/* https://jhildenbiddle.github.io/css-device-frames/#/?id=customization */
-.app-frame {
-  --bar-height: 33px;
+.anchor-link {
+  text-decoration: none;
+  margin-left: -24px;
+  opacity: 0.25;
+  transition: opacity 0.2s ease;
 }
+
+.anchor-link:hover {
+  opacity: 0.75;
+}
+
+
