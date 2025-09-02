@@ -47,12 +47,12 @@ In practice though, we discovered that actually implementing this framework is n
 An honorable mention at this point is deserved by Keycloak, which does implement both the ASM and DCR extensions, however it does not allow configuration of CORS headers for the DCR endpoint which makes it incompatible with most web-based MCP client software.
 Dex used to have partial support for OIDC DCR, but from what we could gather, it was never possible to enable it via configuration and has since been dropped completely.
 
-| Project          | GitHub Url                                                                | Authorization Server Metadata (ASM) support | Dynamic Client Registration (DCR) support | Cross-Origin Resource Sharing (CORS) support |
-| ---------------- | ------------------------------------------------------------------------- | ------------------------------------------- | ----------------------------------------- | -------------------------------------------- |
-| Dex              | [dexidp/dex](https://github.com/dexidp/dex)                               | ⚠️ (Only compatible with OIDC)              | ❌ (Only via gRPC API)                    | ❌ (no)                                      |
-| OAuth2-Proxy     | [oauth2-proxy/oauth2-proxy](https://github.com/oauth2-proxy/oauth2-proxy) | ✅ (yes)                                    | ❌ (no)                                   | ❌ (no)                                      |
-| Keycloak         | [keycloak/keycloak](https://github.com/keycloak/keycloak)                 | ✅ (yes)                                    | ✅ (yes)                                  | ❌ (no)                                      |
-| Hypr MCP Gateway | [hyprmcp/mcp-gateway](https://github.com/hyprmcp/mcp-gateway)             | ✅ (yes)                                    | ✅ (yes)                                  | ✅ (yes)                                     |
+| Project          | GitHub Url                                                                | Dynamic Client Registration (DCR) support | Authorization Server Metadata (ASM) support | Cross-Origin Resource Sharing (CORS) support |
+| ---------------- | ------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------------- | -------------------------------------------- |
+| Dex              | [dexidp/dex](https://github.com/dexidp/dex)                               | ❌ (Only via gRPC API)                    | ⚠️ (Only compatible with OIDC)              | ❌ (no)                                      |
+| OAuth2-Proxy     | [oauth2-proxy/oauth2-proxy](https://github.com/oauth2-proxy/oauth2-proxy) | ❌ (no)                                   | ✅ (yes)                                    | ❌ (no)                                      |
+| Keycloak         | [keycloak/keycloak](https://github.com/keycloak/keycloak)                 | ✅ (yes)                                  | ✅ (yes)                                    | ❌ (no)                                      |
+| Hypr MCP Gateway | [hyprmcp/mcp-gateway](https://github.com/hyprmcp/mcp-gateway)             | ✅ (yes)                                  | ✅ (yes)                                    | ✅ (yes)                                     |
 
 After discovering these issues, we made it our goal to build an easy-to-use component that would help MCP server implementers by providing everything explained in the rest of this blog post in a ready-to-use package.
 Check out the https://github.com/hyprmcp/mcp-gateway/ project if you want to learn more.
