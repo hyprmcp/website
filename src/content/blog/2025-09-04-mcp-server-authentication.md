@@ -298,6 +298,9 @@ mux.HandleFunc("/oauth/register", func(w http.ResponseWriter, r *http.Request) {
 })
 ```
 
+Note that the `ClientSecret` has the `omitempty` tag set.
+This is necessary because an empty value will otherwise be serialized as an empty string, which confuses some clients.
+
 DCR can be enabled for the mcp-gateway by setting `authorization.dynamicClientRegistration.enabled` to `true`.
 Additionally, you have to specify the `dexGRPCClient.addr` property.
 
