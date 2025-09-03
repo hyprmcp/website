@@ -1,0 +1,32 @@
+# Hypr MCP - Model Context Protocol Server Hosting, Gateway, Analytics & Security
+
+## Purpose
+
+Hypr MCP helps companies deploying and managing Model Context Protocol (MCP) servers.
+
+## Key Features
+
+- **Serverless Architecture**: Deploy MCP servers without managing infrastructure
+- **Authentication & Security**: Built-in authentication system for secure MCP server access
+- **Easy Integration**: Compatible with Claude Desktop and other MCP clients
+- **Scalable**: Automatically scales based on demand
+- **Developer-Friendly**: Simple deployment process and comprehensive documentation
+- **Unified MCP**: Create a unified MCP server that combines multiple tools into a single endpoint
+
+## Resources
+
+- **GitHub Repository**: https://github.com/hyprmcp/mcp-gateway/
+- **MCP Server Authentication Guide**: https://hyprmcp.com/blog/mcp-server-authentication/
+- **Documentation**: https://hyprmcp.com/
+
+
+## Use Cases
+
+- Deploy custom MCP servers for your AI applications
+- Integrate databases, APIs, and tools with AI assistants
+- Build scalable AI workflows with secure authentication
+- Create reusable MCP server templates for common integrations
+
+## Getting Started
+
+Visit our documentation at https://hyprmcp.com/ to learn how to deploy your first MCP server with Hypr MCP.
