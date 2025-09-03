@@ -45,14 +45,17 @@ In practice though, we discovered that actually implementing this framework is n
    Therefore, support for it among IdP software is very sparse.
 
 An honorable mention at this point is deserved by Keycloak, which does implement both the ASM and DCR extensions, however it does not allow configuration of CORS headers for the DCR endpoint which makes it incompatible with most web-based MCP client software.
-Dex used to have partial support for OIDC DCR, but from what we could gather, it was never possible to enable it via configuration and has since been dropped completely.
+Dex used to have partial support for OIDC DCR, but from what we could gather, it was never possible to enable it via configuration and has since been removed entirely.
 
-| Project          | GitHub Url                                                                | Dynamic Client Registration (DCR) support | Authorization Server Metadata (ASM) support | Cross-Origin Resource Sharing (CORS) support |
-| ---------------- | ------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------------- | -------------------------------------------- |
-| Dex              | [dexidp/dex](https://github.com/dexidp/dex)                               | ❌ (Only via gRPC API)                    | ⚠️ (Only compatible with OIDC)              | ❌ (no)                                      |
-| OAuth2-Proxy     | [oauth2-proxy/oauth2-proxy](https://github.com/oauth2-proxy/oauth2-proxy) | ❌ (no)                                   | ✅ (yes)                                    | ❌ (no)                                      |
-| Keycloak         | [keycloak/keycloak](https://github.com/keycloak/keycloak)                 | ✅ (yes)                                  | ✅ (yes)                                    | ❌ (no)                                      |
-| Hypr MCP Gateway | [hyprmcp/mcp-gateway](https://github.com/hyprmcp/mcp-gateway)             | ✅ (yes)                                  | ✅ (yes)                                    | ✅ (yes)                                     |
+We also looked at OAuth2-Proxy as a general inspiration, but it would have required too much additional plumbing to make it work.
+Since OAuth2-Proxy is not an IdP, we wouldn't expect it to support DCR, ASM, or CORS anyway.
+
+| Project          | GitHub Url                                                                | Dynamic Client Registration (DCR) support | Authorization Server Metadata (ASM) support | Cross-Origin Resource Sharing (CORS) support                          |
+| ---------------- | ------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------------- | --------------------------------------------------------------------- |
+| OAuth2-Proxy     | [oauth2-proxy/oauth2-proxy](https://github.com/oauth2-proxy/oauth2-proxy) | ❌ (no)                                   | ❌ (no)                                     | ❌ (no)                                                               |
+| Dex              | [dexidp/dex](https://github.com/dexidp/dex)                               | ❌ (Only via gRPC API)                    | ⚠️ (Only compatible with OIDC)              | ❌ (no)                                                               |
+| Keycloak         | [keycloak/keycloak](https://github.com/keycloak/keycloak)                 | ✅ (yes)                                  | ✅ (yes)                                    | ⚠️ ([Not for DCR](https://github.com/keycloak/keycloak/issues/39629)) |
+| Hypr MCP Gateway | [hyprmcp/mcp-gateway](https://github.com/hyprmcp/mcp-gateway)             | ✅ (yes)                                  | ✅ (yes)                                    | ✅ (yes)                                                              |
 
 After discovering these issues, we made it our goal to build an easy-to-use component that would help MCP server implementers by providing everything explained in the rest of this blog post in a ready-to-use package.
 Check out the https://github.com/hyprmcp/mcp-gateway/ project if you want to learn more.
