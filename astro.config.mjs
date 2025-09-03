@@ -174,6 +174,9 @@ export default defineConfig({
     ],
     remarkPlugins: [remarkReadingTime],
   },
+  prefetch: {
+    prefetchAll: true,
+  },
   vite: {
     plugins: [tailwindcss()],
   },
