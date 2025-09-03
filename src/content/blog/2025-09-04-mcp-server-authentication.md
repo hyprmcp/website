@@ -313,8 +313,8 @@ dexGRPCClient:
 
 ### Injecting Required Scopes In The Authorization Request
 
-Some clients, for example, Claude Code, do not set any scopes when sending the authorization request. 
-While this is not generally a problem, it can cause issues if your IdP is particularly strict about following the OIDC specification, which requires the `openid` scope to be present. 
+Some clients, for example, Claude Code, do not set any scopes when sending the authorization request.
+While this is not generally a problem, it can cause issues if your IdP is particularly strict about following the OIDC specification, which requires the `openid` scope to be present.
 To prevent this, we can create a custom authorization endpoint that redirects the request to the authorization endpoint with the required scopes injected.
 
 ```go
