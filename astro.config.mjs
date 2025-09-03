@@ -97,9 +97,9 @@ export default defineConfig({
           items: [
             {label: 'Home', link: '/'},
             {label: 'Pricing', link: '/pricing/'},
-            {label: 'Docs', link: '/docs/getting-started/'},
+            // {label: 'Docs', link: '/docs/getting-started/'},
             {label: 'Blog', link: '/blog/'},
-            {label: 'MCP Analytics', link: '/mcp-analytics/'},
+            {label: 'Analytics', link: '/mcp-analytics/'},
           ],
         },
       ],
