@@ -257,8 +257,8 @@ dexClient := api.NewDexClient(grpcClient)
 
 type ClientInformation struct {
 	ClientID              string   `json:"client_id"`
-	ClientSecret          string   `json:"client_secret"`
-	ClientSecretExpiresAt int64    `json:"client_secret_expires_at"`
+	ClientSecret          string   `json:"client_secret,omitempty"`
+	ClientSecretExpiresAt int64    `json:"client_secret_expires_at,omitempty"`
 	ClientName            string   `json:"client_name,omitempty"`
 	RedirectURIs          []string `json:"redirect_uris"`
 	LogoURI               string   `json:"logo_uri,omitempty"`
@@ -298,15 +298,56 @@ mux.HandleFunc("/oauth/register", func(w http.ResponseWriter, r *http.Request) {
 })
 ```
 
-DCR can be enabled for the mcp-gateway by setting `authorization.dynamicClientRegistrationEnabled` to `true`.
+Note that the `ClientSecret` has the `omitempty` tag set.
+This is necessary because an empty value will otherwise be serialized as an empty string, which confuses some clients.
+
+DCR can be enabled for the mcp-gateway by setting `authorization.dynamicClientRegistration.enabled` to `true`.
 Additionally, you have to specify the `dexGRPCClient.addr` property.
 
 ```yaml
 authorization:
   server: http://localhost:5556/
-  dynamicClientRegistrationEnabled: true
+  dynamicClientRegistration:
+    enabled: true
+    publicClient: true
 dexGRPCClient:
   addr: localhost:5557
+```
+
+### Injecting Required Scopes In The Authorization Request
+
+Some clients, for example, Claude Code, do not set any scopes when sending the authorization request.
+While this is not generally a problem, it can cause issues if your IdP is particularly strict about following the OIDC specification, which requires the `openid` scope to be present.
+To prevent this, we can create a custom authorization endpoint that redirects the request to the authorization endpoint with the required scopes injected.
+
+```go
+mux.HandleFunc("/.well-known/oauth-authorization-server", func(w http.ResponseWriter, r *http.Request) {
+	// GetMetadata now also parses the metadata as a map[string]any
+	metadata := GetMetadata()
+	metadata["registration_endpoint"] = "http://localhost:9000/oauth/register"
+	metadata["authorization_endpoint"] = "http://localhost:9000/oauth/authorize"
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(metadata)
+})
+
+mux.HandleFunc("/oauth/authorize", func(w http.ResponseWriter, r *http.Request) {
+  metadata := GetMetadata()
+  redirectURI, _ := url.Parse(metadata["authorization_endpoint"].(string))
+  q := r.URL.Query()
+  if s := q.Get("scope"); !strings.Contains(s, "openid") {
+    q.Set("scope", s+" openid")
+  }
+  redirectURI.RawQuery = q.Encode()
+  http.Redirect(w, r, redirectURI.String(), http.StatusFound)
+})
+```
+
+You can do the same for any scopes your MCP server requires, although you may want to check if the scope is supported by your authorization server.
+Our mcp-gateway already does all of this for you and you can enable the authorization endpoint by setting `authorization.authorizationProxyEnabled` to `true` in the configuration file.
+
+```yaml
+authorization:
+  authorizationProxyEnabled: true
 ```
 
 ## Testing Authentication for MCP Servers

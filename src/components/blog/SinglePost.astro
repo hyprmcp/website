@@ -1,14 +1,14 @@
 ---
 import {Icon} from '@astrojs/starlight/components';
 import Image from '~/components/common/Image.astro';
-import {Post} from '../../types';
+import type {Post} from '../../types';
 
 export interface Props {
   post: Post;
   url: string | URL;
 }
 
-const {post, url} = Astro.props;
+const {post} = Astro.props;
 const readingTime = post.rendered.metadata.frontmatter.minutesRead;
 
 // Format date
@@ -20,6 +20,14 @@ const formatDate = (date: Date) => {
   }).format(new Date(date));
 };
 ---
+
+<style>
+  .prose {
+    p {
+      @apply hyphens-auto text-justify;
+    }
+  }
+</style>
 
 <section class="py-8 sm:py-12 mx-auto">
   <article class="max-w-4xl mx-auto px-6 sm:px-8">

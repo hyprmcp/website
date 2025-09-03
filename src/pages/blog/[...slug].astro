@@ -2,7 +2,7 @@
 import Layout from '~/layouts/StarlightLayout.astro';
 import SinglePost from '~/components/blog/SinglePost.astro';
 import {getSortedPosts} from '../../utils/blog';
-import {Post} from '../../types';
+import type {Post} from '../../types';
 
 export async function getStaticPaths() {
   let posts = await getSortedPosts();
