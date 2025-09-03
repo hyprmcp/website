@@ -1,8 +1,8 @@
 ---
 import {Icon} from '@astrojs/starlight/components';
 import ThemedImage from './util/ThemedImage.astro';
-import hyprmcpBlack from '../assets/hyprmcp-black.svg';
-import hyprmcpWhite from '../assets/hyprmcp-white.svg';
+import hyprmcpBlack from '../assets/hyprmcp.svg';
+import hyprmcpWhite from '../assets/hyprmcp.svg';
 ---
 
 <footer
@@ -12,23 +12,21 @@ import hyprmcpWhite from '../assets/hyprmcp-white.svg';
     <div class="grid grid-cols-2 gap-8 lg:grid-cols-6">
       {/* Logo and description */}
       <div class="col-span-2 lg:col-span-2">
-        <div class="flex items-center space-x-2 mb-4">
+        <div class="flex flex-col items-start mb-4">
           <ThemedImage
             lightSrc={hyprmcpBlack}
             darkSrc={hyprmcpWhite}
             alt="Hypr MCP Logo"
-            class="w-6 h-6"
+            class="w-48 mb-2"
             width={24}
             height={24}
           />
-          <span class="text-xl font-bold text-gray-900 dark:text-white"
-            >Hypr MCP</span
-          >
         </div>
         <p
           class="text-sm text-gray-500 dark:text-gray-400 max-w-xs leading-relaxed">
-          Deploy and scale MCP servers with confidence. The serverless hosting
-          platform for Model Context Protocol.
+          Deploy and scale MCP servers with confidence.<br />
+          Solve analytics and authorization challenges.<br />
+          Connect your data to AI.
         </p>
       </div>
 
@@ -147,7 +145,7 @@ import hyprmcpWhite from '../assets/hyprmcp-white.svg';
             <Icon name="github" class="w-5 h-5" />
           </a>
           <a
-            href="https://discord.gg/glasskube"
+            href="https://discord.gg/CgZ775fcsy"
             target="_blank"
             rel="noopener noreferrer"
             class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">

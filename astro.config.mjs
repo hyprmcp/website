@@ -6,8 +6,11 @@ import tailwindcss from '@tailwindcss/vite';
 import {defineConfig} from 'astro/config';
 import rehypeMermaid from 'rehype-mermaid';
 import starlightLinksValidator from 'starlight-links-validator';
+import {remarkReadingTime} from './src/utils/remark-reading-time.mjs';
 
 import partytown from '@astrojs/partytown';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeSlug from 'rehype-slug';
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,12 +18,12 @@ export default defineConfig({
 
   integrations: [
     starlight({
-      title: 'hyprmcp',
+      title: 'Hypr MCP',
       description:
         'Serverless hosting and analytics provider for remote, authenticated streamable HTTP MCP server',
       logo: {
-        light: './src/assets/hyprmcp-black.svg',
-        dark: './src/assets/hyprmcp-white.svg',
+        light: './src/assets/hm.svg',
+        dark: './src/assets/hm.svg',
         replacesTitle: true,
       },
       customCss: ['./src/styles/global.css'],
@@ -72,7 +75,7 @@ export default defineConfig({
         {
           icon: 'discord',
           label: 'Discord',
-          href: 'https://discord.gg/6qqBSAWZfW',
+          href: 'https://discord.gg/CgZ775fcsy',
         },
       ],
       sidebar: [
@@ -94,7 +97,9 @@ export default defineConfig({
           items: [
             {label: 'Home', link: '/'},
             {label: 'Pricing', link: '/pricing/'},
-            {label: 'Docs', link: '/docs/getting-started/'},
+            // {label: 'Docs', link: '/docs/getting-started/'},
+            {label: 'Blog', link: '/blog/'},
+            {label: 'Analytics', link: '/mcp-analytics/'},
           ],
         },
       ],
@@ -147,7 +152,27 @@ export default defineConfig({
       type: 'shiki',
       excludeLangs: ['mermaid', 'math'],
     },
-    rehypePlugins: [rehypeMermaid],
+    rehypePlugins: [
+      rehypeMermaid,
+      rehypeSlug,
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: 'prepend',
+          content: {
+            type: 'text',
+            value: '# ',
+          },
+          headingProperties: {
+            className: ['anchor'],
+          },
+          properties: {
+            className: ['anchor-link'],
+          },
+        },
+      ],
+    ],
+    remarkPlugins: [remarkReadingTime],
   },
   vite: {
     plugins: [tailwindcss()],

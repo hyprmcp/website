@@ -1,0 +1,119 @@
+---
+import {Icon} from '@astrojs/starlight/components';
+import Frame from './util/Frame.astro';
+---
+
+<div class="py-12 sm:py-32 border-b border-gray-200 dark:border-gray-800">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2
+        class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+        One Server, All Your Tools
+      </h2>
+      <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+        Authenticate once, access everything. Hypr MCP unifies all your MCP
+        servers behind a single connection.
+      </p>
+    </div>
+
+    <div class="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2">
+      {/* Architecture Diagram */}
+      <div>
+        <pre
+          class="text-gray-800 dark:text-cyan-400 font-mono text-sm mx-6 overflow-x-auto max-w-full">
+            <code>
+┌──────────────┐     OAuth2       ┌──────────────┐
+│   End User   │ ───────────────▶ │   Hypr MCP   │
+└──────────────┘  Single Login    │   Gateway    │
+                                  └──────┬───────┘
+                                         │
+                               ┌─────────┼───────────┐
+                               │         │           │
+                          ┌────▼───┐ ┌───▼────┐ ┌────▼───┐
+                          │ Tool A │ │ Tool B │ │ Tool C │
+                          └────────┘ └────────┘ └────────┘
+            </code>
+          </pre>
+      </div>
+
+      {/* Features List */}
+      <div class="space-y-6">
+        <div class="flex items-start space-x-4">
+          <div
+            class="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+            <Icon
+              name="seti:lock"
+              class="w-5 h-5 text-blue-600 dark:text-blue-400"
+            />
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              Single Sign-On
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              Authenticate once through OAuth2 and access all your tools. No
+              more managing multiple credentials or API keys.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div
+            class="flex-shrink-0 w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
+            <Icon
+              name="seti:config"
+              class="w-5 h-5 text-purple-600 dark:text-purple-400"
+            />
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              Unified Access Control
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              Manage permissions centrally through Jetski platform. Grant or
+              revoke tool access without touching code.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div
+            class="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
+            <Icon
+              name="document"
+              class="w-5 h-5 text-green-600 dark:text-green-400"
+            />
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              Complete Audit Trail
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              Every tool call is logged with user context, timestamp, and
+              parameters. Perfect for compliance and debugging.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div
+            class="flex-shrink-0 w-8 h-8 bg-yellow-100 dark:bg-yellow-900 rounded-lg flex items-center justify-center">
+            <Icon
+              name="puzzle"
+              class="w-5 h-5 text-yellow-600 dark:text-yellow-400"
+            />
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              Tool Authorization
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              Fine-grained permissions per tool and per user. Control exactly
+              what each user can access and execute.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

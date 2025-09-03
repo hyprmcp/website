@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200">
+  <!-- Neon Outline Stroke Only -->
+  <defs>
+    <filter id="outline-glow-4">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="stroke-grad-4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff00ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00ffff;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <g font-family="Impact, sans-serif" font-size="85" font-weight="900" text-anchor="middle" 
+     fill="none" stroke="url(#stroke-grad-4)" stroke-width="3" filter="url(#outline-glow-4)">
+    <text x="200" y="85" style="letter-spacing: 8px;">HYPR</text>
+    <text x="200" y="165" style="letter-spacing: 12px;">MCP</text>
+  </g>
+  
+  <!-- Corner accents -->
+  <g stroke="#ff00ff" stroke-width="2" fill="none" opacity="0.6">
+    <path d="M 5 5 L 35 5 M 5 5 L 5 35"/>
+    <path d="M 395 5 L 365 5 M 395 5 L 395 35"/>
+    <path d="M 5 195 L 35 195 M 5 195 L 5 165"/>
+    <path d="M 395 195 L 365 195 M 395 195 L 395 165"/>
+  </g>
+</svg>

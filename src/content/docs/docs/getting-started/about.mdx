@@ -1,5 +1,5 @@
 ---
-title: What is Hypr MCP? | MCP Server Hosting Platform
+title: What is Hypr MCP? | MCP Server Gateway, Hosting & Analytics
 description: Learn about Hypr MCP, the serverless platform for deploying MCP servers. One-command deploy, Claude/ChatGPT integration, OAuth2 auth & analytics.
 slug: docs/getting-started
 sidebar:
@@ -31,7 +31,7 @@ graph TB
 
     %% Core Platform Components
     UserBrowser <--> |OAuth2 Flow| AuthServer[🔐 Authentication Server]
-    Proxy[🔄 Hypr MCP Proxy] --> |Collects merics| Platform
+    Proxy[🔄 Hypr MCP Proxy] --> |Collects metrics| Platform
 
     %% MCP Server Infrastructure
     Proxy <--> |Streamable HTTP| MCPServer[🚀 Deployed Remote MCP Server]
@@ -89,8 +89,6 @@ Hypr MCP enables you to:
 - **Scale automatically** with serverless hosting that grows with your needs
 
 ## Where do I start?
-
-Get started with Hypr MCP in minutes. Follow the [quickstart guide](/docs/quickstart/) to deploy your first MCP server and learn how to use the platform effectively.
 
 <Aside type="caution">
   Hypr MCP is currently in early access. Join our [waitlist](/waitlist) to get

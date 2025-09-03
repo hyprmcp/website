@@ -1,0 +1,63 @@
+---
+import {Icon} from '@astrojs/starlight/components';
+
+export interface Props {
+  title: string;
+  url: string;
+  description?: string;
+  class?: string;
+}
+
+const {title, url, description = '', class: className = ''} = Astro.props;
+
+const encodedTitle = encodeURIComponent(title);
+const encodedUrl = encodeURIComponent(url);
+const encodedDescription = encodeURIComponent(description);
+
+const shareLinks = {
+  twitter: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,
+  facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+  linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}&title=${encodedTitle}&summary=${encodedDescription}`,
+  email: `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%0A${encodedUrl}`,
+};
+---
+
+<div class={`flex items-center space-x-4 ${className}`}>
+  <span class="text-sm font-medium text-gray-700 dark:text-gray-300"
+    >Share:</span
+  >
+
+  <a
+    href={shareLinks.twitter}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="text-gray-600 hover:text-blue-400 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+    aria-label="Share on Twitter">
+    <Icon name="social-twitter" size="1.25rem" />
+  </a>
+
+  <a
+    href={shareLinks.facebook}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500 transition-colors"
+    aria-label="Share on Facebook">
+    <Icon name="social-facebook" size="1.25rem" />
+  </a>
+
+  <a
+    href={shareLinks.linkedin}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="text-gray-600 hover:text-blue-700 dark:text-gray-400 dark:hover:text-blue-600 transition-colors"
+    aria-label="Share on LinkedIn">
+    <Icon name="social-linkedin" size="1.25rem" />
+  </a>
+
+  <a
+    href={shareLinks.email}
+    class="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+    aria-label="Share via Email">
+    <Icon name="email" size="1.25rem" />
+  </a>
+</div>
