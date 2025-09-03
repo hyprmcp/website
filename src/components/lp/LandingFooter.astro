@@ -2,8 +2,8 @@
 import ThemeProvider from 'virtual:starlight/components/ThemeProvider';
 import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
 import ThemedImage from '../util/ThemedImage.astro';
-import hyprmcpBlack from '../../assets/hyprmcp-black.svg';
-import hyprmcpWhite from '../../assets/hyprmcp-white.svg';
+import hyprmcpBlack from '../../assets/hyprmcp.svg';
+import hyprmcpWhite from '../../assets/hyprmcp.svg';
 
 export interface FooterLink {
   href: string;
@@ -34,7 +34,7 @@ const {
           lightSrc={hyprmcpBlack}
           darkSrc={hyprmcpWhite}
           alt="Hypr MCP Logo"
-          class="w-12 h-12 mr-2"
+          class="w-36 mr-8"
         />
         <div class="flex flex-col">
           <span class="text-2xl font-bold text-gray-900 dark:text-white"

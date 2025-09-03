@@ -18,7 +18,7 @@ export default defineConfig({
 
   integrations: [
     starlight({
-      title: 'hyprmcp',
+      title: 'Hypr MCP',
       description:
         'Serverless hosting and analytics provider for remote, authenticated streamable HTTP MCP server',
       logo: {
@@ -99,6 +99,7 @@ export default defineConfig({
             {label: 'Pricing', link: '/pricing/'},
             {label: 'Docs', link: '/docs/getting-started/'},
             {label: 'Blog', link: '/blog/'},
+            {label: 'MCP Analytics', link: '/mcp-analytics/'},
           ],
         },
       ],
