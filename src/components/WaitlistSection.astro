@@ -5,44 +5,6 @@ import {Icon} from '@astrojs/starlight/components';
 <style>
   @reference 'tailwindcss';
 
-  .hero-bg {
-    background-image:
-      linear-gradient(
-        0deg,
-        transparent 49%,
-        rgba(34, 197, 94, 0.15) 49.5%,
-        rgba(249, 115, 22, 0.15) 50.5%,
-        transparent 51%
-      ),
-      linear-gradient(
-        90deg,
-        transparent 49%,
-        rgba(34, 197, 94, 0.15) 49.5%,
-        rgba(249, 115, 22, 0.15) 50.5%,
-        transparent 51%
-      );
-    background-size: 200px 200px;
-  }
-
-  .dark .hero-bg {
-    background-image:
-      linear-gradient(
-        0deg,
-        transparent 49%,
-        rgba(37, 99, 235, 0.2) 49.5%,
-        rgba(168, 85, 247, 0.2) 50.5%,
-        transparent 51%
-      ),
-      linear-gradient(
-        90deg,
-        transparent 49%,
-        rgba(37, 99, 235, 0.2) 49.5%,
-        rgba(168, 85, 247, 0.2) 50.5%,
-        transparent 51%
-      );
-    background-size: 200px 200px;
-  }
-
   .step-indicator {
     @apply flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium transition-all duration-300;
   }
@@ -73,7 +35,7 @@ import {Icon} from '@astrojs/starlight/components';
 </style>
 
 <div
-  class="relative overflow-hidden bg-gray-50 dark:bg-slate-900 hero-bg pt-8 sm:pt-16 pb-32 border-b border-gray-200 dark:border-slate-800">
+  class="relative overflow-hidden bg-gray-50 dark:bg-slate-900 hyprmcp-bg pt-8 sm:pt-16 pb-32 border-b border-gray-200 dark:border-slate-800">
   <div class="absolute inset-0 bg-gray-50/80 dark:bg-slate-900/80"></div>
   <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
     <div class="text-center">
