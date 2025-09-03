@@ -99,10 +99,10 @@ Fortunately, the Go standard library comes with the `httputil.ReverseProxy` that
 upstream, _ := url.Parse("http://localhost:8000/mcp/")
 
 proxy := &httputil.ReverseProxy{
-Rewrite: func (r *httputil.ProxyRequest) {
-r.Out.URL = upstream
-r.Out.Host = upstream.Host
-},
+	Rewrite: func(r *httputil.ProxyRequest) {
+		r.Out.URL = upstream
+		r.Out.Host = upstream.Host
+	},
 }
 ```
 
@@ -153,24 +153,23 @@ We will use the `github.com/lestrrat-go/jwx` suite of libraries for validating t
 
 ```go
 func OAuthProtected(next http.Handler) http.Handler {
-// See https://pkg.go.dev/github.com/lestrrat-go/jwx/v3/jwk about obtaining a jwk.Set
-var jwkSet jwk.Set
+	// See https://pkg.go.dev/github.com/lestrrat-go/jwx/v3/jwk about obtaining a jwk.Set
+	var jwkSet jwk.Set
 
-return http.HandlerFunc(func (w http.ResponseWriter, r *http.Request) {
-rawToken :=
-strings.TrimSpace(strings.TrimPrefix(strings.TrimSpace(r.Header.Get("Authorization")), "Bearer"))
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		rawToken := strings.TrimSpace(strings.TrimPrefix(strings.TrimSpace(r.Header.Get("Authorization")), "Bearer"))
 
-if _, err := jwt.ParseString(rawToken, jwt.WithKeySet(jwkSet)); err != nil {
-w.Header().Set(
-"WWW-Authenticate",
-`Bearer resource_metadata="http://localhost:9000/.well-known/oauth-protected-resource"`,
-)
-w.WriteHeader(http.StatusUnauthorized)
-return
-}
+		if _, err := jwt.ParseString(rawToken, jwt.WithKeySet(jwkSet)); err != nil {
+			w.Header().Set(
+				"WWW-Authenticate",
+				`Bearer resource_metadata="http://localhost:9000/.well-known/oauth-protected-resource"`,
+			)
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
 
-next.ServeHTTP(w, r)
-})
+		next.ServeHTTP(w, r)
+	})
 }
 
 mux.Handle("/myserver/mcp", OAuthProtected(proxy))
@@ -195,12 +194,12 @@ This step is rather simple:
 All we have to do to implement the specification here is to mount an endpoint for `/.well-known/oauth-protected-resource` that serves a JSON object with the `resource_name` and `authorization_servers` properties:
 
 ```go
-mux.HandleFunc("/.well-known/oauth-protected-resource", func (w http.ResponseWriter, r *http.Request) {
-w.Header().Set("Content-Type", "application/json")
-json.NewEncoder(w).Encode(map[string]any{
-"resource":              "http://localhost:9000/",
-"authorization_servers": []string{"http://localhost:5556"},
-})
+mux.HandleFunc("/.well-known/oauth-protected-resource", func(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]any{
+		"resource":              "http://localhost:9000/",
+		"authorization_servers": []string{"http://localhost:5556"},
+	})
 })
 ```
 
@@ -218,19 +217,19 @@ We can use these two observations to our advantage by modifying the PRS response
 
 ```go
 // The updated protected resource endpoint
-mux.HandleFunc("/.well-known/oauth-protected-resource", func (w http.ResponseWriter, r *http.Request) {
-w.Header().Set("Content-Type", "application/json")
-json.NewEncoder(w).Encode(map[string]any{
-"resource":             "http://localhost:9000/",
-"authorization_servers": []string{"http://localhost:9000/"},
-})
+mux.HandleFunc("/.well-known/oauth-protected-resource", func(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]any{
+		"resource":              "http://localhost:9000/",
+		"authorization_servers": []string{"http://localhost:9000/"},
+	})
 })
 
-mux.HandleFunc("/.well-known/oauth-authorization-server", func (w http.ResponseWriter, r *http.Request) {
-// GetMetadata just fetches /.well-known/openid-configuration from the issuer
-metadata := GetMetadata()
-w.Header().Set("Content-Type", "application/json")
-w.Write(metadata)
+mux.HandleFunc("/.well-known/oauth-authorization-server", func(w http.ResponseWriter, r *http.Request) {
+	// GetMetadata just fetches /.well-known/openid-configuration from the issuer
+	metadata := GetMetadata()
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(metadata)
 })
 ```
 
@@ -257,45 +256,45 @@ grpcClient, _ := grpc.NewClient("localhost:5557", grpc.WithTransportCredentials(
 dexClient := api.NewDexClient(grpcClient)
 
 type ClientInformation struct {
-ClientID              string   `json:"client_id"`
-ClientSecret          string   `json:"client_secret"`
-ClientSecretExpiresAt int64    `json:"client_secret_expires_at"`
-ClientName            string   `json:"client_name,omitempty"`
-RedirectURIs          []string `json:"redirect_uris"`
-LogoURI               string   `json:"logo_uri,omitempty"`
+	ClientID              string   `json:"client_id"`
+	ClientSecret          string   `json:"client_secret"`
+	ClientSecretExpiresAt int64    `json:"client_secret_expires_at"`
+	ClientName            string   `json:"client_name,omitempty"`
+	RedirectURIs          []string `json:"redirect_uris"`
+	LogoURI               string   `json:"logo_uri,omitempty"`
 }
 
-mux.HandleFunc("/.well-known/oauth-authorization-server", func (w http.ResponseWriter, r *http.Request) {
-// GetMetadata now also parses the metadata as a map[string]any
-metadata := GetMetadata()
-metadata["registration_endpoint"] = "http://localhost:9000/oauth/register"
-w.Header().Set("Content-Type", "application/json")
-json.NewEncoder(w).Encode(metadata)
+mux.HandleFunc("/.well-known/oauth-authorization-server", func(w http.ResponseWriter, r *http.Request) {
+	// GetMetadata now also parses the metadata as a map[string]any
+	metadata := GetMetadata()
+	metadata["registration_endpoint"] = "http://localhost:9000/oauth/register"
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(metadata)
 })
 
-mux.HandleFunc("/oauth/register", func (w http.ResponseWriter, r *http.Request) {
-var body ClientInformation
-json.NewDecoder(r.Body).Decode(&body)
+mux.HandleFunc("/oauth/register", func(w http.ResponseWriter, r *http.Request) {
+	var body ClientInformation
+	json.NewDecoder(r.Body).Decode(&body)
 
-client := api.Client{
-Id:           rand.Text(),
-Name:         body.ClientName,
-LogoUrl:      body.LogoURI,
-RedirectUris: body.RedirectURIs,
-Public:       true,
-}
+	client := api.Client{
+		Id:           rand.Text(),
+		Name:         body.ClientName,
+		LogoUrl:      body.LogoURI,
+		RedirectUris: body.RedirectURIs,
+		Public:       true,
+	}
 
-clientResponse, _ := dexClient.CreateClient(r.Context(), &api.CreateClientReq{Client: &client})
+	clientResponse, _ := dexClient.CreateClient(r.Context(), &api.CreateClientReq{Client: &client})
 
-w.WriteHeader(http.StatusCreated)
-w.Header().Set("Content-Type", "application/json")
-json.NewEncoder(w).Encode(ClientInformation{
-ClientID:     clientResponse.Client.Id,
-ClientSecret: clientResponse.Client.Secret,
-ClientName:   clientResponse.Client.Name,
-RedirectURIs: clientResponse.Client.RedirectUris,
-LogoURI:      clientResponse.Client.LogoUrl,
-})
+	w.WriteHeader(http.StatusCreated)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(ClientInformation{
+		ClientID:     clientResponse.Client.Id,
+		ClientSecret: clientResponse.Client.Secret,
+		ClientName:   clientResponse.Client.Name,
+		RedirectURIs: clientResponse.Client.RedirectUris,
+		LogoURI:      clientResponse.Client.LogoUrl,
+	})
 })
 ```
 
