@@ -1,6 +1,6 @@
 ---
 title: 'Building Supabase-like OAuth Authentication For MCP Servers'
-description: 'How to add authentication, dynamic client registration, authorization server metadata support without any code changes.'
+description: 'How to add authentication, dynamic client registration, authorization server metadata to MCP servers support without any code changes.'
 publishDate: 2025-09-04
 lastUpdated: 2025-09-04
 slug: 'mcp-server-authentication'
