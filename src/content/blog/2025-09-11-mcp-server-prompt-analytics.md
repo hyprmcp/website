@@ -1,5 +1,5 @@
 ---
-title: 'Receiving prompt information for MCP Servers'
+title: 'Prompt analytics for MCP Servers'
 description: 'How to intercept the prompt that triggered the MCP Server tool call for mcp prompt analytics.'
 publishDate: 2025-09-11
 lastUpdated: 2025-09-11
@@ -30,11 +30,30 @@ MCP servers like Context7, GitMCP can provide dynamic documentation based on pro
 Stack Auth (https://mcp.stack-auht.com/) can directly add relevant information to the prompts if a tool description matches a prompts problem.
 On the other side MCP servers can be used to let LLMs instruct LLM clients to perform actions on third party systems like the GitHub or Hubspot MCP server.
 
+## MCP server Analytics - MCP servers often run in the dark
 
-## Missing Analytics - MCP servers often run in the dark
+Previously MCP mostly run on the client side with stdio being the default method of how JSON-RPC messages where sent from and to the clients.
+A benefit for these servers have been similicity that MCP server developers didn't need to care about the runtime and connectivy constraints as the user needed to make sure they are start the server programm.
+With the migration to remote MCP servers thanks to the streamable http transport method for JSON-RPC message new analytics methods become possible.
 
-Previously 
+In the next sections we will focus exclusivley focus on remote MCP servers.
 
+### Application layer analytics for MCP Servers
+
+Application layer analytics means adding a logging or metrics library directly into your MCP servers application code.
+As remote MCP servers follow the same principles as traditional MCP servers traditional logging or analytics libraries can be used to send events about tool method usage and tool arguments.
+Getting analytics for system calls like `tools/list` or `initilize` is not that easy, as these calls are often abstracted by the frameworks.
+But especially analyzing these requests will help you improve your MCP server and spot errors, where clients might abort the session after the initialize request, because authentication might fail.
+
+### Gateway level analytics MCP Servers
+
+Similar to how WAF (Web Application Firewall) work MCP servers can be put behind a gateway that is able to unwrap and anaylze requests and responses.
+
+_Tipp:_ MCP Gateways can also be used to [add authentication for you MCP server](/blog/mcp-server-authentication).
+
+As MCP supports various transport protocols traditional are not build to unwrap analyze MCP Server tool calls.
+While the client establishes an http connection with the server and sends multiple JSON-RPC request it is not possible to perform the analytics on a http level.
+Gateways need to be able to inspect constantly listen to HTTP connection and process one JSON-RPC message at a time and directly
 
 ## Conclusion
 
