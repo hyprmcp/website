@@ -49,7 +49,7 @@ But especially analyzing these requests will help you improve your MCP server an
 
 Similar to how WAF (Web Application Firewall) work MCP servers can be put behind a gateway that is able to unwrap and anaylze requests and responses.
 
-_Tipp:_ MCP Gateways can also be used to [add authentication for you MCP server](/blog/mcp-server-authentication).
+_Tipp:_ MCP Gateways can also be used to [add authentication for you MCP server](/blog/mcp-server-authentication/).
 
 As MCP supports various transport protocols traditional are not build to unwrap analyze MCP Server tool calls.
 While the client establishes an http connection with the server and sends multiple JSON-RPC request it is not possible to perform the analytics on a http level.
