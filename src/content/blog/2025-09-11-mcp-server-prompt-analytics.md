@@ -53,7 +53,27 @@ _Tipp:_ MCP Gateways can also be used to [add authentication for you MCP server]
 
 As MCP supports various transport protocols traditional are not build to unwrap analyze MCP Server tool calls.
 While the client establishes an http connection with the server and sends multiple JSON-RPC request it is not possible to perform the analytics on a http level.
-Gateways need to be able to inspect constantly listen to HTTP connection and process one JSON-RPC message at a time and directly
+MCP Gateways need to be able to inspect constantly hold both connections to the client and server, receive and analyze a JSON-RPC request and then forward it to the second connection.
+
+TODO: @kosmoz - Can you add a small section on how you intially used the T-Reader, but now migrated to a more sophisticated approach?
+
+As you can see in the gateway configuration, you are able to configure a webook for each mcp server.
+The gateway will forward every JSON-RPC request and its response directly to webook endpoint
+
+
+```yaml
+host: http://localhost:9000/
+proxy:
+  - path: /path/mcp
+    http:
+      url: http://localhost:3000/mcp/
+    webhook:
+      url: http://localhost:8080/webhook/gateway/87dd8dde-c7aa-4535-a6d7-3b313ffb1d0c
+```
+
+### Prompt analytics
+
+After successfully analyzing the JSON-G
 
 ## Conclusion
 
