@@ -1,0 +1,510 @@
+---
+import {Icon} from '@astrojs/starlight/components';
+---
+
+<div class="py-12 sm:py-32 border-b border-gray-200 dark:border-gray-800">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2
+        class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+        MCP Analytics
+      </h2>
+      <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+        Turn the lights on for your MCP server with real-time insights
+      </p>
+    </div>
+
+    <div class="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2">
+      {/* Analytics Features List - Left Side */}
+      <div class="space-y-6">
+        <div class="flex items-start space-x-4">
+          <div
+            class="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+            <Icon
+              name="seti:graphql"
+              class="w-5 h-5 text-blue-600 dark:text-blue-400"
+            />
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              Prompt Analytics
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              Monitor every prompt sent to your MCP server in real-time.
+              Understand user intent and optimize your tools accordingly.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div
+            class="flex-shrink-0 w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
+            <Icon
+              name="seti:config"
+              class="w-5 h-5 text-purple-600 dark:text-purple-400"
+            />
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              Tool Usage Metrics
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              Track which tools are used most frequently. Identify patterns and
+              optimize tool performance based on actual usage.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div
+            class="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
+            <Icon
+              name="seti:vue"
+              class="w-5 h-5 text-green-600 dark:text-green-400"
+            />
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              Client Analytics
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              Understand how different user segments interact with your MCP
+              server. Segment by role, department, or custom attributes.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Analytics Flow Diagram - Centered Right Side */}
+      <div class="flex justify-center items-start -mt-18">
+        <div class="relative w-full max-w-2xl overflow-x-auto">
+          <svg
+            class="w-full h-auto"
+            viewBox="0 0 700 420"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg">
+            <!-- Background Grid -->
+            <defs>
+              <pattern
+                id="grid"
+                width="40"
+                height="40"
+                patternUnits="userSpaceOnUse">
+                <path
+                  d="M 40 0 L 0 0 0 40"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1"
+                  class="text-gray-200 dark:text-gray-700"
+                  opacity="0.3"></path>
+              </pattern>
+
+              <!-- Gradient for animated paths -->
+              <linearGradient
+                id="flow-gradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%">
+                <stop offset="0%" stop-color="#3B82F6" stop-opacity="0">
+                  <animate
+                    attributeName="stop-opacity"
+                    values="0;1;0"
+                    dur="3s"
+                    repeatCount="indefinite"></animate>
+                </stop>
+                <stop offset="50%" stop-color="#3B82F6" stop-opacity="1">
+                  <animate
+                    attributeName="stop-opacity"
+                    values="0;1;0"
+                    dur="3s"
+                    repeatCount="indefinite"
+                    begin="0.5s"></animate>
+                </stop>
+                <stop offset="100%" stop-color="#3B82F6" stop-opacity="0">
+                  <animate
+                    attributeName="stop-opacity"
+                    values="0;1;0"
+                    dur="3s"
+                    repeatCount="indefinite"
+                    begin="1s"></animate>
+                </stop>
+              </linearGradient>
+
+              <!-- Purple gradient for analytics flow -->
+              <linearGradient
+                id="analytics-gradient"
+                x1="0%"
+                y1="0%"
+                x2="0%"
+                y2="100%">
+                <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0">
+                  <animate
+                    attributeName="stop-opacity"
+                    values="0;1;0"
+                    dur="3s"
+                    repeatCount="indefinite"></animate>
+                </stop>
+                <stop offset="50%" stop-color="#8B5CF6" stop-opacity="1">
+                  <animate
+                    attributeName="stop-opacity"
+                    values="0;1;0"
+                    dur="3s"
+                    repeatCount="indefinite"
+                    begin="0.5s"></animate>
+                </stop>
+                <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0">
+                  <animate
+                    attributeName="stop-opacity"
+                    values="0;1;0"
+                    dur="3s"
+                    repeatCount="indefinite"
+                    begin="1s"></animate>
+                </stop>
+              </linearGradient>
+            </defs>
+
+            <rect width="700" height="420" fill="url(#grid)" opacity="0.5"
+            ></rect>
+
+            <!-- MCP Client -->
+            <g transform="translate(75, 150)">
+              <rect
+                x="0"
+                y="0"
+                width="120"
+                height="80"
+                rx="8"
+                fill="white"
+                stroke="#E5E7EB"
+                stroke-width="2"
+                class="dark:fill-slate-800 dark:stroke-slate-600"></rect>
+              <text
+                x="60"
+                y="30"
+                text-anchor="middle"
+                class="fill-gray-900 dark:fill-white font-semibold text-sm"
+                >MCP Client</text
+              >
+              <text
+                x="60"
+                y="50"
+                text-anchor="middle"
+                class="fill-gray-500 dark:fill-gray-400 text-xs"
+                >(Claude, ChatGPT)</text
+              >
+              <circle cx="60" cy="65" r="3" fill="#3B82F6" class="animate-pulse"
+              ></circle>
+            </g>
+
+            <!-- Flow from Client to Gateway -->
+            <path
+              d="M 195 190 L 275 190"
+              stroke="#E5E7EB"
+              stroke-width="2"
+              fill="none"
+              class="dark:stroke-slate-600"></path>
+            <path
+              d="M 195 190 L 275 190"
+              stroke="url(#flow-gradient)"
+              stroke-width="3"
+              fill="none"
+              opacity="0.8"></path>
+
+            <!-- Animated dots from Client to Gateway -->
+            <circle r="3" fill="#3B82F6">
+              <animateMotion
+                dur="2s"
+                repeatCount="indefinite"
+                path="M 195 190 L 275 190"></animateMotion>
+            </circle>
+            <!-- Reverse flow dot -->
+            <circle r="3" fill="#10B981" opacity="0.6">
+              <animateMotion
+                dur="2.5s"
+                repeatCount="indefinite"
+                path="M 275 190 L 195 190"
+                begin="0.8s"></animateMotion>
+            </circle>
+
+            <!-- Hypr MCP Gateway -->
+            <g transform="translate(275, 150)">
+              <rect
+                x="0"
+                y="0"
+                width="150"
+                height="80"
+                rx="8"
+                fill="#3B82F6"
+                fill-opacity="0.1"
+                stroke="#3B82F6"
+                stroke-width="2"
+                class="dark:fill-blue-900/30"></rect>
+              <text
+                x="75"
+                y="30"
+                text-anchor="middle"
+                class="fill-blue-900 dark:fill-blue-300 font-bold text-sm"
+                >Hypr MCP Gateway</text
+              >
+              <text
+                x="75"
+                y="50"
+                text-anchor="middle"
+                class="fill-blue-700 dark:fill-blue-400 text-xs"
+                >Analytics Layer</text
+              >
+
+              <!-- Processing indicator -->
+              <g transform="translate(75, 60)">
+                <circle
+                  r="6"
+                  fill="none"
+                  stroke="#3B82F6"
+                  stroke-width="2"
+                  opacity="0.3"></circle>
+                <circle
+                  r="6"
+                  fill="none"
+                  stroke="#3B82F6"
+                  stroke-width="2"
+                  stroke-dasharray="8 4"
+                  class="animate-spin"
+                  style="animation-duration: 3s; transform-origin: center;"
+                ></circle>
+              </g>
+            </g>
+
+            <!-- Flow from Gateway to Server -->
+            <path
+              d="M 425 190 L 505 190"
+              stroke="#E5E7EB"
+              stroke-width="2"
+              fill="none"
+              class="dark:stroke-slate-600"></path>
+            <path
+              d="M 425 190 L 505 190"
+              stroke="url(#flow-gradient)"
+              stroke-width="3"
+              fill="none"
+              opacity="0.8"></path>
+
+            <!-- Animated dots from Gateway to Server -->
+            <circle r="3" fill="#3B82F6">
+              <animateMotion
+                dur="2s"
+                repeatCount="indefinite"
+                path="M 425 190 L 505 190"
+                begin="0.5s"></animateMotion>
+            </circle>
+            <!-- Reverse flow dot -->
+            <circle r="3" fill="#10B981" opacity="0.6">
+              <animateMotion
+                dur="2.5s"
+                repeatCount="indefinite"
+                path="M 505 190 L 425 190"
+                begin="1.3s"></animateMotion>
+            </circle>
+
+            <!-- MCP Server -->
+            <g transform="translate(505, 150)">
+              <rect
+                x="0"
+                y="0"
+                width="120"
+                height="80"
+                rx="8"
+                fill="white"
+                stroke="#E5E7EB"
+                stroke-width="2"
+                class="dark:fill-slate-800 dark:stroke-slate-600"></rect>
+              <text
+                x="60"
+                y="30"
+                text-anchor="middle"
+                class="fill-gray-900 dark:fill-white font-semibold text-sm"
+                >MCP Server</text
+              >
+              <text
+                x="60"
+                y="50"
+                text-anchor="middle"
+                class="fill-gray-500 dark:fill-gray-400 text-xs"
+                >(Your Tools)</text
+              >
+              <rect x="45" y="60" width="30" height="4" rx="2" fill="#10B981"
+              ></rect>
+            </g>
+
+            <!-- Response flow back -->
+            <path
+              d="M 505 230 L 425 230"
+              stroke="#E5E7EB"
+              stroke-width="2"
+              fill="none"
+              stroke-dasharray="4 4"
+              class="dark:stroke-slate-600"></path>
+            <path
+              d="M 425 230 L 195 230"
+              stroke="#E5E7EB"
+              stroke-width="2"
+              fill="none"
+              stroke-dasharray="4 4"
+              class="dark:stroke-slate-600"></path>
+
+            <!-- More animated circles on response paths -->
+            <circle r="2" fill="#06B6D4" opacity="0.7">
+              <animateMotion
+                dur="2.2s"
+                repeatCount="indefinite"
+                path="M 505 230 L 425 230"
+                begin="0.3s"></animateMotion>
+            </circle>
+            <circle r="2" fill="#06B6D4" opacity="0.7">
+              <animateMotion
+                dur="2.2s"
+                repeatCount="indefinite"
+                path="M 425 230 L 195 230"
+                begin="0.8s"></animateMotion>
+            </circle>
+
+            <!-- Flow from Gateway to Analytics Platform -->
+            <path
+              d="M 350 230 L 350 300"
+              stroke="#8B5CF6"
+              stroke-width="2"
+              fill="none"
+              class="dark:stroke-purple-500"></path>
+            <path
+              d="M 350 230 L 350 300"
+              stroke="url(#analytics-gradient)"
+              stroke-width="3"
+              fill="none"
+              opacity="0.8"></path>
+
+            <!-- Animated dots to Analytics -->
+            <circle r="2" fill="#8B5CF6">
+              <animateMotion
+                dur="3s"
+                repeatCount="indefinite"
+                path="M 350 230 L 350 300"></animateMotion>
+            </circle>
+            <circle r="2" fill="#8B5CF6">
+              <animateMotion
+                dur="3s"
+                repeatCount="indefinite"
+                path="M 350 230 L 350 300"
+                begin="1s"></animateMotion>
+            </circle>
+            <circle r="2" fill="#8B5CF6">
+              <animateMotion
+                dur="3s"
+                repeatCount="indefinite"
+                path="M 350 230 L 350 300"
+                begin="2s"></animateMotion>
+            </circle>
+
+            <!-- Reverse flow from Analytics back up -->
+            <circle r="2" fill="#22C55E" opacity="0.6">
+              <animateMotion
+                dur="2.5s"
+                repeatCount="indefinite"
+                path="M 350 300 L 350 230"
+                begin="1.5s"></animateMotion>
+            </circle>
+
+            <!-- Hypr MCP Analytics Platform -->
+            <g transform="translate(275, 300)">
+              <rect
+                x="0"
+                y="0"
+                width="150"
+                height="80"
+                rx="8"
+                fill="#8B5CF6"
+                fill-opacity="0.1"
+                stroke="#8B5CF6"
+                stroke-width="2"
+                class="dark:fill-purple-900/30"></rect>
+              <text
+                x="75"
+                y="30"
+                text-anchor="middle"
+                class="fill-purple-900 dark:fill-purple-300 font-bold text-sm"
+                >Hypr MCP Analytics</text
+              >
+              <text
+                x="75"
+                y="50"
+                text-anchor="middle"
+                class="fill-purple-700 dark:fill-purple-400 text-xs"
+                >Real-time Dashboard</text
+              >
+
+              <!-- Mini chart visualization -->
+              <g transform="translate(30, 55)">
+                <rect
+                  x="0"
+                  y="15"
+                  width="6"
+                  height="8"
+                  fill="#8B5CF6"
+                  opacity="0.6"></rect>
+                <rect
+                  x="8"
+                  y="10"
+                  width="6"
+                  height="13"
+                  fill="#8B5CF6"
+                  opacity="0.7"></rect>
+                <rect
+                  x="16"
+                  y="5"
+                  width="6"
+                  height="18"
+                  fill="#8B5CF6"
+                  opacity="0.8"></rect>
+                <rect
+                  x="24"
+                  y="8"
+                  width="6"
+                  height="15"
+                  fill="#8B5CF6"
+                  opacity="0.7"></rect>
+                <rect
+                  x="32"
+                  y="12"
+                  width="6"
+                  height="11"
+                  fill="#8B5CF6"
+                  opacity="0.6"></rect>
+              </g>
+            </g>
+
+            <!-- Labels for data types -->
+            <g transform="translate(360, 285)">
+              <text class="fill-purple-600 dark:fill-purple-400 text-xs"
+                >Logs & Metrics</text
+              >
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin {
+    animation: spin 3s linear infinite;
+  }
+</style>
