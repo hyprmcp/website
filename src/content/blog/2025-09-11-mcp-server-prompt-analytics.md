@@ -55,11 +55,13 @@ As MCP supports various transport protocols, traditional gateways are not built 
 While the client establishes an HTTP connection with the server and sends multiple JSON-RPC requests, it is not possible to perform the analytics on an HTTP level.
 MCP Gateways need to be able to constantly hold both connections to the client and server, receive and analyze a JSON-RPC request, and then forward it to the second connection.
 
-TODO: @kosmoz - Can you add a small section on how you initially used the T-Reader, but now migrated to a more sophisticated approach?
+Initially our Gateway used a basic `io.TeeReader` from the Golang standard library to simply fork off the request and response body for further analysis.
+However, as you will see in the next section, this approach has its limitations as it does not allow us to modify the response body.
+We therefore switched processing of the response body to a custom `io.Reader` implementation that parses each SSE event from the upstream body reader, allows for modifications and makes the modified event available downstream with a backing buffer.
+This is necessary as we want to handle each event individually, without having to buffer the entire response body.
 
 As you can see in the gateway configuration, you are able to configure a webhook for each MCP server.
 The gateway will forward every JSON-RPC request and its response directly to the webhook endpoint.
-
 
 ```yaml
 host: http://localhost:9000/
