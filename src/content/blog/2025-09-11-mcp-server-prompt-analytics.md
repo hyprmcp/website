@@ -75,6 +75,8 @@ proxy:
 
 After successfully analyzing the JSON-RPC requests and responses, you can extract valuable insights about how your MCP server is being used.
 
+TODO: explain prompt injection / data leaks and how can do this.
+
 ## Conclusion
 
 If you are looking for a battle-tested, batteries-included MCP server gateway, check out our [MCP Gateway](https://github.com/hyprmcp/mcp-gateway), which implements everything we discussed above, and more.
