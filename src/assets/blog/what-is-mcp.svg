@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Cyberpunk gradient background -->
+  <defs>
+    <linearGradient id="dark-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e27;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a0033;stop-opacity:1" />
+    </linearGradient>
+    <!-- Neon glow -->
+    <filter id="neon-glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Grid pattern -->
+    <pattern id="cyber-grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#00ffff" stroke-width="0.5" opacity="0.2"/>
+    </pattern>
+  </defs>
+  
+  <!-- Dark background -->
+  <rect width="1200" height="630" fill="url(#dark-gradient)"/>
+  <rect width="1200" height="630" fill="url(#cyber-grid)"/>
+  
+  <!-- Central MCP architecture diagram -->
+  <g transform="translate(600, 250)">
+    <!-- AI Agent (Left) -->
+    <g transform="translate(-200, 0)">
+      <rect x="-50" y="-30" width="100" height="60" rx="8" fill="none" stroke="#00ffff" stroke-width="3"/>
+      <circle cx="0" cy="0" r="15" fill="#00ffff" opacity="0.8"/>
+      <text x="0" y="50" font-family="monospace" font-size="12" fill="#00ffff" text-anchor="middle">AI AGENT</text>
+    </g>
+    
+    <!-- MCP Protocol Bridge (Center) -->
+    <g transform="translate(0, 0)">
+      <rect x="-40" y="-20" width="80" height="40" rx="5" fill="none" stroke="#ff00ff" stroke-width="3"/>
+      <text x="0" y="-5" font-family="monospace" font-size="10" fill="#ff00ff" text-anchor="middle">MCP</text>
+      <text x="0" y="8" font-family="monospace" font-size="10" fill="#ff00ff" text-anchor="middle">PROTOCOL</text>
+      
+      <!-- Connection lines -->
+      <g opacity="0.6">
+        <line x1="-40" y1="0" x2="-200" y2="0" stroke="#00ffff" stroke-width="2"/>
+        <line x1="40" y1="0" x2="200" y2="0" stroke="#00ffff" stroke-width="2"/>
+      </g>
+    </g>
+    
+    <!-- MCP Server (Right) -->
+    <g transform="translate(200, 0)">
+      <rect x="-50" y="-30" width="100" height="60" rx="8" fill="none" stroke="#ff00ff" stroke-width="3"/>
+      <rect x="-30" y="-15" width="60" height="30" rx="3" fill="#ff00ff" opacity="0.3"/>
+      <text x="0" y="50" font-family="monospace" font-size="12" fill="#ff00ff" text-anchor="middle">MCP SERVER</text>
+    </g>
+  </g>
+  
+  <!-- Main Title -->
+  <text x="600" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="bold" text-anchor="middle" fill="white">
+    What is MCP?
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="24" text-anchor="middle" fill="#00ffff" opacity="0.9">
+    Model Context Protocol Explained
+  </text>
+  
+  <!-- Key Features -->
+  <text x="600" y="400" font-family="monospace" font-size="16" text-anchor="middle" fill="#00ffff" opacity="0.9" filter="url(#neon-glow)">
+    STANDARDIZED AI INTEGRATIONS
+  </text>
+  <text x="600" y="425" font-family="monospace" font-size="16" text-anchor="middle" fill="#00ffff" opacity="0.9" filter="url(#neon-glow)">
+    CLIENT-SERVER ARCHITECTURE
+  </text>
+  <text x="600" y="450" font-family="monospace" font-size="16" text-anchor="middle" fill="#00ffff" opacity="0.9" filter="url(#neon-glow)">
+    SECURE TOOL DISCOVERY
+  </text>
+  
+  <!-- Stamps/Badges -->
+  <g transform="translate(200, 100)">
+    <!-- Open Source stamp -->
+    <rect x="-60" y="-20" width="120" height="40" rx="20" fill="none" stroke="#00ffff" stroke-width="2" opacity="0.8"/>
+    <text x="0" y="5" font-family="monospace" font-size="14" fill="#00ffff" text-anchor="middle" font-weight="bold">OPEN SOURCE</text>
+  </g>
+  
+  <g transform="translate(1000, 100)">
+    <!-- JSON-RPC stamp -->
+    <rect x="-60" y="-20" width="120" height="40" rx="20" fill="none" stroke="#ff00ff" stroke-width="2" opacity="0.8"/>
+    <text x="0" y="5" font-family="monospace" font-size="14" fill="#ff00ff" text-anchor="middle" font-weight="bold">JSON-RPC 2.0</text>
+  </g>
+  
+  <!-- Corner decorations -->
+  <g stroke="#ff00ff" stroke-width="2" fill="none" opacity="0.6">
+    <path d="M 20 20 L 60 20 M 20 20 L 20 60"/>
+    <path d="M 1180 20 L 1140 20 M 1180 20 L 1180 60"/>
+    <path d="M 20 610 L 60 610 M 20 610 L 20 570"/>
+    <path d="M 1180 610 L 1140 610 M 1180 610 L 1180 570"/>
+  </g>
+</svg>
