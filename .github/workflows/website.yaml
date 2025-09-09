@@ -37,7 +37,7 @@ jobs:
       - name: Lint with prettier
         run: pnpm run lint
       - name: Install playwright browser
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --only-shell
       - name: Build website
         run: pnpm run build
       - uses: aws-actions/configure-aws-credentials@a03048d87541d1d9fcf2ecf528a4a65ba9bd7838 # v5
