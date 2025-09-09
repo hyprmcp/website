@@ -1,0 +1,91 @@
+---
+import Layout from '~/layouts/StarlightLayout.astro';
+const title = 'MCP Server Instructions';
+const description = 'Create instructions for your MCP server';
+---
+
+<Layout title={title} description={description}>
+  <div
+    class="relative overflow-hidden bg-gray-50 dark:bg-slate-900 hyprmcp-bg py-12 sm:py-20">
+    <div class="absolute inset-0 bg-gray-50/80 dark:bg-slate-900/80"></div>
+    <div class="relative space-y-10">
+      <div class="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+        <div class="text-center">
+          <h1
+            class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl md:text-6xl mb-4">
+            {title}
+          </h1>
+          <h2
+            class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            {description}
+          </h2>
+        </div>
+      </div>
+
+      <div
+        class="mx-auto max-w-4xl px-8 text-center text-gray-600 dark:text-gray-400">
+        Instructing users on how to install an MCP server is hard, because
+        configuration is different for each client. If this has been your
+        experience hosting an MCP server for your product, this site is for you!
+        Just enter your server URL below and let us generate instructions for
+        the most widely used clients, ready for you to copy and paste into your
+        product's readme or documentation.
+      </div>
+
+      <div class="max-w-lg mx-auto px-8 space-y-1">
+        <div
+          class="relative rounded-2xl bg-white dark:bg-gray-900 p-8 shadow-lg ring-1 ring-gray-200 dark:ring-gray-800 space-y-4 not-content">
+          <form method="GET" action="/mcp-instructions" class="space-y-4">
+            <div>
+              <label for="server-url" class="block">Server URL</label>
+              <input
+                type="text"
+                id="server-url"
+                name="url"
+                class="border border-black dark:border-white focus:bg-gray-50 dark:focus:bg-gray-800 px-3 py-2 rounded-md w-full bg-transparent outline-none"
+                placeholder="https://mcp.example.com/"
+                required
+              />
+            </div>
+            <div>
+              <label for="server-name" class="block"
+                >Server Name (optional)</label
+              >
+              <input
+                type="text"
+                id="server-name"
+                name="name"
+                class="border border-black dark:border-white focus:bg-gray-50 dark:focus:bg-gray-800 px-3 py-2 rounded-md w-full bg-transparent outline-none"
+                placeholder="example"
+              />
+            </div>
+
+            <div class="text-center">
+              <button
+                type="submit"
+                class="min-w-48 px-6 py-2 bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-full text-center hover:bg-gray-800 dark:hover:bg-gray-200 transition-all cursor-pointer"
+                >Show</button
+              >
+            </div>
+          </form>
+
+          <div class="text-center space-y-4">
+            <div>or</div>
+            <form method="GET" action="/mcp-instructions">
+              <input
+                type="hidden"
+                name="url"
+                value="https://mcp.example.com/"
+              />
+              <button
+                type="submit"
+                class="min-w-48 border border-gray-200 dark:border-gray-700 px-6 py-2 bg-white dark:bg-gray-900 rounded-full text-center hover:bg-gray-50 dark:hover:bg-gray-800 transition-all cursor-pointer"
+                >Show example</button
+              >
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
