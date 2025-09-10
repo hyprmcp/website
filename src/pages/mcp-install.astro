@@ -1,0 +1,154 @@
+---
+import StandaloneLayout from '../layouts/StandaloneLayout.astro';
+import type {FooterLink} from '../components/lp/LandingFooter.astro';
+import GitHubStarButton from '../components/common/GitHubStarButton.astro';
+import {Icon} from '@astrojs/starlight/components';
+
+const pageTitle = 'Hypr MCP - From Zero to MCP in Days, Not Weeks';
+const pageDescription =
+  'Deploy and scale MCP servers with confidence. Solve analytics and authorization challenges. Connect your data to AI.';
+const navLinks: FooterLink[] = [];
+---
+
+<script>
+  import '@hyprmcp/mcp-install-instructions-generator/dist/component';
+
+  function updateInstructions() {
+    const queryParams = new URLSearchParams(location.search);
+    const instructionsElement = document.querySelector(
+      'mcp-install-instructions',
+    );
+
+    if (instructionsElement) {
+      const url = queryParams.get('url');
+      if (url) instructionsElement.setAttribute('url', url);
+      const name = queryParams.get('name');
+      if (name) instructionsElement.setAttribute('name', name);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', updateInstructions);
+  addEventListener('load', updateInstructions);
+  addEventListener('popstate', updateInstructions);
+
+  document.querySelector('#btn-share')!.addEventListener('click', e => {
+    const btn = e.target as HTMLButtonElement;
+    navigator.clipboard.writeText(window.location.href);
+    btn.textContent = 'URL copied!';
+    setTimeout(() => {
+      btn.textContent = 'Share';
+    }, 2000);
+  });
+</script>
+
+<style>
+  @reference "tailwindcss";
+  @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+  h1 {
+    @apply m-0;
+  }
+
+  h3 {
+    @apply text-2xl font-bold mt-6 mb-1;
+  }
+
+  mcp-install-instructions {
+    h3 {
+      @apply text-2xl font-bold mt-6 mb-1;
+    }
+
+    h4 {
+      @apply text-xl font-bold mt-2 mb-1;
+    }
+
+    button {
+      @apply font-medium rounded-sm cursor-pointer;
+    }
+
+    hr {
+      @apply my-8;
+    }
+
+    .mcp_instructions_header {
+      @apply mb-4 flex flex-wrap gap-1 justify-center-safe items-center;
+
+      .mcp_instructions_btn {
+        background: none;
+        @apply px-2 py-1;
+      }
+
+      .mcp_instructions_selected {
+        @apply bg-black dark:bg-white text-white dark:text-black;
+      }
+    }
+
+    .mcp_instructions_content {
+      p,
+      pre {
+        @apply mb-4;
+      }
+
+      pre,
+      code {
+        @apply bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-xs p-1 font-mono text-sm;
+      }
+
+      pre {
+        @apply overflow-auto p-4 rounded-sm mt-4;
+      }
+
+      pre.mcp_instructions_fullMarkdown {
+        @apply max-h-108;
+      }
+
+      button {
+        @apply bg-black dark:bg-white text-white dark:text-black py-2 px-4;
+      }
+    }
+  }
+</style>
+
+<StandaloneLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogUrl="https://hyprmcp.com/mcp-instructions/"
+  footerTagline={pageDescription}
+  footerLinks={navLinks}>
+  <div class="hyprmcp-bg bg-white dark:bg-slate-900">
+    <div class="max-w-4xl mx-auto p-8 xl:py-16 space-y-10">
+      <div
+        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="order-2 sm:order-1 text-center sm:text-left">
+          <a
+            href="/mcp-install-instructions-generator/"
+            class="inline-flex items-center px-4 py-1.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors cursor-pointer">
+            <Icon name="left-arrow" class="w-4 h-4 mr-1" />
+            Back to MCP Server Installation Instructions Generator
+          </a>
+        </div>
+        <div class="order-1 sm:order-2 flex justify-center sm:justify-end">
+          <GitHubStarButton />
+        </div>
+      </div>
+      <div class="relative group">
+        <div
+          class="absolute -inset-0.5 bg-gradient-to-r from-green-600 to-blue-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+        </div>
+        <div
+          class="relative rounded-2xl bg-white dark:bg-gray-900 p-6 space-y-6 shadow-lg ring-1 ring-gray-200 dark:ring-gray-800">
+          <div class="flex items-center">
+            <h1 class="mb-4 flex-grow">MCP Server Instructions</h1>
+            <button
+              id="btn-share"
+              class="bg-black dark:bg-white text-white dark:text-black py-2 px-4 rounded cursor-pointer font font-medium"
+              >Share</button
+            >
+          </div>
+
+          <mcp-install-instructions></mcp-install-instructions>
+        </div>
+      </div>
+    </div>
+  </div>
+</StandaloneLayout>
