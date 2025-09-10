@@ -1,10 +1,12 @@
 ---
 import StandaloneLayout from '../layouts/StandaloneLayout.astro';
 import type {FooterLink} from '../components/lp/LandingFooter.astro';
+import GitHubStarButton from '../components/common/GitHubStarButton.astro';
+import {Icon} from '@astrojs/starlight/components';
 
 const pageTitle = 'Hypr MCP - From Zero to MCP in Days, Not Weeks';
 const pageDescription =
-  'We build, host, and monitor your remote MCP so your application works instantly with ChatGPT, AI agents, and IDEs.';
+  'Deploy and scale MCP servers with confidence. Solve analytics and authorization challenges. Connect your data to AI.';
 const navLinks: FooterLink[] = [];
 ---
 
@@ -111,16 +113,23 @@ const navLinks: FooterLink[] = [];
   title={pageTitle}
   description={pageDescription}
   ogUrl="https://hyprmcp.com/mcp-instructions/"
-  footerTagline="From Zero to MCP — in Days, Not Weeks. We build, host, and monitor your remote MCP."
+  footerTagline={pageDescription}
   footerLinks={navLinks}>
   <div class="hyprmcp-bg bg-white dark:bg-slate-900">
     <div class="max-w-4xl mx-auto p-8 xl:py-16 space-y-10">
-      <div class="text-center">
-        <a
-          href="/"
-          class="inline-flex items-center px-4 py-1.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors cursor-pointer"
-          >Back to hyprmcp.com</a
-        >
+      <div
+        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="order-2 sm:order-1 text-center sm:text-left">
+          <a
+            href="/mcp-install-instructions-generator/"
+            class="inline-flex items-center px-4 py-1.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors cursor-pointer">
+            <Icon name="left-arrow" class="w-4 h-4 mr-1" />
+            Back to MCP Server Installation Instructions Generator
+          </a>
+        </div>
+        <div class="order-1 sm:order-2 flex justify-center sm:justify-end">
+          <GitHubStarButton />
+        </div>
       </div>
       <div class="relative group">
         <div

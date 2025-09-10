@@ -1,0 +1,378 @@
+---
+import Layout from '~/layouts/StarlightLayout.astro';
+import GitHubStarButton from '../components/common/GitHubStarButton.astro';
+const title = 'MCP Server Installation Instructions Generator';
+const description =
+  'Generate MCP Server Installation Instructions for Cursor, Visual Studio Code, Claude Code, Claude Desktop, Windsurf, ChatGPT, Gemini CLI and more';
+---
+
+<Layout title={title} description={description}>
+  <div
+    class="relative overflow-hidden bg-gray-50 dark:bg-slate-900 hyprmcp-bg py-12 sm:py-20">
+    <div class="absolute inset-0 bg-gray-50/80 dark:bg-slate-900/80"></div>
+    <div class="relative space-y-10">
+      <div class="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
+        <div class="text-center">
+          <h1
+            class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl md:text-6xl mb-4">
+            {title}
+          </h1>
+          <h2
+            class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            {description}
+          </h2>
+        </div>
+      </div>
+
+      <!-- Instructions Generator -->
+      <div class="max-w-lg mx-auto px-8 space-y-1">
+        <div class="relative group">
+          <div
+            class="absolute -inset-0.5 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+          </div>
+          <div
+            class="relative rounded-2xl bg-white dark:bg-gray-900 p-8 shadow-lg space-y-4 not-content">
+            <form method="GET" action="/mcp-install/" class="space-y-4">
+              <div>
+                <label for="server-url" class="block">Server URL</label>
+                <input
+                  type="text"
+                  id="server-url"
+                  name="url"
+                  class="border border-black dark:border-white focus:bg-gray-50 dark:focus:bg-gray-800 px-3 py-2 rounded-md w-full bg-transparent outline-none"
+                  placeholder="https://demo.hyprmcp.com/who-am-i/mcp"
+                  required
+                />
+              </div>
+              <div>
+                <label for="server-name" class="block"
+                  >Server Name (optional)</label
+                >
+                <input
+                  type="text"
+                  id="server-name"
+                  name="name"
+                  class="border border-black dark:border-white focus:bg-gray-50 dark:focus:bg-gray-800 px-3 py-2 rounded-md w-full bg-transparent outline-none"
+                  placeholder="who-am-i"
+                />
+              </div>
+
+              <div class="text-center">
+                <button
+                  type="submit"
+                  class="min-w-48 px-6 py-2 bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-full text-center hover:bg-gray-800 dark:hover:bg-gray-200 transition-all cursor-pointer"
+                  >Generate Installation Instructions</button
+                >
+              </div>
+            </form>
+
+            <div class="text-center space-y-4">
+              <div>or</div>
+              <form method="GET" action="/mcp-install/">
+                <input
+                  type="hidden"
+                  name="url"
+                  value="https://demo.hyprmcp.com/mcp-install-instructions-generator/mcp"
+                />
+                <button
+                  type="submit"
+                  class="min-w-48 border border-gray-200 dark:border-gray-700 px-6 py-2 bg-white dark:bg-gray-900 rounded-full text-center hover:bg-gray-50 dark:hover:bg-gray-800 transition-all cursor-pointer"
+                  >Show example</button
+                >
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="max-w-4xl mx-auto px-8 py-12 space-y-8">
+        <h2
+          class="text-3xl font-bold text-center text-gray-900 dark:text-white">
+          How To Install a Remote MCP server?
+        </h2>
+
+        <div
+          class="mx-auto max-w-4xl px-8 text-center text-gray-600 dark:text-gray-400">
+          Instructing users on how to install an MCP server is hard, because
+          configuration is different for each client. If this has been your
+          experience hosting an MCP server for your product, this site is for
+          you! Just enter your server URL below and let us generate instructions
+          for the most widely used clients, ready for you to copy and paste into
+          your product's readme or documentation.
+        </div>
+
+        <div class="space-y-6">
+          <div class="relative group">
+            <div
+              class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+            </div>
+            <details
+              class="relative bg-white dark:bg-gray-900 rounded-lg shadow-sm p-6">
+              <summary
+                class="text-lg font-semibold text-gray-900 dark:text-white cursor-pointer">
+                How do I install a remote MCP server on Claude Code?
+              </summary>
+              <div class="mt-4 text-gray-600 dark:text-gray-400 space-y-3">
+                <p>To install a remote MCP server on Claude Code:</p>
+                <ol class="list-decimal list-inside space-y-2 ml-4">
+                  <li>Open a terminal in Claude Code</li>
+                  <li>
+                    Run the command: <code
+                      class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded"
+                      >claude mcp add --transport http [server-name]
+                      [server-url]</code
+                    >
+                  </li>
+                  <li>
+                    Replace <code>[server-name]</code> with your desired name and
+                    <code>[server-url]</code> with the MCP server URL
+                  </li>
+                  <li>
+                    Use the <code>/mcp</code> command within Claude Code to verify
+                    the server is connected
+                  </li>
+                </ol>
+              </div>
+            </details>
+          </div>
+
+          <div class="relative group">
+            <div
+              class="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+            </div>
+            <details
+              class="relative bg-white dark:bg-gray-900 rounded-lg shadow-sm p-6">
+              <summary
+                class="text-lg font-semibold text-gray-900 dark:text-white cursor-pointer">
+                How do I install a remote MCP server on Cursor?
+              </summary>
+              <div class="mt-4 text-gray-600 dark:text-gray-400 space-y-3">
+                <p>To install a remote MCP server on Cursor:</p>
+                <ol class="list-decimal list-inside space-y-2 ml-4">
+                  <li>
+                    Locate your <code
+                      class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded"
+                      >mcp.json</code
+                    > configuration file
+                  </li>
+                  <li>
+                    Add your server configuration to the <code>mcpServers</code>
+                    object with the server URL
+                  </li>
+                  <li>Save the file and restart Cursor to apply the changes</li>
+                  <li>
+                    Alternatively, use the direct installation link if provided
+                    by the server
+                  </li>
+                </ol>
+              </div>
+            </details>
+          </div>
+
+          <div class="relative group">
+            <div
+              class="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+            </div>
+            <details
+              class="relative bg-white dark:bg-gray-900 rounded-lg shadow-sm p-6">
+              <summary
+                class="text-lg font-semibold text-gray-900 dark:text-white cursor-pointer">
+                How do I install a remote MCP server on Claude Desktop?
+              </summary>
+              <div class="mt-4 text-gray-600 dark:text-gray-400 space-y-3">
+                <p>To install a remote MCP server on Claude Desktop:</p>
+                <ol class="list-decimal list-inside space-y-2 ml-4">
+                  <li>Open Claude Desktop application</li>
+                  <li>
+                    Navigate to Settings → Connectors → Add Custom Connector
+                  </li>
+                  <li>Enter a name for your server</li>
+                  <li>Paste the remote MCP server URL</li>
+                  <li>Click Add to complete the installation</li>
+                </ol>
+              </div>
+            </details>
+          </div>
+
+          <div class="relative group">
+            <div
+              class="absolute -inset-0.5 bg-gradient-to-r from-green-600 to-teal-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+            </div>
+            <details
+              class="relative bg-white dark:bg-gray-900 rounded-lg shadow-sm p-6">
+              <summary
+                class="text-lg font-semibold text-gray-900 dark:text-white cursor-pointer">
+                How do I install a remote MCP server on VS Code?
+              </summary>
+              <div class="mt-4 text-gray-600 dark:text-gray-400 space-y-3">
+                <p>To install a remote MCP server on VS Code:</p>
+                <ol class="list-decimal list-inside space-y-2 ml-4">
+                  <li>
+                    Open a terminal and run: <code
+                      class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded"
+                      >code --add-mcp '{
+                        `{"type":"http","name":"[server-name]","url":"[server-url]"}`
+                      }'</code
+                    >
+                  </li>
+                  <li>
+                    Open the <code>.vscode/mcp.json</code> file in VS Code
+                  </li>
+                  <li>Click "Start server" to activate the connection</li>
+                  <li>
+                    Alternatively, use the installation link button if available
+                  </li>
+                </ol>
+              </div>
+            </details>
+          </div>
+
+          <div class="relative group">
+            <div
+              class="absolute -inset-0.5 bg-gradient-to-r from-orange-600 to-red-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+            </div>
+            <details
+              class="relative bg-white dark:bg-gray-900 rounded-lg shadow-sm p-6">
+              <summary
+                class="text-lg font-semibold text-gray-900 dark:text-white cursor-pointer">
+                How do I install a remote MCP server on Windsurf?
+              </summary>
+              <div class="mt-4 text-gray-600 dark:text-gray-400 space-y-3">
+                <p>To install a remote MCP server on Windsurf:</p>
+                <ol class="list-decimal list-inside space-y-2 ml-4">
+                  <li>Open your Windsurf MCP configuration file</li>
+                  <li>
+                    Add the server configuration to the <code
+                      class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded"
+                      >mcpServers</code
+                    > object
+                  </li>
+                  <li>
+                    Use <code>serverUrl</code> as the key for the remote URL
+                  </li>
+                  <li>Save the configuration and restart Windsurf</li>
+                </ol>
+              </div>
+            </details>
+          </div>
+
+          <div class="relative group">
+            <div
+              class="absolute -inset-0.5 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+            </div>
+            <details
+              class="relative bg-white dark:bg-gray-900 rounded-lg shadow-sm p-6">
+              <summary
+                class="text-lg font-semibold text-gray-900 dark:text-white cursor-pointer">
+                How do I install a remote MCP server on ChatGPT?
+              </summary>
+              <div class="mt-4 text-gray-600 dark:text-gray-400 space-y-3">
+                <p>To install a remote MCP server on ChatGPT:</p>
+                <ol class="list-decimal list-inside space-y-2 ml-4">
+                  <li>
+                    Navigate to Settings → Connectors (requires admin
+                    permissions in Team/Enterprise workspaces)
+                  </li>
+                  <li>Add a custom connector with your server URL</li>
+                  <li>
+                    The connector will be available in Composer → Deep research
+                    tool
+                  </li>
+                  <li>You may need to add the server as a source</li>
+                  <li>Note: Connectors can only be used with Deep Research</li>
+                </ol>
+              </div>
+            </details>
+          </div>
+
+          <div class="relative group">
+            <div
+              class="absolute -inset-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+            </div>
+            <details
+              class="relative bg-white dark:bg-gray-900 rounded-lg shadow-sm p-6">
+              <summary
+                class="text-lg font-semibold text-gray-900 dark:text-white cursor-pointer">
+                How do I install a remote MCP server on Gemini CLI?
+              </summary>
+              <div class="mt-4 text-gray-600 dark:text-gray-400 space-y-3">
+                <p>To install a remote MCP server on Gemini CLI:</p>
+                <ol class="list-decimal list-inside space-y-2 ml-4">
+                  <li>
+                    Locate your Gemini CLI configuration file at <code
+                      class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded"
+                      >~/.gemini/settings.json</code
+                    >
+                  </li>
+                  <li>
+                    Add your server to the <code>mcpServers</code> object with <code
+                      >httpUrl</code
+                    > key
+                  </li>
+                  <li>
+                    Include headers with <code
+                      >Accept: application/json, text/event-stream</code
+                    >
+                  </li>
+                  <li>Save the file and restart Gemini CLI</li>
+                </ol>
+              </div>
+            </details>
+          </div>
+
+          <div class="relative group">
+            <div
+              class="absolute -inset-0.5 bg-gradient-to-r from-teal-600 to-blue-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+            </div>
+            <details
+              class="relative bg-white dark:bg-gray-900 rounded-lg shadow-sm p-6">
+              <summary
+                class="text-lg font-semibold text-gray-900 dark:text-white cursor-pointer">
+                What is a remote MCP server?
+              </summary>
+              <div class="mt-4 text-gray-600 dark:text-gray-400 space-y-3">
+                <p>
+                  A remote MCP (Model Context Protocol) server is a web-based
+                  service that provides additional capabilities to AI
+                  assistants. Unlike local MCP servers that run on your machine,
+                  remote servers are hosted on the internet and accessed via
+                  HTTPS. Remote MCP servers can also implement <a
+                    href="/blog/mcp-server-authentication/"
+                    >MCP Server authentication</a
+                  > for personalized tools and context.
+                </p>
+              </div>
+            </details>
+          </div>
+
+          <div class="relative group">
+            <div
+              class="absolute -inset-0.5 bg-gradient-to-r from-red-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+            </div>
+            <details
+              class="relative bg-white dark:bg-gray-900 rounded-lg shadow-sm p-6">
+              <summary
+                class="text-lg font-semibold text-gray-900 dark:text-white cursor-pointer">
+                Can I contribute to the MCP Server installation instructions
+                generator?
+              </summary>
+              <div class="mt-4 text-gray-600 dark:text-gray-400 space-y-3">
+                <p>
+                  Yes! The MCP Server Installation Instructions Generator is
+                  open source. You can contribute, report issues, or suggest
+                  improvements on GitHub at <a
+                    href="https://github.com/hyprmcp/mcp-install-instructions-generator"
+                    target="_blank"
+                    class="text-blue-600 dark:text-blue-400 underline"
+                    >github.com/hyprmcp/mcp-install-instructions-generator</a
+                  >.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
