@@ -38,16 +38,15 @@ An MCP server is a lightweight program that exposes specific capabilities (resou
 
 The protocol supports three types of exposures:
 
-* **Resources**: Structured data such as files, database queries or API responses. For example, a file‑system server might let the model read documents from a specific directory.
-* **Tools**: Actions that the AI agent can perform, such as creating a GitHub issue or running a SQL query.
-* **Prompts**: Pre‑written instructions or templates that guide the model in a particular task, such as formatting a report.
+- **Resources**: Structured data such as files, database queries or API responses. For example, a file‑system server might let the model read documents from a specific directory.
+- **Tools**: Actions that the AI agent can perform, such as creating a GitHub issue or running a SQL query.
+- **Prompts**: Pre‑written instructions or templates that guide the model in a particular task, such as formatting a report.
 
 ### A brief history and the growing ecosystem
 
 Anthropic introduced MCP in late 2024 and quickly open-sourced it to accelerate adoption. Since then, hundreds of community servers have appeared—from simple reference implementations to sophisticated connectors for enterprise platforms.
 
-Major platforms have embraced the standard: 
-
+Major platforms have embraced the standard:
 
 - **[Microsoft’s Azure MCP Server](https://github.com/Azure/azure-mcp)** allows AI agents to interact with Azure resources using natural language commands
 
@@ -59,15 +58,13 @@ Major platforms have embraced the standard:
 
 - **[Figma Dev Mode MCP Server](https://www.figma.com/blog/introducing-figmas-dev-mode-mcp-server/)** grants AI coding agents access to precise design data—like graph metrics and color values—instead of relying on image interpretation, enabling highly accurate design-to-code experiences.
 
-
 ## Why do you need an MCP server?
 
 While the technology may seem esoteric, an MCP server can offer concrete advantages for both individuals and businesses.
 
-* **Reduce manual friction**: Without MCP, developers and users must copy data between applications, manually trigger APIs and assemble context. An MCP server centralises these tasks, allowing an AI agent to perform them directly. For example, instead of pasting file contents into a chat, the agent can fetch the file via a file‑system server and summarise it for you.
-* **Solve the NxM integration problem**: Each AI model (N) connecting to each tool (M) traditionally requires a custom integration. MCP standardises the interface so that any model can work with any tool, reducing integration overhead for teams maintaining complex AI systems.
-* **Enable agentic workflows**: Agents can plan and execute sequences of actions when they have access to the right tools. For instance, an agent could read code from a repository, apply refactoring functions, create a pull request and notify team members—all via MCP.
-
+- **Reduce manual friction**: Without MCP, developers and users must copy data between applications, manually trigger APIs and assemble context. An MCP server centralises these tasks, allowing an AI agent to perform them directly. For example, instead of pasting file contents into a chat, the agent can fetch the file via a file‑system server and summarise it for you.
+- **Solve the NxM integration problem**: Each AI model (N) connecting to each tool (M) traditionally requires a custom integration. MCP standardises the interface so that any model can work with any tool, reducing integration overhead for teams maintaining complex AI systems.
+- **Enable agentic workflows**: Agents can plan and execute sequences of actions when they have access to the right tools. For instance, an agent could read code from a repository, apply refactoring functions, create a pull request and notify team members—all via MCP.
 
 ## MCP architecture and how servers work
 
@@ -76,10 +73,9 @@ While the technology may seem esoteric, an MCP server can offer concrete advanta
 # MCP Architecture
 
 flowchart TD
-    A[Host Applications] <-->B(MCP Client)
-    B[MCP Client] <-->|JSON-RPC| C(Transport Layer)
-    C[Transport Layer] <-->|http+sse| D(MCP Server)
-
+A[Host Applications] <-->B(MCP Client)
+B[MCP Client] <-->|JSON-RPC| C(Transport Layer)
+C[Transport Layer] <-->|http+sse| D(MCP Server)
 
 1. **Host application**: The primary application that interacts with users. Examples include Claude Desktop, IDEs like Cursor or VS Code and custom chat platforms.
 2. **MCP client**: A component inside the host that connects to MCP servers. It negotiates capabilities, manages sessions and translates between the host’s needs and the MCP protocol.
@@ -100,7 +96,7 @@ From the AI agent’s perspective, using an MCP server follows a predictable pat
 
 ### Local vs remote connections
 
-MCP supports both local and remote connections.  Historically, most implementations were **local**, using the **stdio** transport to exchange messages via standard input and output.  This worked because early MCP servers didn’t include authentication or authorization.  However, the ecosystem is rapidly moving toward **remote** MCP servers that communicate over HTTP and Server‑Sent Events (SSE).  Remote transports allow an agent to access services on other machines or across the Internet and support secure, multi‑user environments.  The substack “Crossing the MCP Adoption Chasm” notes that most early implementations were local but predicts that remote MCP servers will overtake local ones as authentication matures.  Local servers remain ideal for sensitive data or offline use, but HTTP/SSE is becoming the de‑facto standard for hosted services and cross‑platform access.  When designing a server, think carefully about where it will run and select the appropriate transport.
+MCP supports both local and remote connections. Historically, most implementations were **local**, using the **stdio** transport to exchange messages via standard input and output. This worked because early MCP servers didn’t include authentication or authorization. However, the ecosystem is rapidly moving toward **remote** MCP servers that communicate over HTTP and Server‑Sent Events (SSE). Remote transports allow an agent to access services on other machines or across the Internet and support secure, multi‑user environments. The substack “Crossing the MCP Adoption Chasm” notes that most early implementations were local but predicts that remote MCP servers will overtake local ones as authentication matures. Local servers remain ideal for sensitive data or offline use, but HTTP/SSE is becoming the de‑facto standard for hosted services and cross‑platform access. When designing a server, think carefully about where it will run and select the appropriate transport.
 
 ### MCP vs traditional APIs and function calls
 
@@ -130,18 +126,17 @@ Industry‑specific MCP servers can provide curated data sets (medical codes, le
 
 Some MCP servers expose actual tools or actions. For example, a GitHub server may let an agent create an issue, review a pull request or clone a repository, while a DevOps server can manage Kubernetes resources. These actions empower agents to act on behalf of the user.
 
-
 ## Limitations and challenges of MCP adoption
 
-Despite its potential, MCP is not without shortcomings.  Understanding these challenges will help you set realistic expectations and plan mitigation strategies.
+Despite its potential, MCP is not without shortcomings. Understanding these challenges will help you set realistic expectations and plan mitigation strategies.
 
-* **Limited tool scope and few enterprise servers**: Because early versions of the spec lacked authentication and authorization, most existing servers run locally via stdio and expose a narrow set of tools.  Remote servers require secure authentication; as a result, there are still relatively few enterprise‑grade MCP servers covering complex business systems.  Many companies must build their own connectors, and the ecosystem of off‑the‑shelf servers is still nascent.
+- **Limited tool scope and few enterprise servers**: Because early versions of the spec lacked authentication and authorization, most existing servers run locally via stdio and expose a narrow set of tools. Remote servers require secure authentication; as a result, there are still relatively few enterprise‑grade MCP servers covering complex business systems. Many companies must build their own connectors, and the ecosystem of off‑the‑shelf servers is still nascent.
 
-* **Spec maturity and ecosystem size**: Authorization and remote transport were only added to the official spec in March 2025, and the proposals continue to evolve.  The protocol and its tooling are still early; features like OAuth support, protected resource metadata and multi‑user client management are under active development.  This immaturity means that integration patterns may change and enterprises may hesitate to rely on MCP for critical workflows.
+- **Spec maturity and ecosystem size**: Authorization and remote transport were only added to the official spec in March 2025, and the proposals continue to evolve. The protocol and its tooling are still early; features like OAuth support, protected resource metadata and multi‑user client management are under active development. This immaturity means that integration patterns may change and enterprises may hesitate to rely on MCP for critical workflows.
 
-* **Security remains paramount**: Early MCP servers lacked built‑in security controls and often operated under the assumption that the local environment could be trusted.  Without proper authentication, authorization and data masking, an agent could inadvertently expose sensitive files or perform unauthorized actions.
+- **Security remains paramount**: Early MCP servers lacked built‑in security controls and often operated under the assumption that the local environment could be trusted. Without proper authentication, authorization and data masking, an agent could inadvertently expose sensitive files or perform unauthorized actions.
 
-These limitations are typical of an emerging standard.  As the ecosystem matures—with better tooling, more hosted servers and stronger security models—many of these challenges will lessen.  For now, awareness of the shortcomings helps you plan and prioritise accordingly.
+These limitations are typical of an emerging standard. As the ecosystem matures—with better tooling, more hosted servers and stronger security models—many of these challenges will lessen. For now, awareness of the shortcomings helps you plan and prioritise accordingly.
 
 ## How to build and connect to an MCP server
 
@@ -159,9 +154,9 @@ Create a new directory for your server and initialise your project (e.g., using 
 
 Write a script that imports the MCP library and defines the server’s capabilities:
 
-* **Describe the server**: Provide metadata such as name and description.
-* **Define resources/tools/prompts**: For a weather server, you might expose `get_forecast` and `get_alerts` tools that call an external weather API.
-* **Handle requests**: Implement functions that receive parameters, fetch data from the external service, handle errors and return JSON responses.
+- **Describe the server**: Provide metadata such as name and description.
+- **Define resources/tools/prompts**: For a weather server, you might expose `get_forecast` and `get_alerts` tools that call an external weather API.
+- **Handle requests**: Implement functions that receive parameters, fetch data from the external service, handle errors and return JSON responses.
 
 Each tool definition should include input parameters (with type information), output structure and a description. The MCP library will expose these to the client during capability discovery.
 
@@ -179,11 +174,9 @@ Test the server thoroughly. Ensure proper error handling, implement authenticati
 
 ### Testing and debugging
 
-While you develop your server, you’ll want to verify that the exposed tools behave as expected.  The **MCP inspector** is a visual testing tool that makes this process simple.  Run it locally with `npx @modelcontextprotocol/inspector`, then enter the URL of your remote or local MCP server and authenticate if necessary.  After logging in, click **List Tools** to see and interact with the server’s tools.  This browser‑based interface lets you invoke methods, inspect responses and debug your server without wiring up a full client.
+While you develop your server, you’ll want to verify that the exposed tools behave as expected. The **MCP inspector** is a visual testing tool that makes this process simple. Run it locally with `npx @modelcontextprotocol/inspector`, then enter the URL of your remote or local MCP server and authenticate if necessary. After logging in, click **List Tools** to see and interact with the server’s tools. This browser‑based interface lets you invoke methods, inspect responses and debug your server without wiring up a full client.
 
-
-Beyond the official **MCP inspector**, there is a [specialized fork by MCP Jam](https://github.com/MCPJam/inspector). It includes powerful enhancements such as multi-server support, an LLM playground, OAuth support, and improved logging and developer experience.  
-
+Beyond the official **MCP inspector**, there is a [specialized fork by MCP Jam](https://github.com/MCPJam/inspector). It includes powerful enhancements such as multi-server support, an LLM playground, OAuth support, and improved logging and developer experience.
 
 ## Security and best practices
 
@@ -191,7 +184,7 @@ While MCP streamlines integrations, it does not include built‑in authenticatio
 
 ### Implement authentication and authorization
 
-Adding secure authentication and authorization remains one of the biggest hurdles for MCP adoption.  Authentication verifies the identity of the client or user, while authorization restricts what actions the agent can perform.  The **Hypr MCP Gateway** solves much of this complexity by acting as an OAuth proxy with dynamic client registration and prompt telemetry.  By separating authentication into a gateway, your MCP server can remain lightweight and spec‑compliant without you writing your own auth code.  Always require the user to approve tool usage, especially when dealing with sensitive operations or data.
+Adding secure authentication and authorization remains one of the biggest hurdles for MCP adoption. Authentication verifies the identity of the client or user, while authorization restricts what actions the agent can perform. The **Hypr MCP Gateway** solves much of this complexity by acting as an OAuth proxy with dynamic client registration and prompt telemetry. By separating authentication into a gateway, your MCP server can remain lightweight and spec‑compliant without you writing your own auth code. Always require the user to approve tool usage, especially when dealing with sensitive operations or data.
 
 ### Encrypt communication
 
@@ -208,7 +201,6 @@ Descope recommends defining roots, which specify the directories a file‑system
 ### Monitor and audit
 
 Log all requests and responses for auditing. Implement rate limiting to prevent denial‑of‑service attacks. Periodically review the server’s permissions, update dependencies and apply security patches.
-
 
 ## Frequently asked questions
 
@@ -240,9 +232,8 @@ MCP is still maturing. Many servers and clients are in beta, and the specificati
 
 Ensure the client can connect to the server (check network connectivity and firewall rules). Verify that the tool appears in the list of capabilities and that you’ve approved it. Check server logs for errors and confirm that authentication tokens are valid. If the server returns errors, ensure you’re passing the correct parameters and that the back‑end system is reachable.
 
-
 ## Conclusion
 
 The Model Context Protocol and MCP servers mark a significant step forward in connecting AI agents to the real world. By standardising how models discover and call tools, MCP reduces integration complexity, unlocks powerful agentic workflows and enables secure access to proprietary data. Whether you’re a developer automating repetitive tasks, a business integrating AI into legacy systems or a researcher exploring agentic AI, building or using an MCP server can save time and deliver richer interactions.
 
-If you need support building an enterprise-grade MCP server, [contact us](https://hyprmcp.com/waitlist/) or check out our [Open Source MCP  Gateway](https://github.com/hyprmcp/mcp-gateway)
+If you need support building an enterprise-grade MCP server, [contact us](https://hyprmcp.com/waitlist/) or check out our [Open Source MCP Gateway](https://github.com/hyprmcp/mcp-gateway)
