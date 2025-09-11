@@ -24,7 +24,7 @@ jobs:
           version: 10
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
-          node-version: '24.7'
+          node-version: '24.8'
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
       - uses: actions/cache@v4
@@ -37,7 +37,7 @@ jobs:
       - name: Lint with prettier
         run: pnpm run lint
       - name: Install playwright browser
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --only-shell
       - name: Build website
         run: pnpm run build
       - uses: aws-actions/configure-aws-credentials@a03048d87541d1d9fcf2ecf528a4a65ba9bd7838 # v5

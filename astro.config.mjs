@@ -22,8 +22,8 @@ export default defineConfig({
       description:
         'Serverless hosting and analytics provider for remote, authenticated streamable HTTP MCP server',
       logo: {
-        light: './src/assets/hm.svg',
-        dark: './src/assets/hm.svg',
+        light: './src/assets/mc-dark.svg',
+        dark: './src/assets/mc-light.svg',
         replacesTitle: true,
       },
       customCss: ['./src/styles/global.css'],
@@ -109,7 +109,9 @@ export default defineConfig({
       },
       prerender: true,
       plugins: [
-        starlightLinksValidator(),
+        starlightLinksValidator({
+          exclude: ['/blog/mcp-server-authentication/'],
+        }),
         starlightUtils({
           navLinks: {
             leading: {useSidebarLabelled: 'Navbar'},
@@ -120,7 +122,12 @@ export default defineConfig({
     sitemap({
       filter: page => {
         // Exclude specific pages by slug
-        const excludedSlugs = ['ai-integration', 'mcp-analytics', 'remote-mcp'];
+        const excludedSlugs = [
+          'ai-integration',
+          'mcp-analytics',
+          'mcp-install',
+          'remote-mcp',
+        ];
         const url = new URL(page);
         const pathname = url.pathname;
 
