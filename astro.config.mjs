@@ -109,7 +109,9 @@ export default defineConfig({
       },
       prerender: true,
       plugins: [
-        starlightLinksValidator(),
+        starlightLinksValidator({
+          exclude: ['/blog/mcp-server-authentication/'],
+        }),
         starlightUtils({
           navLinks: {
             leading: {useSidebarLabelled: 'Navbar'},
