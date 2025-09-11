@@ -1,8 +1,8 @@
 ---
 title: 'MCP Explained in 2025 - A Comprehensive Introduction to MCP'
 description: 'What are MCP Servers, What are they used for and how to get started'
-publishDate: 2025-09-10
-lastUpdated: 2025-09-10
+publishDate: 2025-09-11
+lastUpdated: 2025-09-11
 slug: 'what-is-mcp'
 authors:
   - name: 'Louis Weston'
