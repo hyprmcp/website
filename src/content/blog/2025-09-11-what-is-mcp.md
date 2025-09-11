@@ -136,7 +136,21 @@ The substack "Crossing the MCP Adoption Chasm" notes that most early implementat
 Local servers remain ideal for sensitive data or offline use, but streamable HTTP is becoming the de facto standard for hosted services and cross-platform access.
 When designing a server, think carefully about these tradeoffs and select the appropriate transport mechanism for your specific use case.
 
-### MCP vs traditional APIs and function calls
+| Aspect              | Local MCP Server                     | Remote MCP Server                   |
+| ------------------- | ------------------------------------ | ----------------------------------- |
+| **Location**        | Same machine as client               | Separate machine or cloud           |
+| **Transport**       | STDIO (standard input/output)        | Streamable HTTP/HTTPS               |
+| **Installation**    | Requires local software installation | No client-side installation needed  |
+| **Security**        | Relies on local system security      | TLS encryption + authentication     |
+| **Performance**     | Faster (no network latency)          | Network latency overhead            |
+| **Accessibility**   | Single user/machine only             | Multi-user, cross-platform access   |
+| **Use Cases**       | File system access, hardware control | Team collaboration, cloud services  |
+| **Compatibility**   | Desktop clients only                 | Web apps (ChatGPT), mobile, desktop |
+| **Scalability**     | Limited to local resources           | Can scale with cloud infrastructure |
+| **Maintenance**     | User manages updates                 | Centralized updates and management  |
+| **User Experience** | Manual token/config setup            | Seamless OAuth 2.0 authentication   |
+
+### Traditional APIs vs Function Calls vs MCP
 
 MCP provides unique advantages over existing integration methods.
 
@@ -148,9 +162,31 @@ With MCP, the server handles the API call and returns structured data, freeing t
 Function calling in modern AI models similarly allows the model to call external functions but still requires model-specific schemas and separate implementations for each model.
 MCP builds on function calling by standardizing how tools are defined and discovered, providing a universal protocol that works across models and clients.
 
+| Aspect                                        | Traditional APIs                                                                                                      | Function Calling (in LLMs)                                                                                                                                             | MCP (Model Context Protocol)                                                                                                                                                              |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Purpose**                                   | Expose functionality/data to client applications; general software integration.                                       | Let LLMs invoke specific “tools/functions” via structured schemas to perform tasks (call APIs, compute things, etc.).                                                  | Provide a standard protocol so LLMs/agents can access external tools, data sources, and context in a uniform, model-agnostic way.                                                         |
+| **Target Audience**                           | Software developers building apps or services.                                                                        | Developers building LLM-powered agents or applications, and the LLM itself.                                                                                            | Both developers and any AI model / agent frameworks that want to support interoperable tool & data access.                                                                                |
+| **Schema / Contract Definition**              | Defined by each API (e.g. REST, GraphQL, gRPC). Can vary widely; must be documented.                                  | Defined tool/function schemas (often using JSON Schema or similar), provided to the LLM so it “knows” what it can call.                                                | MCP defines schemas for tools, resources, prompts, etc., in a standardized way (JSON-RPC transport, formal spec, SDKs).                                                                   |
+| **Tool / Capability Discovery**               | Usually via external documentation; developer must integrate manually; each API is different.                         | The LLM is given the list of callable tools/functions in the prompt / config. Discovery is static per session/config.                                                  | Dynamic discovery: MCP clients can discover MCP servers’ capabilities (tools/resources) more flexibly.                                                                                    |
+| **Implementation**                            | Applications make API calls (HTTP, RPC) using client libraries; developer handles schemas, endpoints, authentication. | Application supplies function definitions/schema; LLM returns a function call request; application executes and returns result to LLM.                                 | MCP uses a protocol (client-server), structured over JSON-RPC 2.0, with SDKs and MCP servers/clients; supports both local and remote servers.                                             |
+| **Response Handling**                         | Application parses API responses (often arbitrary JSON / XML / etc.), handles errors, formats.                        | After LLM signals a function call, application executes the function and returns structured results; LLM may then incorporate that into its next prompt / response.    | MCP server returns structured data/resources; the protocol ensures consistent format; the client (agent/model) can use the results, maintain context etc.                                 |
+| **Context Management / Stateful Interaction** | Typically stateless or limited state (sessions, tokens, cookies) built by developer.                                  | LLM maintains conversational context; function call results are often fed back into context in subsequent turns. State beyond that must be managed by the application. | MCP is designed to support richer and built-in context: metadata tagging, resources, tools, memory / stateful resources, and ability to orchestrate across multiple tools & data sources. |
+| **Standardization**                           | Varies widely; many styles, conventions, auth mechanisms.                                                             | Emerging conventions (many use JSON Schema; many LLMs follow similar function-calling conventions), but still vendor-specific differences.                             | MCP is an open standard; aims at vendor-agnostic interoperability; uses JSON-RPC etc.                                                                                                     |
+| **Integration / Development Effort**          | High when integrating many APIs: each API needs its own client, schema handling, error handling, auth, etc.           | Lower: define the function schemas once, then LLM uses them; still need to implement the actual function/tool endpoints and error handling.                            | Lower (relative) once MCP is supported: plug into existing MCP servers or build servers for your tools; clients/agents understand them; less custom glue code.                            |
+| **Error Handling & Security**                 | Each API defines its own errors; security/auth handled per API; responsibility on developer.                          | Function schema constrains parameter types; still need application-level error handling; potential security issues if tools/functions do harmful things.               | MCP includes standardized error formats (JSON-RPC), permissioning, and audit concepts; still evolving and security risks are being researched.                                            |
+
 ## Use cases and examples
 
 MCP servers enable diverse applications across industries.
+
+```mermaid
+graph TD
+    A[MCP Use Cases] --> B[Securely Exposing<br/>Enterprise Data]
+    A --> C[Federating Access to<br/>Multiple Data Silos]
+    A --> D[API & External<br/>Service Integrations]
+    A --> E[Domain-Specific<br/>Knowledge & Tools]
+    A --> F[Enabling<br/>AI Tools]
+```
 
 ### Securely exposing enterprise data
 
@@ -229,7 +265,13 @@ The specific steps for implementing a server are dependent on the language and S
 
 While you develop your server, you'll want to verify that the exposed tools behave as expected.
 The **MCP inspector** is a visual testing tool that makes this process simple.
-Run it locally with `npx @modelcontextprotocol/inspector@latest`, then enter the URL of your remote or local MCP server and authenticate if necessary.
+Run it locally with
+
+```shell
+npx @modelcontextprotocol/inspector@latest
+```
+
+Then enter the URL of your remote or local MCP server and authenticate if necessary.
 After logging in, click **List Tools** to see and interact with the server's tools.
 This browser-based interface lets you invoke methods, inspect responses and debug your server without wiring up a full client.
 
@@ -283,7 +325,17 @@ Visibility enables security and compliance.
 
 Log all requests and responses for auditing.
 Implement rate limiting to prevent denial-of-service attacks.
-Periodically review the server's permissions, update dependencies and apply security patches.
+Periodically review the server's permissions, update dependencies, and apply security patches.
+
+## MCP Logo
+
+The official MCP logos are available for use in your projects and documentation.
+
+| Logo                                                                                                                                                     | Description                  | Download                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- | --------------------------------------- |
+| <img src="/mcp/mcp-logo-icon.png" alt="MCP Logo Icon png" style="width: 100%; max-width: 50px; background: #f0f0f0; border-radius: 8px;" />              | MCP Icon (PNG)               | [Download PNG](/mcp/mcp-logo-icon.png)  |
+| <img src="/mcp/mcp-logo-black.svg" alt="MCP Logo Black" style="width: 100%; max-width: 300px; background: #f0f0f0; padding: 4px; border-radius: 8px;" /> | MCP Logo Black Version (SVG) | [Download SVG](/mcp/mcp-logo-black.svg) |
+| <img src="/mcp/mcp-logo-white.svg" alt="MCP Logo White" style="width: 100%; max-width: 300px; background: #1a1a1a; padding: 4px; border-radius: 8px;" /> | MCP Logo White Version (SVG) | [Download SVG](/mcp/mcp-logo-white.svg) |
 
 ## Frequently asked questions
 
@@ -345,6 +397,20 @@ Ensure the client can connect to the server (check network connectivity and fire
 Verify that the tool appears in the list of capabilities and that you've approved it.
 Check server logs for errors and confirm that authentication tokens are valid.
 If the server returns errors, ensure you're passing the correct parameters and that the back-end system is reachable.
+
+### How does Authentication for Remote MCP servers work?
+
+Authentication can work by manually passing a token (often a JWT) via a header.
+As an alternative, MCP servers can support OAuth 2.0 for an interactive and user-friendly authentication flow.
+
+For this to work, remote MCP servers need to implement three key components:
+
+- **Dynamic Client Registration (DCR)** - Clients register automatically without manual configuration
+- **Authorization Server Metadata (ASM)** - Servers expose their OAuth endpoints through well-known URLs
+- **Cross-Origin Resource Sharing (CORS)** - Enables secure browser-based authentication flows
+
+You can find another blog post on building an authentication layer for MCP servers at
+[Building Supabase-like OAuth Authentication For MCP Servers](/blog/mcp-server-authentication).
 
 ## Conclusion
 
