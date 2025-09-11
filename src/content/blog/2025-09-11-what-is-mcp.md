@@ -181,11 +181,11 @@ MCP servers enable diverse applications across industries.
 
 ```mermaid
 graph TD
-    A[MCP Use Cases] --> B[Securely Exposing<br/>Enterprise Data]
-    A --> C[Federating Access to<br/>Multiple Data Silos]
-    A --> D[API & External<br/>Service Integrations]
-    A --> E[Domain-Specific<br/>Knowledge & Tools]
-    A --> F[Enabling<br/>AI Tools]
+    A[MCP] --> B[Securely Exposing Enterprise Data]
+    A --> C[Federating Access to Multiple Data Silos]
+    A --> D[API & External Service Integrations]
+    A --> E[Domain-Specific Knowledge & Tools]
+    A --> F[Enabling AI Tools]
 ```
 
 ### Securely exposing enterprise data
