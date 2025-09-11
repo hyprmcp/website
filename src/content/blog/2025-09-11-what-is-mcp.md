@@ -94,9 +94,13 @@ The MCP ecosystem consists of four main components working together.
 
 ```mermaid
 flowchart LR
-A[Host Applications] <-->B(MCP Client)
-B[MCP Client] <-->|stdio / streamable http| C(Transport Layer)
-C[Transport Layer] <-->|JSON-RPC| D(MCP Server)
+    subgraph Host application
+    client(MCP client)
+    end
+        
+    server(MCP server)
+
+    client <-- "Transport layer" --> server
 ```
 
 1. **Host application**: The primary application that interacts with users. Examples include Claude Desktop, IDEs like Cursor or VS Code and custom chat platforms.
@@ -107,14 +111,14 @@ C[Transport Layer] <-->|JSON-RPC| D(MCP Server)
 All interactions use JSON-RPC 2.0 to send requests, results, errors and notifications.
 This ensures consistent message formats across implementations.
 
-### The MCP request lifecycle
+### The MCP lifecycle
 
 Understanding the request flow helps when building or debugging MCP servers.
 
 From the AI agent's perspective, using an MCP server follows a predictable pattern:
 
 1. **Client request**: The user asks the host application to perform an action. The client packages the request and includes session or user identifiers.
-2. **Capability discovery**: When the client connects to a server, it asks "What capabilities do you offer?". The server returns its available resources, tools and prompts. This step happens once per session.
+2. **Capability discovery**: When the client connects to a server, it asks "What capabilities do you offer?". The server returns its available resources, tools and prompts. This step happens at least once per session, though the protocol does have support for servers updating capabilities dynamically.
 3. **Permission prompt**: To protect privacy, the client may ask the user to approve a specific tool invocation. For instance, Claude Desktop might prompt "Allow the weather server to fetch the forecast?"
 4. **Server processing**: The server receives the request, handles authentication and authorization, queries back-end systems or executes commands, applies masking or transformation logic and prepares a structured response.
 5. **Response and context update**: The client integrates the returned data into the model's context and continues the conversation or workflow. The agent may call multiple servers sequentially and compose the results.
@@ -125,12 +129,12 @@ Choosing between local and remote deployment affects security and accessibility.
 
 MCP supports both local and remote connections.
 Historically, most implementations were **local**, using the **stdio** transport to exchange messages via standard input and output.
-This worked because early MCP servers didn't include authentication or authorization.
+This worked because early iterations of the MCP specification didn't account for authentication or authorization.
 However, the ecosystem is rapidly moving toward **remote** MCP servers that communicate over streamable HTTP.
 Remote transports allow an agent to access services on other machines or across the Internet and support secure, multi-user environments.
 The substack "Crossing the MCP Adoption Chasm" notes that most early implementations were local but predicts that remote MCP servers will overtake local ones as authentication matures.
 Local servers remain ideal for sensitive data or offline use, but streamable HTTP is becoming the de facto standard for hosted services and cross-platform access.
-When designing a server, think carefully about where it will run and select the appropriate transport.
+When designing a server, think carefully about these tradeoffs and select the appropriate transport mechanism for your specific use case.
 
 ### MCP vs traditional APIs and function calls
 
@@ -153,7 +157,7 @@ MCP servers enable diverse applications across industries.
 Enterprises need controlled access to sensitive systems.
 
 Enterprises often store sensitive customer or operational data in CRM, ERP or HCM systems.
-Connecting these directly to an AI agent can be risky or require significant integration work.
+Connecting these directly to an AI agent can be risky and requires significant integration work.
 An MCP server can sit between the agent and these systems, enforcing authentication, authorization and data masking.
 For instance, a finance MCP server might fetch transaction records but mask account numbers before returning them.
 
@@ -207,75 +211,30 @@ For now, awareness of the shortcomings helps you plan and prioritize accordingly
 
 Creating your first MCP server is straightforward with the right tools.
 
-Building an MCP server is easier than you might think, especially with community libraries and detailed examples.
-Here's a high-level overview inspired by Apidog's weather server example and other reference implementations.
+Building an MCP server is easier than you might think, especially with official SDKs, community libraries and detailed examples.
+After deciding on which resources, tools and prompts you want your server to expose, choose an SDK in a programming language of your choice.
+Here are some examples of well-known SDKs for different programming languages:
 
-### 1. Set up the environment
+- **Python**: [modelcontextprotocol/python-sdk](https://github.com/modelcontextprotocol/python-sdk), [jlowin/fastmcp](https://github.com/jlowin/fastmcp)
+- **JavaScript**: [modelcontextprotocol/typescript-sdk](https://github.com/modelcontextprotocol/typescript-sdk)
+- **Java**: [modelcontextprotocol/java-sdk](https://github.com/modelcontextprotocol/java-sdk)
+- **Go**: [modelcontextprotocol/go-sdk](https://github.com/modelcontextprotocol/go-sdk), [mark3labs/mcp-go](https://github.com/mark3labs/mcp-go)
 
-Proper environment setup ensures smooth development.
+The specific steps for implementing a server are dependent on the language and SDK you choose, but generally involve the following steps:
 
-Ensure you have a supported programming language and library.
-Many servers are written in Node.js or Python; for Python, you can use the `mcp` package.
-Install the necessary tools (e.g., Python 3.10+, Node.js) and set up a virtual environment to manage dependencies.
-
-### 2. Initialize the project
-
-Start with a clean project structure.
-
-Create a new directory for your server and initialize your project (e.g., using `uv init my_server` for Python projects).
-Install the MCP library and any dependencies needed to access your target resource.
-If you're building a weather server, you might need an HTTP client like `httpx`.
-
-### 3. Implement the MCP server
-
-The core implementation defines your server's capabilities.
-
-Write a script that imports the MCP library and defines the server's capabilities:
-
-- **Describe the server**: Provide metadata such as name and description.
-- **Define resources/tools/prompts**: For a weather server, you might expose `get_forecast` and `get_alerts` tools that call an external weather API.
-- **Handle requests**: Implement functions that receive parameters, fetch data from the external service, handle errors and return JSON responses.
-
-Each tool definition should include input parameters (with type information), output structure and a description.
-The MCP library will expose these to the client during capability discovery.
-
-### 4. Run the server
-
-Choose the right transport for your deployment.
-
-Start the server by specifying the transport.
-For local development, use STDIO or a local HTTP port.
-For remote deployment, you might run it behind a secure proxy with TLS.
-
-### 5. Connect a client
-
-Clients discover and use your server's capabilities.
-
-Use an MCP-compatible client such as Claude Desktop, an IDE extension or a custom app.
-Configure the client to connect to your server.
-When it starts, the client will discover the server's tools and list them for user approval.
-Once approved, the AI agent can call your server using natural language.
-
-### 6. Iterate and secure
-
-Continuous improvement ensures reliability and safety.
-
-Test the server thoroughly.
-Ensure proper error handling, implement authentication and authorization if needed and consider rate-limiting to prevent abuse.
-You can extend the server to include more tools or integrate additional services.
-
-### Testing and debugging
-
-Proper testing tools accelerate development.
+1. Install the SDK using the language's package manager.
+2. Create a new instance of the MCP server using the SDK.
+3. Configure the server with the desired resources, tools and prompts.
+4. Start the server using an appropriate transport mechanism.
 
 While you develop your server, you'll want to verify that the exposed tools behave as expected.
 The **MCP inspector** is a visual testing tool that makes this process simple.
-Run it locally with `npx @modelcontextprotocol/inspector`, then enter the URL of your remote or local MCP server and authenticate if necessary.
+Run it locally with `npx @modelcontextprotocol/inspector@latest`, then enter the URL of your remote or local MCP server and authenticate if necessary.
 After logging in, click **List Tools** to see and interact with the server's tools.
 This browser-based interface lets you invoke methods, inspect responses and debug your server without wiring up a full client.
 
 Beyond the official **MCP inspector**, there is a [specialized fork by MCP Jam](https://github.com/MCPJam/inspector).
-It includes powerful enhancements such as multi-server support, an LLM playground, OAuth support, and improved logging and developer experience.
+It includes powerful enhancements such as multi-server support, an LLM playground, and improved logging and developer experience.
 
 ## Security and best practices
 
@@ -283,41 +242,39 @@ Security must be a primary consideration when deploying MCP servers.
 
 While MCP streamlines integrations, it does not include built-in authentication, authorization or encryption by default.
 This flexibility allows implementations to choose their own security model, but it also introduces risk.
-Here's how to secure your MCP deployment.
+While most existing security best practices also apply to MCP, it also introduces new challenges and attack vectors such as prompt injection. 
+Prompt injection is a type of attack where an LLM is tricked into following malicious instructions that go beyond the scope of the prompt originally written by the user.
+Implementing proper access control, and audit logging is therefore all the more important for securely using MCP servers in production.
 
 ### Implement authentication and authorization
-
-Access control is critical for production deployments.
 
 Adding secure authentication and authorization remains one of the biggest hurdles for MCP adoption.
 Authentication verifies the identity of the client or user, while authorization restricts what actions the agent can perform.
 The **Hypr MCP Gateway** solves much of this complexity by acting as an OAuth proxy with dynamic client registration and prompt telemetry.
 By separating authentication into a gateway, your MCP server can remain lightweight and spec-compliant without you writing your own auth code.
-Always require the user to approve tool usage, especially when dealing with sensitive operations or data.
+On the other hand, always require the user to approve tool usage, when implementing an MCP client or AI agent, especially when dealing with sensitive operations or data.
 
 ### Encrypt communication
 
-Protect data in transit from interception.
-
-When using remote servers, always enable TLS (HTTPS) to protect data in transit.
-MCP messages over HTTP are vulnerable to impersonation or on-path attacks.
-Local servers can rely on STDIO, but remote servers should never run unencrypted.
+As any service exposed via the internet, remote MCP servers should be encrypted using TLS (HTTPS).
+Unencrypted communication can be intercepted and tampered with by a malicious actor opening up a wide range of attack vectors.
+Local servers can rely on STDIO, which does not require or support encryption.
 
 ### Restrict permissions
 
-Follow the principle of least privilege.
-
-Only expose the minimum capabilities required.
 Research by Knostic and Backslash Security found that many MCP servers in 2025 lacked any form of authentication and were over-permissioned.
+By following the principle of least privilege, thus only exposing the minimum capabilities required, you can reduce the attack surface and minimize the impact of successful attacks such as prompt injection.
 Configure fine-grained scopes and avoid giving the agent write access when read-only is sufficient.
-Use JSON schemas to validate user input and prevent malicious commands.
 
-### Use "roots" to limit file access
+### Limit file access
 
-File system boundaries prevent data leaks.
+The local file system is one of the most sensitive resources available to an agent and requires very careful protection.
+Only grant MCP servers access to the file system when it is necessary.
+Never grant access to files outside of the intended directory, or worse, the entire file system.
 
-Descope recommends defining roots, which specify the directories a file-system server can access.
-This prevents accidental exposure of sensitive files.
+MCP provides a mechanism for clients to inform servers about available file system boundaries they can operate within called “Roots”.
+Descope recommends defining roots, as these file system boundaries prevent accidental exposure of sensitive files.
+This helps to prevent data leaks.
 For example, you can restrict a server to `/user/documents/project/` rather than the entire drive.
 
 ### Monitor and audit
@@ -330,15 +287,15 @@ Periodically review the server's permissions, update dependencies and apply secu
 
 ## Frequently asked questions
 
-Common questions help clarify MCP concepts and implementation details.
-
 ### What is a remote MCP server and how does it differ from a local one?
 
 The deployment model affects accessibility and security.
 
 A remote MCP server runs on a separate machine and communicates over streamable HTTP, often secured by TLS and authentication.
 It's ideal for sharing capabilities across a team or exposing cloud services.
-A local MCP server operates on the same machine as the client and uses STDIO, which is fast and often simpler.
+Using a remote MCP server does not require installation of any additional software, which makes it possible to use it with web-based applications such as ChatGPT.
+A local MCP server operates on the same machine as the client and uses STDIO, which is generally faster and simpler to implement.
+Running on local hardware enables some unique use-cases by allowing access to the file-system and other hardware.
 
 ### Why do I need an MCP server if I already use function calling or APIs?
 
@@ -348,14 +305,14 @@ Function calling and APIs handle discrete tasks but lack a universal discovery m
 MCP standardizes how tools are defined, discovered and called across models and clients.
 It eliminates repetitive boilerplate and integrates context management, making it easier to build complex agentic workflows.
 
-### How do I connect to an MCP server from my IDE?
+### How do I connect my agent to an MCP server?
 
 Configuration varies by client implementation.
 
 Most MCP clients provide a configuration interface.
 In tools like Claude Desktop, you specify the server's address and port (or choose a local one) and enable the client.
-During startup, the client discovers available tools, lists them and asks for your approval.
-Once approved, you can call those tools through natural language commands.
+During startup, the client discovers available tools, making them available for use through natural language commands.
+Individual tool calls typically require user approval.
 
 ### How is MCP different from JSON-RPC?
 
@@ -376,7 +333,6 @@ However, you can orchestrate multiple servers from a host or through a meta-serv
 
 The ecosystem is still evolving.
 
-MCP is still maturing.
 Many servers and clients are in beta, and the specification continues to evolve.
 You may encounter inconsistent implementations or limited support for complex data types.
 Always consult the latest documentation and be prepared to update your servers when the protocol changes.
