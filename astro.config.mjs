@@ -125,7 +125,7 @@ export default defineConfig({
         const excludedSlugs = [
           'ai-integration',
           'mcp-analytics',
-          'mcp-install',
+          // 'mcp-install',
           'remote-mcp',
         ];
         const url = new URL(page);

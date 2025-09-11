@@ -21,7 +21,15 @@ const navLinks: FooterLink[] = [];
 
     if (instructionsElement) {
       const url = queryParams.get('url');
-      if (url) instructionsElement.setAttribute('url', url);
+      if (url) {
+        instructionsElement.setAttribute('url', url);
+      } else {
+        instructionsElement.setAttribute(
+          'url',
+          'https://demo.hyprmcp.cloud/mcp-install-instructions-generator/mcp',
+        );
+      }
+
       const name = queryParams.get('name');
       if (name) instructionsElement.setAttribute('name', name);
     }
