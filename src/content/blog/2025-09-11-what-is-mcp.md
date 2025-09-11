@@ -410,7 +410,7 @@ For this to work, remote MCP servers need to implement three key components:
 - **Cross-Origin Resource Sharing (CORS)** - Enables secure browser-based authentication flows
 
 You can find another blog post on building an authentication layer for MCP servers at
-[Building Supabase-like OAuth Authentication For MCP Servers](/blog/mcp-server-authentication).
+[Building Supabase-like OAuth Authentication For MCP Servers](/blog/mcp-server-authentication/).
 
 ## Conclusion
 
