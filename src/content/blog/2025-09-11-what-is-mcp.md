@@ -97,7 +97,7 @@ flowchart LR
     subgraph Host application
     client(MCP client)
     end
-        
+
     server(MCP server)
 
     client <-- "Transport layer" --> server
@@ -242,7 +242,7 @@ Security must be a primary consideration when deploying MCP servers.
 
 While MCP streamlines integrations, it does not include built-in authentication, authorization or encryption by default.
 This flexibility allows implementations to choose their own security model, but it also introduces risk.
-While most existing security best practices also apply to MCP, it also introduces new challenges and attack vectors such as prompt injection. 
+While most existing security best practices also apply to MCP, it also introduces new challenges and attack vectors such as prompt injection.
 Prompt injection is a type of attack where an LLM is tricked into following malicious instructions that go beyond the scope of the prompt originally written by the user.
 Implementing proper access control, and audit logging is therefore all the more important for securely using MCP servers in production.
 
