@@ -1,10 +1,58 @@
 ---
 import Layout from '~/layouts/StarlightLayout.astro';
 import GitHubStarButton from '../components/common/GitHubStarButton.astro';
+import {Icon} from '@astrojs/starlight/components';
 const title = 'MCP Server Installation Instructions Generator';
 const description =
   'Generate MCP Server Installation Instructions for Cursor, Visual Studio Code, Claude Code, Claude Desktop, Windsurf, ChatGPT, Gemini CLI and more';
 ---
+
+<style>
+  @keyframes borderRun {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes gradientShift {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .animated-border {
+    background: linear-gradient(
+      90deg,
+      #fbbf24 0%,
+      #f59e0b 25%,
+      #fbbf24 50%,
+      #f59e0b 75%,
+      #fbbf24 100%
+    );
+    background-size: 200% 100%;
+    animation: borderRun 3s linear infinite;
+  }
+
+  .animated-gradient {
+    background: linear-gradient(
+      90deg,
+      #fbbf24 0%,
+      #f59e0b 33%,
+      #fbbf24 66%,
+      #f59e0b 100%
+    );
+    background-size: 200% 100%;
+    animation: gradientShift 4s ease infinite;
+  }
+</style>
 
 <Layout title={title} description={description}>
   <div
@@ -60,7 +108,7 @@ const description =
               <div class="text-center">
                 <button
                   type="submit"
-                  class="min-w-48 px-6 py-2 bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-full text-center hover:bg-gray-800 dark:hover:bg-gray-200 transition-all cursor-pointer"
+                  class="min-w-48 px-6 py-2 mt-6 bg-gray-900 text-white dark:bg-white dark:text-gray-900 rounded-full text-center hover:bg-gray-800 dark:hover:bg-gray-200 transition-all cursor-pointer"
                   >Generate Installation Instructions</button
                 >
               </div>
@@ -68,20 +116,90 @@ const description =
 
             <div class="text-center space-y-4">
               <div>or</div>
-              <form method="GET" action="/mcp-install/">
-                <input
-                  type="hidden"
-                  name="url"
-                  value="https://demo.hyprmcp.cloud/mcp-install-instructions-generator/mcp"
-                />
-                <button
-                  type="submit"
-                  class="min-w-48 border border-gray-200 dark:border-gray-700 px-6 py-2 bg-white dark:bg-gray-900 rounded-full text-center hover:bg-gray-50 dark:hover:bg-gray-800 transition-all cursor-pointer"
-                  >Show example</button
-                >
-              </form>
+              <a
+                href="/mcp-install/"
+                class="inline-block min-w-48 border border-gray-200 dark:border-gray-700 px-6 py-2 bg-white dark:bg-gray-900 rounded-full text-center hover:bg-gray-50 dark:hover:bg-gray-800 transition-all cursor-pointer no-underline text-gray-900 dark:text-white visited:text-gray-900 dark:visited:text-white"
+                >Show example</a
+              >
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Open Source Section -->
+      <div class="max-w-4xl mx-auto px-8 py-8 text-center">
+        <div class="flex flex-col items-center space-y-4">
+          <p class="text-gray-600 dark:text-gray-400">
+            This generator is fully open source on
+            <a
+              href="https://github.com/hyprmcp/mcp-install-instructions-generator"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="no-underline">
+              <code
+                ><Icon name="github" class="w-4 h-4 inline align-text-bottom" />
+                hyprmcp/mcp-install-instructions-generator</code
+              >
+            </a>.
+          </p>
+          <div class="flex items-center space-x-4">
+            <div class="relative group">
+              <!-- Animated border background -->
+              <div
+                class="absolute -inset-[2px] animated-border rounded-lg opacity-75 group-hover:opacity-100 transition-opacity">
+              </div>
+              <!-- Glowing effect -->
+              <div
+                class="absolute -inset-0.5 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+              </div>
+              <!-- Button with animated gradient -->
+              <a
+                href="https://github.com/hyprmcp/mcp-install-instructions-generator"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="relative inline-flex items-center space-x-2 px-5 py-2.5 animated-gradient text-white rounded-lg transform hover:scale-105 transition-transform duration-300 no-underline shadow-lg hover:shadow-xl">
+                <span class="relative">
+                  <Icon name="star" class="w-5 h-5" />
+                  <Icon
+                    name="star"
+                    class="absolute -inset-y-4 w-5 h-5 group-hover:animate-ping opacity-0 group-hover:opacity-50 transition-opacity"
+                  />
+                </span>
+                <span class="font-semibold">Star on GitHub</span>
+                <span class="relative">
+                  <Icon name="star" class="w-5 h-5" />
+                  <Icon
+                    name="star"
+                    class="absolute -inset-y-4 w-5 h-5 group-hover:animate-ping opacity-0 group-hover:opacity-50 transition-opacity"
+                  />
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gateway Reference -->
+      <div class="max-w-4xl mx-auto px-8 pb-8 text-center">
+        <div class="flex flex-col items-center space-y-4">
+          <p class="text-gray-600 dark:text-gray-400">
+            This project was originally created to serve html requests for users
+            who tried to access a mcp url that was secured by the <a
+              href="https://github.com/hyprmcp/mcp-gateway"
+              class="no-underline"
+              target="_blank">
+              <code
+                ><Icon name="github" class="w-4 h-4 inline align-text-bottom" />
+                hyprmcp/mcp-gateway</code
+              >
+            </a> in the browser. Checkout the installation instructions for this
+            hosted mcp server here:
+            <a
+              href="https://demo.hyprmcp.cloud/mcp-install-instructions-generator/mcp"
+              target="_blank"
+              >https://demo.hyprmcp.cloud/mcp-install-instructions-generator/mcp</a
+            >
+          </p>
         </div>
       </div>
 

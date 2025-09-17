@@ -16,7 +16,7 @@
     "@astrojs/sitemap": "^3.4.2",
     "@astrojs/starlight": "^0.35.2",
     "@astrojs/starlight-tailwind": "^4.0.1",
-    "@hyprmcp/mcp-install-instructions-generator": "^0.1.0",
+    "@hyprmcp/mcp-install-instructions-generator": "^0.1.1",
     "@lorenzo_lewis/starlight-utils": "^0.3.2",
     "@tailwindcss/vite": "^4.1.6",
     "astro": "^5.12.8",

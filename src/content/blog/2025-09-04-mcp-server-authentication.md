@@ -18,7 +18,7 @@ tags:
 ---
 
 I am Jakob, an Engineer at Hypr MCP, where we help companies connect their internal applications to LLM-based workflows with the power of MCP servers.
-[Join our waitlist](/waitlist) or [book a demo](https://cal.glasskube.com/team/hyprmcp/demo) to learn more.
+[Join our waitlist](/waitlist/) or [book a demo](https://cal.glasskube.com/team/hyprmcp/demo) to learn more.
 In this blog post, I want to show you how and why we built an MCP Server Gateway that acts as a reverse proxy for one or more upstream MCP servers while adding support for the authorization framework provided by the MCP specification.
 
 ## Introduction
@@ -392,4 +392,4 @@ While lacking support for some OAuth2 extensions required additional implementat
 
 If you are looking for a battle-tested, batteries-included MCP server gateway, check out our https://github.com/hyprmcp/mcp-gateway, which implements everything we discussed above, and more.
 
-[Join our waitlist](/waitlist) or [book a demo](https://cal.glasskube.com/team/hyprmcp/demo) to learn more.
+[Join our waitlist](/waitlist/) or [book a demo](https://cal.glasskube.com/team/hyprmcp/demo) to learn more.
