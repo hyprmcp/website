@@ -17,6 +17,11 @@ tags:
   - mcp-gateway
 ---
 
+import ThemedImage from '../../components/util/ThemedImage.astro';
+import promptAnalyticsLight from '../../assets/screenshots/mcp-prompt-analytics-light.webp';
+import promptAnalyticsDark from '../../assets/screenshots/mcp-prompt-analytics-dark.webp';
+
+
 I am Philip, an Engineer at Hypr MCP, where we help companies connect their internal applications to LLM-based workflows with the power of MCP servers.
 [Join our waitlist](/waitlist) or [book a demo](https://cal.glasskube.com/team/hyprmcp/demo) to learn more.
 Every time we showcase our Hypr MCP platform, this is the most asked question: How did we manage to get the prompt analytics?
@@ -76,6 +81,18 @@ proxy:
 ### Prompt Analytics
 
 After successfully analyzing the JSON-RPC requests and responses, you can extract valuable insights about how your MCP server is being used.
+
+Everything someone sees the [HyprMCP Analytics Dashboard](/mcp-analytics/) for the first time, they immediately ask us how we have been able to get prompt insights.
+
+
+<ThemedImage
+  lightSrc={promptAnalyticsLight}
+  darkSrc={promptAnalyticsDark}
+  alt="HyprMCP Prompt Analytics"
+  class="w-14 h-9"
+/>
+
+
 
 TODO: explain prompt injection / data leaks and how can do this.
 
