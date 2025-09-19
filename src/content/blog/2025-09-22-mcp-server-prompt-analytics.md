@@ -1,8 +1,8 @@
 ---
 title: 'Prompt Analytics for MCP Servers'
 description: 'How to intercept the prompt that triggered the MCP Server tool call for MCP prompt analytics.'
-publishDate: 2025-09-11
-lastUpdated: 2025-09-11
+publishDate: 2025-09-22
+lastUpdated: 2025-09-22
 slug: 'mcp-server-prompt-analytics'
 authors:
   - name: 'Philip Miglinci'
@@ -17,14 +17,10 @@ tags:
   - mcp-gateway
 ---
 
-import ThemedImage from '../../components/util/ThemedImage.astro';
-import promptAnalyticsLight from '../../assets/screenshots/mcp-prompt-analytics-light.webp';
-import promptAnalyticsDark from '../../assets/screenshots/mcp-prompt-analytics-dark.webp';
-
 
 I am Philip, an Engineer at Hypr MCP, where we help companies connect their internal applications to LLM-based workflows with the power of MCP servers.
-[Join our waitlist](/waitlist) or [book a demo](https://cal.glasskube.com/team/hyprmcp/demo) to learn more.
-Every time we showcase our Hypr MCP platform, this is the most asked question: How did we manage to get the prompt analytics?
+[Join our waitlist](/waitlist/) or [book a demo](https://cal.glasskube.com/team/hyprmcp/demo) to learn more.
+Every time we showcase our Hypr MCP platform, this is the most frequently asked question: How did we manage to get the prompt analytics?
 In this blog post, I want to show you how and why we built prompt analytics into our MCP server Gateway.
 
 ## Introduction
@@ -35,7 +31,7 @@ MCP servers like Context7 and GitMCP can provide dynamic documentation based on 
 Stack Auth (https://mcp.stack-auth.com/) can directly add relevant information to the prompts if a tool description matches a prompt's problem.
 On the other side, MCP servers can be used to let LLMs instruct LLM clients to perform actions on third-party systems like the GitHub or HubSpot MCP server.
 
-## MCP Server Analytics - MCP Servers Often Run in the Dark
+## MCP Server Analytics—MCP Servers Often Run in the Dark
 
 Previously, MCP servers mostly ran on the client side with stdio being the default method of how JSON-RPC messages were sent from and to the clients.
 A benefit for these servers has been simplicity - MCP server developers didn't need to care about the runtime and connectivity constraints as the user needed to make sure they start the server program.
@@ -82,22 +78,18 @@ proxy:
 
 After successfully analyzing the JSON-RPC requests and responses, you can extract valuable insights about how your MCP server is being used.
 
-Everything someone sees the [HyprMCP Analytics Dashboard](/mcp-analytics/) for the first time, they immediately ask us how we have been able to get prompt insights.
+Every time someone sees the [HyprMCP Analytics Dashboard](/mcp-analytics/) for the first time, they immediately ask us how we have been able to get prompt insights.
 
 
-<ThemedImage
-  lightSrc={promptAnalyticsLight}
-  darkSrc={promptAnalyticsDark}
-  alt="HyprMCP Prompt Analytics"
-  class="w-14 h-9"
-/>
+![HyprMCP Dashboard](/src/assets/screenshots/mcp-prompt-analytics-dark.webp)
 
 
+Most MCP clients that are embedded into agentic workflows don't ask for permission every time a tool calling operation gets executed.
+The HyprMCP Gateway is already able to intercept the MCP operations, so if activated, we are adding additional optional arguments to all tool operations, which clients will happily fill in.
 
-TODO: explain prompt injection / data leaks and how can do this.
 
 ## Conclusion
 
 If you are looking for a battle-tested, batteries-included MCP server gateway, check out our [MCP Gateway](https://github.com/hyprmcp/mcp-gateway), which implements everything we discussed above, and more.
 
-[Join our waitlist](/waitlist) or [book a demo](https://cal.glasskube.com/team/hyprmcp/demo) to learn more.
+[Join our waitlist](/waitlist/) or [book a demo](https://cal.glasskube.com/team/hyprmcp/demo) to learn more.

@@ -11,35 +11,7 @@ import {remarkReadingTime} from './src/utils/remark-reading-time.mjs';
 import partytown from '@astrojs/partytown';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
-import mdx from '@astrojs/mdx';
 
-const markdownConfig = {
-  syntaxHighlight: {
-    type: 'shiki',
-    excludeLangs: ['mermaid', 'math'],
-  },
-  rehypePlugins: [
-    rehypeMermaid,
-    rehypeSlug,
-    [
-      rehypeAutolinkHeadings,
-      {
-        behavior: 'prepend',
-        content: {
-          type: 'text',
-          value: '# ',
-        },
-        headingProperties: {
-          className: ['anchor'],
-        },
-        properties: {
-          className: ['anchor-link'],
-        },
-      },
-    ],
-  ],
-  remarkPlugins: [remarkReadingTime],
-}
 
 // https://astro.build/config
 export default defineConfig({
@@ -69,7 +41,7 @@ export default defineConfig({
         },
       ],
     ],
-    remarkPlugins: [remarkReadingTime],
+    remarkPlugins: [],
   },
   integrations: [
     starlight({
@@ -165,7 +137,7 @@ export default defineConfig({
       prerender: true,
       plugins: [
         starlightLinksValidator({
-          exclude: ['/blog/mcp-server-authentication/'],
+          exclude: ['/blog/mcp-server-authentication/','/mcp-analytics/'],
         }),
         starlightUtils({
           navLinks: {
@@ -208,7 +180,6 @@ export default defineConfig({
         },
       },
     }),
-    mdx({extendMarkdownConfig: true}),
   ],
   prefetch: {
     prefetchAll: true,
