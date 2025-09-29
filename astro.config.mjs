@@ -6,12 +6,10 @@ import tailwindcss from '@tailwindcss/vite';
 import {defineConfig} from 'astro/config';
 import rehypeMermaid from 'rehype-mermaid';
 import starlightLinksValidator from 'starlight-links-validator';
-import {remarkReadingTime} from './src/utils/remark-reading-time.mjs';
 
 import partytown from '@astrojs/partytown';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
-
 
 // https://astro.build/config
 export default defineConfig({
@@ -137,7 +135,7 @@ export default defineConfig({
       prerender: true,
       plugins: [
         starlightLinksValidator({
-          exclude: ['/blog/mcp-server-authentication/','/mcp-analytics/'],
+          exclude: ['/blog/mcp-server-authentication/', '/mcp-analytics/'],
         }),
         starlightUtils({
           navLinks: {

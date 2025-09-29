@@ -2,7 +2,6 @@ import {docsLoader} from '@astrojs/starlight/loaders';
 import {docsSchema} from '@astrojs/starlight/schema';
 import {glob} from 'astro/loaders';
 import {defineCollection, z} from 'astro:content';
-import {HeadConfigSchema} from './../node_modules/@astrojs/starlight/schemas/head.ts';
 
 export const BlogPostConfigSchema = ({image}) =>
   z.object({
@@ -22,7 +21,6 @@ export const BlogPostConfigSchema = ({image}) =>
     ),
     image: image(),
     tags: z.array(z.string()),
-    head: HeadConfigSchema(),
   });
 
 export const collections = {
@@ -31,7 +29,7 @@ export const collections = {
     schema: docsSchema(),
   }),
   blog: defineCollection({
-    loader: glob({pattern:  "**/*.{md,mdx}", base: 'src/content/blog'}),
+    loader: glob({pattern: '**/*.{md,mdx}', base: 'src/content/blog'}),
     schema: BlogPostConfigSchema,
   }),
 };
