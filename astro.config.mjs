@@ -6,7 +6,6 @@ import tailwindcss from '@tailwindcss/vite';
 import {defineConfig} from 'astro/config';
 import rehypeMermaid from 'rehype-mermaid';
 import starlightLinksValidator from 'starlight-links-validator';
-import {remarkReadingTime} from './src/utils/remark-reading-time.mjs';
 
 import partytown from '@astrojs/partytown';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -15,7 +14,33 @@ import rehypeSlug from 'rehype-slug';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://hyprmcp.com',
-
+  markdown: {
+    syntaxHighlight: {
+      type: 'shiki',
+      excludeLangs: ['mermaid', 'math'],
+    },
+    rehypePlugins: [
+      rehypeMermaid,
+      rehypeSlug,
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: 'prepend',
+          content: {
+            type: 'text',
+            value: '# ',
+          },
+          headingProperties: {
+            className: ['anchor'],
+          },
+          properties: {
+            className: ['anchor-link'],
+          },
+        },
+      ],
+    ],
+    remarkPlugins: [],
+  },
   integrations: [
     starlight({
       title: 'Hypr MCP',
@@ -110,7 +135,7 @@ export default defineConfig({
       prerender: true,
       plugins: [
         starlightLinksValidator({
-          exclude: ['/blog/mcp-server-authentication/'],
+          exclude: ['/blog/mcp-server-authentication/', '/mcp-analytics/'],
         }),
         starlightUtils({
           navLinks: {
@@ -154,33 +179,6 @@ export default defineConfig({
       },
     }),
   ],
-  markdown: {
-    syntaxHighlight: {
-      type: 'shiki',
-      excludeLangs: ['mermaid', 'math'],
-    },
-    rehypePlugins: [
-      rehypeMermaid,
-      rehypeSlug,
-      [
-        rehypeAutolinkHeadings,
-        {
-          behavior: 'prepend',
-          content: {
-            type: 'text',
-            value: '# ',
-          },
-          headingProperties: {
-            className: ['anchor'],
-          },
-          properties: {
-            className: ['anchor-link'],
-          },
-        },
-      ],
-    ],
-    remarkPlugins: [remarkReadingTime],
-  },
   prefetch: {
     prefetchAll: true,
   },

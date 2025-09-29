@@ -7,7 +7,7 @@ slug: 'mcp-server-authentication'
 authors:
   - name: 'Jakob Steiner'
     role: 'Engineer'
-    image: 'https://avatars.githubusercontent.com/u/16959694'
+    image: '/src/assets/blog/authors/jakob.jpg'
     linkedIn: https://www.linkedin.com/in/jakob-steiner-46998230a/
     gitHub: https://github.com/kosmoz
 image: '/src/assets/blog/mcp-server-authentication.svg'

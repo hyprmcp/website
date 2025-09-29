@@ -255,7 +255,8 @@ import HyprMcpButton from './util/HyprMcpButton.astro';
               <text
                 text-anchor="middle"
                 y="5"
-                class="fill-gray-700 dark:fill-gray-300 text-sm">Analytics</text
+                class="fill-gray-700 dark:fill-gray-300 text-sm"
+                >📊 Analytics</text
               >
             </g>
 
@@ -273,7 +274,26 @@ import HyprMcpButton from './util/HyprMcpButton.astro';
               <text
                 text-anchor="middle"
                 y="5"
-                class="fill-gray-700 dark:fill-gray-300 text-sm">Memory</text
+                class="fill-gray-700 dark:fill-gray-300 text-sm">🧠 Memory</text
+              >
+            </g>
+
+            <!-- Middle row features - left side -->
+            <g transform="translate(-145, 0)">
+              <rect
+                x="-35"
+                y="-22"
+                width="70"
+                height="44"
+                rx="22"
+                fill="white"
+                stroke="#E5E7EB"
+                stroke-width="1"
+                class="dark:fill-slate-800 dark:stroke-slate-700"></rect>
+              <text
+                text-anchor="middle"
+                y="5"
+                class="fill-gray-700 dark:fill-gray-300 text-xs">🛡️ RBAC</text
               >
             </g>
 
@@ -295,6 +315,25 @@ import HyprMcpButton from './util/HyprMcpButton.astro';
               >HyprMCP Platform</text
             >
 
+            <!-- Middle row features - right side -->
+            <g transform="translate(145, 0)">
+              <rect
+                x="-35"
+                y="-22"
+                width="70"
+                height="44"
+                rx="22"
+                fill="white"
+                stroke="#E5E7EB"
+                stroke-width="1"
+                class="dark:fill-slate-800 dark:stroke-slate-700"></rect>
+              <text
+                text-anchor="middle"
+                y="5"
+                class="fill-gray-700 dark:fill-gray-300 text-xs">🔒 Auth</text
+              >
+            </g>
+
             <!-- Bottom row features -->
             <g transform="translate(-95, 95)">
               <rect
@@ -310,7 +349,8 @@ import HyprMcpButton from './util/HyprMcpButton.astro';
               <text
                 text-anchor="middle"
                 y="5"
-                class="fill-gray-700 dark:fill-gray-300 text-sm">Auth</text
+                class="fill-gray-700 dark:fill-gray-300 text-sm"
+                >🔧 Tool unification</text
               >
             </g>
 
@@ -328,7 +368,8 @@ import HyprMcpButton from './util/HyprMcpButton.astro';
               <text
                 text-anchor="middle"
                 y="5"
-                class="fill-gray-700 dark:fill-gray-300 text-sm">Hosting</text
+                class="fill-gray-700 dark:fill-gray-300 text-sm"
+                >☁️ Hosting</text
               >
             </g>
 
@@ -356,7 +397,6 @@ import HyprMcpButton from './util/HyprMcpButton.astro';
           </g>
 
           <!-- Right side: Access Types -->
-          <!-- Database Access -->
           <g transform="translate(1070, 80)">
             <rect
               x="-90"
@@ -379,14 +419,20 @@ import HyprMcpButton from './util/HyprMcpButton.astro';
             <text x="-60" y="5" text-anchor="middle" class="text-xs">🗄️</text>
             <text
               x="20"
-              y="5"
+              y="0"
               text-anchor="middle"
-              class="fill-gray-900 dark:fill-white font-medium text-sm"
-              >Database access</text
+              class="fill-gray-900 dark:fill-white font-medium text-xs"
+              >Unauthenticated</text
+            >
+            <text
+              x="20"
+              y="12"
+              text-anchor="middle"
+              class="fill-gray-900 dark:fill-white font-medium text-xs"
+              >MCP Server</text
             >
           </g>
 
-          <!-- Files Access -->
           <g transform="translate(1070, 150)">
             <rect
               x="-90"
@@ -409,10 +455,17 @@ import HyprMcpButton from './util/HyprMcpButton.astro';
             <text x="-60" y="5" text-anchor="middle" class="text-xs">📁</text>
             <text
               x="20"
-              y="5"
+              y="0"
               text-anchor="middle"
-              class="fill-gray-900 dark:fill-white font-medium text-sm"
-              >Files access</text
+              class="fill-gray-900 dark:fill-white font-medium text-xs"
+              >Remote</text
+            >
+            <text
+              x="20"
+              y="12"
+              text-anchor="middle"
+              class="fill-gray-900 dark:fill-white font-medium text-xs"
+              >MCP Server</text
             >
           </g>
 

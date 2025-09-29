@@ -12,14 +12,15 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.3.6",
     "@astrojs/partytown": "^2.1.4",
-    "@astrojs/sitemap": "^3.4.2",
-    "@astrojs/starlight": "^0.35.2",
+    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/starlight": "^0.36.0",
     "@astrojs/starlight-tailwind": "^4.0.1",
     "@hyprmcp/mcp-install-instructions-generator": "^0.1.1",
     "@lorenzo_lewis/starlight-utils": "^0.3.2",
     "@tailwindcss/vite": "^4.1.6",
-    "astro": "^5.12.8",
+    "astro": "^5.14.1",
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "github-buttons": "^2.29.1",
