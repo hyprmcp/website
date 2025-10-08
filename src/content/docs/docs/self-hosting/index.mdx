@@ -1,0 +1,72 @@
+---
+title: Self-hosting HyprMCP
+description: Learn how to self-host HyprMCP using Jetski and Kubernetes. Set up analytics, authentication, and MCP gateway orchestration on your own infrastructure.
+slug: docs/self-hosting
+sidebar:
+  order: 1
+---
+
+import {Aside, Code} from '@astrojs/starlight/components';
+
+<Aside type="caution">
+  HyprMCP is still in active development.
+  <br />
+  We might make <strong>BREAKING CHANGES</strong> and require difficult
+  migrations.
+</Aside>
+
+If you are only interested in our MCP
+[mcp-install-instructions-generator](https://github.com/hyprmcp/mcp-install-instructions-generator)
+or our [mcp-gateway](https://github.com/hyprmcp/mcp-gateway), follow the instructions in the component sections.
+
+Make sure you have familiarized yourself with the [Getting Started](/docs/getting-started/) section.
+
+## Technical Description
+
+Deploying and operating HyprMCP requires a Kubernetes cluster, as Jetski (the orchestrator) will deploy a new [MCP Gateway](https://github.com/hyprmcp/mcp-gateway) instance for every organization.
+Jetski creates a Kubernetes custom resource for every organization,
+whose lifecycle is managed by the [Metacontroller](https://github.com/metacontroller/metacontroller).
+
+Additionally, an authentication server is required that authenticates users against Jetski and against MCP servers.
+Although these servers can theoretically be different instances, we are currently using a single [Dex](https://dexidp.io/) instance for all authentication and authorizations.
+
+## Setup
+
+The setup can be split into two parts:
+
+1. Setting up the Jetski Analytics platform
+2. Setting up Jetski MCP Gateway Orchestration
+
+### 1. Jetski Analytics Platform
+
+HyprMCP uses [mise](https://mise.jdx.dev/) to configure your development environment and execute development tasks.
+
+You can get started locally by running the following commands:
+
+| Step                                                                                                                                                     | Command                                              |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| **Install dependencies** - Trust mise configuration and install necessary tools                                                                          | <Code code="mise trust && mise install" lang="sh" /> |
+| **Start database and mock SMTP server**                                                                                                                  | <Code code="docker compose up -d" lang="sh" />       |
+| **Set correct host file entry** - Add the following entry to your `/etc/hosts` file: `127.0.0.1 host.minikube.internal`, or reconfigure the Dex hostname | (manual file edit)                                   |
+| **Start the Backend**                                                                                                                                    | <Code code="mise run serve" lang="sh" />             |
+| **Start the Frontend**                                                                                                                                   | <Code code="pnpm run start" lang="sh" />             |
+| **Generate demo data**                                                                                                                                   | <Code code="mise run generate" lang="sh" />          |
+
+Afterward you can access the frontend at `http://localhost:4200` and log in with: `admin@example.com` / `password`.
+
+### 2. Setting up Jetski MCP Gateway Orchestration
+
+For setting up the orchestration part of Jetski, a Kubernetes cluster is recommended.
+We recommend [Minikube](https://minikube.sigs.k8s.io/docs/) for local testing.
+Make sure you have followed all previous steps - especially the `/etc/hosts` entry is required for Dex to work correctly.
+
+| Step                                                                                                                                    | Command                                                          |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| **Start a preconfigured Minikube cluster**                                                                                              | <Code code="mise run minikube-start" lang="sh" />                |
+| **Start the platform and deploy metacontroller** - ⚠️ This will perform operations against the currently configured Kubernetes context! | <Code code="mise run serve -- --install-controller" lang="sh" /> |
+
+Now when configuring a new project, it should get successfully deployed to your Kubernetes cluster.
+
+## Support
+
+We are happy to assist you with any custom setups or questions you might have.

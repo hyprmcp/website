@@ -118,6 +118,10 @@ export default defineConfig({
         //   autogenerate: {directory: 'docs/authentication'},
         // },
         {
+          label: 'Self-hosting',
+          autogenerate: {directory: 'docs/self-hosting'},
+        },
+        {
           label: 'Navbar',
           items: [
             {label: 'Home', link: '/'},

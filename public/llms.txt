@@ -17,7 +17,8 @@ Hypr MCP helps companies deploying and managing Model Context Protocol (MCP) ser
 
 - **GitHub Repository**: https://github.com/hyprmcp/mcp-gateway/
 - **MCP Server Authentication Guide**: https://hyprmcp.com/blog/mcp-server-authentication/
-- **Documentation**: https://hyprmcp.com/
+- **MCP Server Analytics Guide**: https://hyprmcp.com/blog/mcp-server-prompt-analytics/
+- **Documentation**: https://hyprmcp.com/docs/getting-started/
 
 
 ## Use Cases
