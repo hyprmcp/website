@@ -146,6 +146,7 @@ export default defineConfig({
           'mcp-analytics',
           // 'mcp-install',
           'remote-mcp',
+          'privacy-policy',
         ];
         const url = new URL(page);
         const pathname = url.pathname;
