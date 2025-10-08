@@ -108,15 +108,6 @@ export default defineConfig({
           label: 'Getting started',
           autogenerate: {directory: 'docs/getting-started'},
         },
-        // Not yet documented
-        // {
-        //   label: 'Platform',
-        //   autogenerate: {directory: 'docs/platform'},
-        // },
-        // {
-        //   label: 'MCP Authentication',
-        //   autogenerate: {directory: 'docs/authentication'},
-        // },
         {
           label: 'Self-hosting',
           autogenerate: {directory: 'docs/self-hosting'},
@@ -126,9 +117,8 @@ export default defineConfig({
           items: [
             {label: 'Home', link: '/'},
             {label: 'Pricing', link: '/pricing/'},
-            // {label: 'Docs', link: '/docs/getting-started/'},
+            {label: 'Docs', link: '/docs/getting-started/'},
             {label: 'Blog', link: '/blog/'},
-            {label: 'Analytics', link: '/mcp-analytics/'},
           ],
         },
       ],

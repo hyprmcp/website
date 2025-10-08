@@ -43,14 +43,16 @@ HyprMCP uses [mise](https://mise.jdx.dev/) to configure your development environ
 
 You can get started locally by running the following commands:
 
-| Step                                                                                                                                                     | Command                                              |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| **Install dependencies** - Trust mise configuration and install necessary tools                                                                          | <Code code="mise trust && mise install" lang="sh" /> |
-| **Start database and mock SMTP server**                                                                                                                  | <Code code="docker compose up -d" lang="sh" />       |
-| **Set correct host file entry** - Add the following entry to your `/etc/hosts` file: `127.0.0.1 host.minikube.internal`, or reconfigure the Dex hostname | (manual file edit)                                   |
-| **Start the Backend**                                                                                                                                    | <Code code="mise run serve" lang="sh" />             |
-| **Start the Frontend**                                                                                                                                   | <Code code="pnpm run start" lang="sh" />             |
-| **Generate demo data**                                                                                                                                   | <Code code="mise run generate" lang="sh" />          |
+| Step                                                                                                                                                     | Command                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| **Clone the repository**                                                                                                                                 | <Code code="git clone https://github.com/hyprmcp/jetski.git && cd jetski" lang="sh" /> |
+| **Install dependencies** - Trust mise configuration and install necessary tools                                                                          | <Code code="mise trust && mise install" lang="sh" />                                   |
+| **Create Dex secret file**                                                                                                                               | <Code code="touch .dex.secret.env" lang="sh" />                                        |
+| **Start database and mock SMTP server**                                                                                                                  | <Code code="docker compose up -d" lang="sh" />                                         |
+| **Set correct host file entry** - Add the following entry to your `/etc/hosts` file: `127.0.0.1 host.minikube.internal`, or reconfigure the Dex hostname | (manual file edit)                                                                     |
+| **Start the Backend**                                                                                                                                    | <Code code="mise run serve" lang="sh" />                                               |
+| **Start the Frontend**                                                                                                                                   | <Code code="pnpm run start" lang="sh" />                                               |
+| **Generate demo data**                                                                                                                                   | <Code code="mise run generate" lang="sh" />                                            |
 
 Afterward you can access the frontend at `http://localhost:4200` and log in with: `admin@example.com` / `password`.
 
