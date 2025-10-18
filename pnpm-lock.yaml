@@ -64,7 +64,7 @@ importers:
         version: 0.34.4
       starlight-links-validator:
         specifier: ^0.18.0
-        version: 0.18.0(@astrojs/starlight@0.36.0(astro@5.14.6(@types/node@24.8.1)(jiti@2.6.1)(lightningcss@1.30.1)(rollup@4.52.4)(typescript@5.8.3)))
+        version: 0.18.1(@astrojs/starlight@0.36.0(astro@5.14.6(@types/node@24.8.1)(jiti@2.6.1)(lightningcss@1.30.1)(rollup@4.52.4)(typescript@5.8.3)))
       tailwindcss:
         specifier: ^4.1.6
         version: 4.1.14
@@ -2634,8 +2634,8 @@ packages:
   space-separated-tokens@2.0.2:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
 
-  starlight-links-validator@0.18.0:
-    resolution: {integrity: sha512-R0gLdrKWdpAEqux3DL2B3QvNJM8Zpys8CQu1BGLD9hc+66nt/Q6aJDkvvkvoCVky9JKmBEnmL4PhFkyz13lK5g==}
+  starlight-links-validator@0.18.1:
+    resolution: {integrity: sha512-64BlSEL6SYItOdEZadCicORYAbLyDtLSAH2Ry8FWh/cLAvOSPTCFZiOzmk0h4A0vPU7mZ2H/FZEcIGmyB7Hb9g==}
     engines: {node: '>=18.17.1'}
     peerDependencies:
       '@astrojs/starlight': '>=0.32.0'
@@ -6281,7 +6281,7 @@ snapshots:
 
   space-separated-tokens@2.0.2: {}
 
-  starlight-links-validator@0.18.0(@astrojs/starlight@0.36.0(astro@5.14.6(@types/node@24.8.1)(jiti@2.6.1)(lightningcss@1.30.1)(rollup@4.52.4)(typescript@5.8.3))):
+  starlight-links-validator@0.18.1(@astrojs/starlight@0.36.0(astro@5.14.6(@types/node@24.8.1)(jiti@2.6.1)(lightningcss@1.30.1)(rollup@4.52.4)(typescript@5.8.3))):
     dependencies:
       '@astrojs/starlight': 0.36.0(astro@5.14.6(@types/node@24.8.1)(jiti@2.6.1)(lightningcss@1.30.1)(rollup@4.52.4)(typescript@5.8.3))
       '@types/picomatch': 3.0.2
