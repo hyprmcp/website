@@ -45,17 +45,17 @@ jobs:
         with:
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::855808870739:role/github-actions-jetski.sh
+      - name: Deploy assets
+        if: github.ref == 'refs/heads/main'
+        run: >-
+          aws s3 sync dist/_astro s3://hyprmcp.com/_astro
+          --cache-control "max-age=604800, public"
+          --acl=public-read
       - name: Deploy short lived content
         if: github.ref == 'refs/heads/main'
         run: >-
           aws s3 sync dist s3://hyprmcp.com/
           --cache-control "max-age=60, public"
-          --acl=public-read
-      - name: Deploy long lived content
-        if: github.ref == 'refs/heads/main'
-        run: >-
-          aws s3 sync dist/_astro s3://hyprmcp.com/_astro
-          --cache-control "max-age=604800, public"
           --acl=public-read
       - name: Invalidate cache
         if: github.ref == 'refs/heads/main'
